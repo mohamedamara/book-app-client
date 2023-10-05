@@ -1,3 +1,4 @@
+import 'package:books_app_client/core/themes/custom_light_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,14 +13,20 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Books app',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Scaffold(
-        body: Center(
-          child: Text("Books app"),
-        ),
+      theme: CustomLightTheme.getTheme(),
+      home: const HomeView(),
+    );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text("Books app"),
       ),
     );
   }
