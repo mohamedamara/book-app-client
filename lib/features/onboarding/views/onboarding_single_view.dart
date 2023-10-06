@@ -32,13 +32,13 @@ class OnboardingSingleView extends StatelessWidget {
           )
               .animate()
               .fadeIn(
-                duration: const Duration(milliseconds: 800),
+                duration: 800.milliseconds,
               )
               .slideY(
                 begin: -1,
                 end: 0,
                 curve: Curves.easeInOut,
-                duration: const Duration(milliseconds: 800),
+                duration: 800.milliseconds,
               ),
           SizedBox(height: context.setHeight(16)),
           Text(
@@ -48,13 +48,13 @@ class OnboardingSingleView extends StatelessWidget {
           )
               .animate()
               .fadeIn(
-                duration: const Duration(milliseconds: 800),
+                duration: 800.milliseconds,
               )
               .slideY(
                 begin: -3,
                 end: 0,
                 curve: Curves.easeInOut,
-                duration: const Duration(milliseconds: 800),
+                duration: 800.milliseconds,
               ),
           SizedBox(height: subTitleSpacing),
           Image.asset(

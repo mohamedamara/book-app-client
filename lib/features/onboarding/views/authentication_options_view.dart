@@ -27,13 +27,13 @@ class AuthenticationOptionsView extends StatelessWidget {
                   )
                       .animate()
                       .fadeIn(
-                        duration: const Duration(milliseconds: 800),
+                        duration: 800.milliseconds,
                       )
                       .slideY(
                         begin: -1,
                         end: 0,
                         curve: Curves.easeInOut,
-                        duration: const Duration(milliseconds: 800),
+                        duration: 800.milliseconds,
                       ),
                   SizedBox(height: context.setHeight(98)),
                   PrimaryButtoon(
