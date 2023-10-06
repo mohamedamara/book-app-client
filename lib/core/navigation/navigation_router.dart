@@ -1,3 +1,5 @@
+import 'package:books_app_client/features/authentication/views/sign_in_view.dart';
+import 'package:books_app_client/features/authentication/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/onboarding/views/onboarding_view.dart';
@@ -11,6 +13,16 @@ class NavigationRouter {
       case NavigationPaths.onboardingRoute:
         return MaterialPageRoute(
           builder: (_) => const OnboardingView(),
+          settings: RouteSettings(name: routeSettings.name),
+        );
+      case NavigationPaths.signUpRoute:
+        return MaterialPageRoute(
+          builder: (_) => const SignUpView(),
+          settings: RouteSettings(name: routeSettings.name),
+        );
+      case NavigationPaths.signIpRoute:
+        return MaterialPageRoute(
+          builder: (_) => const SignInView(),
           settings: RouteSettings(name: routeSettings.name),
         );
       default:

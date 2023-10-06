@@ -1,5 +1,6 @@
 import 'package:books_app_client/core/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class OnboardingSingleView extends StatelessWidget {
   const OnboardingSingleView({
@@ -28,13 +29,33 @@ class OnboardingSingleView extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium,
-          ),
+          )
+              .animate()
+              .fadeIn(
+                duration: const Duration(milliseconds: 800),
+              )
+              .slideY(
+                begin: -1,
+                end: 0,
+                curve: Curves.easeInOut,
+                duration: const Duration(milliseconds: 800),
+              ),
           SizedBox(height: context.setHeight(16)),
           Text(
             subTitle,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleSmall,
-          ),
+          )
+              .animate()
+              .fadeIn(
+                duration: const Duration(milliseconds: 800),
+              )
+              .slideY(
+                begin: -3,
+                end: 0,
+                curve: Curves.easeInOut,
+                duration: const Duration(milliseconds: 800),
+              ),
           SizedBox(height: subTitleSpacing),
           Image.asset(
             imageURL,
