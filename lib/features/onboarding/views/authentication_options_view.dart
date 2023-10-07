@@ -38,28 +38,18 @@ class AuthenticationOptionsView extends StatelessWidget {
                   SizedBox(height: context.setHeight(98)),
                   PrimaryButtoon(
                     buttonText: "Sign In",
-                    textColor: Colors.white,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    borderColor: Colors.transparent,
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        NavigationPaths.signIpRoute,
-                      );
-                    },
+                    onPressed: () => _navigateToAuthenticationScreen(
+                      context,
+                      NavigationPaths.signIpRoute,
+                    ),
                   ),
                   SizedBox(height: context.setHeight(20)),
                   PrimaryButtoon(
                     buttonText: "Sign Up",
-                    textColor: Colors.white,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    borderColor: Colors.transparent,
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        NavigationPaths.signUpRoute,
-                      );
-                    },
+                    onPressed: () => _navigateToAuthenticationScreen(
+                      context,
+                      NavigationPaths.signUpRoute,
+                    ),
                   ),
                 ],
               ),
@@ -95,6 +85,13 @@ class AuthenticationOptionsView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _navigateToAuthenticationScreen(BuildContext context, String routeName) {
+    Navigator.pushNamed(
+      context,
+      routeName,
     );
   }
 }

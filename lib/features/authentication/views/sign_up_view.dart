@@ -95,22 +95,10 @@ class _SignUpViewState extends State<SignUpView> {
                 },
               ),
               SizedBox(height: context.setHeight(25)),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: PrimaryButtoon(
-                  key: Key(areAllTextFieldsNotEmpty().toString()),
-                  buttonText: "Sign Up",
-                  textColor: areAllTextFieldsNotEmpty()
-                      ? Colors.white
-                      : Theme.of(context).primaryColor,
-                  onPressed: areAllTextFieldsNotEmpty() ? () {} : null,
-                  backgroundColor: areAllTextFieldsNotEmpty()
-                      ? Theme.of(context).primaryColor
-                      : Colors.transparent,
-                  borderColor: areAllTextFieldsNotEmpty()
-                      ? Colors.transparent
-                      : Theme.of(context).primaryColor,
-                ),
+              PrimaryButtoon(
+                buttonText: "Sign Up",
+                isEnabled: areAllTextFieldsNotEmpty(),
+                onPressed: () {},
               ),
               SizedBox(height: context.setHeight(30)),
             ],

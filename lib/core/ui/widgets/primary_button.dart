@@ -5,50 +5,52 @@ class PrimaryButtoon extends StatelessWidget {
   const PrimaryButtoon({
     super.key,
     required this.buttonText,
-    required this.textColor,
-    required this.backgroundColor,
-    required this.borderColor,
+    this.isEnabled = true,
     required this.onPressed,
   });
 
   final String buttonText;
-  final Color textColor;
-  final Color backgroundColor;
-  final Color borderColor;
+  final bool isEnabled;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, context.setHeight(56)),
-        ),
-        backgroundColor: MaterialStateProperty.all<Color>(
-          backgroundColor,
-        ),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              context.setRadius(20),
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: ElevatedButton(
+        key: Key(isEnabled.toString()),
+        style: ButtonStyle(
+          minimumSize: MaterialStateProperty.all<Size>(
+            Size(double.infinity, context.setHeight(56)),
+          ),
+          backgroundColor: MaterialStateProperty.all<Color>(
+            isEnabled ? Theme.of(context).primaryColor : Colors.transparent,
+          ),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                context.setRadius(20),
+              ),
+            ),
+          ),
+          side: MaterialStateProperty.all<BorderSide>(
+            BorderSide(
+              width: context.setHeight(1),
+              color: isEnabled
+                  ? Colors.transparent
+                  : Theme.of(context).primaryColor,
             ),
           ),
         ),
-        side: MaterialStateProperty.all<BorderSide>(
-          BorderSide(
-            width: context.setHeight(1),
-            color: borderColor,
+        onPressed: isEnabled ? onPressed : null,
+        child: Center(
+          child: Text(
+            buttonText.toUpperCase(),
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color:
+                      isEnabled ? Colors.white : Theme.of(context).primaryColor,
+                ),
           ),
-        ),
-      ),
-      onPressed: onPressed,
-      child: Center(
-        child: Text(
-          buttonText.toUpperCase(),
-          style: Theme.of(context)
-              .textTheme
-              .labelLarge
-              ?.copyWith(color: textColor),
         ),
       ),
     );
