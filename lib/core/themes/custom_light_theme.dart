@@ -1,3 +1,4 @@
+import 'package:books_app_client/core/extensions/context_extensions.dart';
 import 'package:books_app_client/core/themes/custom_checkbox_theme.dart';
 import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:books_app_client/core/themes/custom_input_decoration_theme.dart';
@@ -11,6 +12,11 @@ class CustomLightTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       primaryColor: CustomColors.mainGreenColor,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: CustomColors.mainGreenColor,
+        primary: CustomColors.mainGreenColor,
+        brightness: Brightness.light,
+      ),
       appBarTheme: const AppBarTheme(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -31,6 +37,17 @@ class CustomLightTheme {
         selectionHandleColor: CustomColors.mainGreenColor,
         cursorColor: CustomColors.mainGreenColor,
         selectionColor: CustomColors.textFieldSelectionColor,
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: CustomColors.mainGreenColor,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white.withOpacity(0.5),
+        selectedLabelStyle: TextStyle(
+          fontSize: context.setSp(12),
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontSize: context.setSp(11),
+        ),
       ),
     );
   }
