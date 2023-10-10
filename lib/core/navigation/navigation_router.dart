@@ -1,11 +1,12 @@
 import 'package:books_app_client/features/authentication/views/sign_in_view.dart';
 import 'package:books_app_client/features/authentication/views/sign_up_view.dart';
+import 'package:books_app_client/features/top_navigation/views/top_navigation_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/onboarding/views/onboarding_view.dart';
 import 'navigation_paths.dart';
 
-const String initialRoute = NavigationPaths.onboardingRoute;
+const String initialRoute = NavigationPaths.topNavigationRoute;
 
 class NavigationRouter {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
@@ -23,6 +24,11 @@ class NavigationRouter {
       case NavigationPaths.signIpRoute:
         return MaterialPageRoute(
           builder: (_) => const SignInView(),
+          settings: RouteSettings(name: routeSettings.name),
+        );
+      case NavigationPaths.topNavigationRoute:
+        return MaterialPageRoute(
+          builder: (_) => const TopNavigationView(),
           settings: RouteSettings(name: routeSettings.name),
         );
       default:
