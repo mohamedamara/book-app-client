@@ -44,7 +44,7 @@ class CustomTextField extends StatelessWidget {
         obscureText: obscureText ?? false,
         obscuringCharacter: "●",
         textAlignVertical: TextAlignVertical.center,
-        cursorColor: Theme.of(context).primaryColor,
+        cursorColor: Theme.of(context).colorScheme.primary,
         style: Theme.of(context)
             .textTheme
             .labelLarge

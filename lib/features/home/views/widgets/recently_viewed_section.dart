@@ -39,8 +39,7 @@ class RecentlyViewedSection extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl: dummyBooksCoverImageURLs[index],
                         fit: BoxFit.fitHeight,
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                        placeholder: (_, __) => const SizedBox(),
                       ),
                     ),
                   ),
@@ -49,20 +48,17 @@ class RecentlyViewedSection extends StatelessWidget {
               SizedBox(height: context.setHeight(29)),
               Text(
                 "Fatherhood",
-                style: TextStyle(
-                  color: const Color(0xFF242126),
-                  fontWeight: FontWeight.w600,
-                  fontSize: context.setSp(16),
-                ),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: context.setSp(15),
+                    ),
               ),
               SizedBox(height: context.setHeight(5)),
               Text(
                 "Marcus Berkmann",
-                style: TextStyle(
-                  color: const Color(0xFF242126).withOpacity(0.5),
-                  fontWeight: FontWeight.w300,
-                  fontSize: context.setSp(13),
-                ),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontSize: context.setSp(11),
+                      fontWeight: FontWeight.w400,
+                    ),
               ),
             ],
           );

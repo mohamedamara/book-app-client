@@ -49,11 +49,7 @@ class HomeView extends StatelessWidget {
               padding: EdgeInsets.only(left: context.setWidth(20)),
               child: Text(
                 "Recently Viewed",
-                style: TextStyle(
-                  color: const Color(0xFF242126),
-                  fontWeight: FontWeight.bold,
-                  fontSize: context.setSp(24),
-                ),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
             SizedBox(height: context.setHeight(25)),

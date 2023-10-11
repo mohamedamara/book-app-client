@@ -15,8 +15,8 @@ class OnboardingViewDotIndicator extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isActive
-            ? Theme.of(context).primaryColor
-            : Theme.of(context).primaryColor.withOpacity(0.25),
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.primary.withOpacity(0.25),
       ),
     );
   }

@@ -31,6 +31,11 @@ class CustomTextTheme {
         fontSize: context.setSp(24),
         fontWeight: FontWeight.bold,
       ),
+      bodyMedium: theme.primaryTextTheme.bodyLarge?.copyWith(
+        color: CustomColors.textColorAlmostBlack,
+        fontSize: context.setSp(16),
+        fontWeight: FontWeight.w600,
+      ),
       bodySmall: theme.primaryTextTheme.bodySmall?.copyWith(
         color: CustomColors.textColorAlmostBlack.withOpacity(0.5),
         fontSize: context.setSp(12),

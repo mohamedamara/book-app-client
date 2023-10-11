@@ -24,7 +24,9 @@ class PrimaryButtoon extends StatelessWidget {
             Size(double.infinity, context.setHeight(56)),
           ),
           backgroundColor: MaterialStateProperty.all<Color>(
-            isEnabled ? Theme.of(context).primaryColor : Colors.transparent,
+            isEnabled
+                ? Theme.of(context).colorScheme.primary
+                : Colors.transparent,
           ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
@@ -38,7 +40,7 @@ class PrimaryButtoon extends StatelessWidget {
               width: context.setHeight(1),
               color: isEnabled
                   ? Colors.transparent
-                  : Theme.of(context).primaryColor,
+                  : Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
@@ -47,8 +49,9 @@ class PrimaryButtoon extends StatelessWidget {
           child: Text(
             buttonText.toUpperCase(),
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color:
-                      isEnabled ? Colors.white : Theme.of(context).primaryColor,
+                  color: isEnabled
+                      ? Colors.white
+                      : Theme.of(context).colorScheme.primary,
                 ),
           ),
         ),

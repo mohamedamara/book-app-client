@@ -11,7 +11,7 @@ class CurvedDecorationBackground extends StatelessWidget {
       child: Container(
         height: context.setHeight(312),
         width: double.infinity,
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).colorScheme.primary,
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:books_app_client/core/extensions/context_extensions.dart';
-import 'package:books_app_client/core/ui/widgets/custom_textfield.dart';
-import 'package:books_app_client/core/ui/widgets/primary_button.dart';
+import 'package:books_app_client/core/widgets/custom_textfield.dart';
+import 'package:books_app_client/core/widgets/primary_button.dart';
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
 import 'package:flutter/material.dart';
 

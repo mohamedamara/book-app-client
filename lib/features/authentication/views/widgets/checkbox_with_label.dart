@@ -42,7 +42,7 @@ class CheckboxWithLabel extends StatelessWidget {
                 if (states.contains(MaterialState.selected)) {
                   return BorderSide(
                     width: context.setHeight(1),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                   );
                 }
                 return BorderSide(

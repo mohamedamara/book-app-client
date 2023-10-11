@@ -1,4 +1,5 @@
 import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -40,29 +41,28 @@ class CarouselItem extends StatelessWidget {
         SizedBox(height: context.setHeight(28)),
         AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 200),
-          style: TextStyle(
-            color: isActiveItem
-                ? const Color(0xFF242126)
-                : const Color(0xFF242126).withOpacity(0.5),
-            fontWeight: isActiveItem ? FontWeight.w600 : FontWeight.w500,
-            fontSize: context.setSp(16),
-          ),
-          child: const Text(
-            "Fatherhood",
-          ),
+          style: isActiveItem
+              ? Theme.of(context).textTheme.bodyMedium ?? const TextStyle()
+              : Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: CustomColors.textColorAlmostBlack.withOpacity(
+                          0.5,
+                        ),
+                      ) ??
+                  const TextStyle(),
+          child: const Text("Fatherhood"),
         ),
         SizedBox(height: context.setHeight(5)),
         AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 200),
-          style: TextStyle(
-              color: isActiveItem
-                  ? const Color(0xFF242126).withOpacity(0.6)
-                  : const Color(0xFF242126).withOpacity(0.4),
-              fontWeight: isActiveItem ? FontWeight.w300 : FontWeight.w200,
-              fontSize: context.setSp(13)),
-          child: const Text(
-            "Marcus Berkmann",
-          ),
+          style: isActiveItem
+              ? Theme.of(context).textTheme.bodySmall ?? const TextStyle()
+              : Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: CustomColors.textColorAlmostBlack.withOpacity(
+                          0.25,
+                        ),
+                      ) ??
+                  const TextStyle(),
+          child: const Text("Marcus Berkmann"),
         ),
       ],
     );
