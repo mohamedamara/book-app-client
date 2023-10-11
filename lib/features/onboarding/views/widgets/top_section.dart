@@ -4,10 +4,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/constants/assets_constants.dart';
 import '../../../../core/navigation/navigation_paths.dart';
-import '../../../../core/ui/widgets/primary_button.dart';
+import '../../../../core/widgets/primary_button.dart';
 
-class TopHalfScreen extends StatelessWidget {
-  const TopHalfScreen({super.key});
+class TopSection extends StatelessWidget {
+  const TopSection({super.key});
 
   @override
   Widget build(BuildContext context) {

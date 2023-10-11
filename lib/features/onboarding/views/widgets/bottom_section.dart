@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/assets_constants.dart';
 import '../../../../core/navigation/navigation_paths.dart';
-import '../../../../core/ui/widgets/primary_button.dart';
+import '../../../../core/widgets/primary_button.dart';
 
-class BottomHalfScreen extends StatelessWidget {
-  const BottomHalfScreen({super.key});
+class BottomSection extends StatelessWidget {
+  const BottomSection({super.key});
 
   @override
   Widget build(BuildContext context) {
