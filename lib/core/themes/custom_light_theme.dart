@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class CustomLightTheme {
   static ThemeData getTheme(BuildContext context) {
     return ThemeData(
-      useMaterial3: true,
+      useMaterial3: false,
       brightness: Brightness.light,
       primaryColor: CustomColors.mainGreenColor,
       colorScheme: ColorScheme.fromSeed(

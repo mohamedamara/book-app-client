@@ -1,53 +1,17 @@
-import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/features/onboarding/views/widgets/bottom_section_image.dart';
+import 'package:books_app_client/features/onboarding/views/widgets/button_section_button.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/constants/assets_constants.dart';
-import '../../../../core/navigation/navigation_paths.dart';
-import '../../../../core/widgets/primary_button.dart';
 
 class BottomSection extends StatelessWidget {
   const BottomSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return const Expanded(
       child: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: context.setWidth(20),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PrimaryButtoon(
-                  buttonText: "Sign Up",
-                  onPressed: () => Navigator.pushNamed(
-                    context,
-                    NavigationPaths.signUpRoute,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: context.setHeight(8)),
-              Expanded(
-                child: IgnorePointer(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Image.asset(
-                      AssetsConstants.girlReadingBookImage,
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: context.setHeight(8)),
-            ],
-          ),
+          BottomSectionButton(),
+          BottomSectionImage(),
         ],
       ),
     );
