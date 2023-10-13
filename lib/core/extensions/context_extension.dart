@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-extension SizeConfigExtension on BuildContext {
+extension ContextExtension on BuildContext {
   static const Size _designSize = Size(375, 812);
 
   double get _screenWidth => MediaQuery.of(this).size.width;
