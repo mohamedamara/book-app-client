@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/features/home/views/widgets/carousel_slider_section.dart';
 import 'package:books_app_client/features/home/views/widgets/curved_decoration_background.dart';
 import 'package:books_app_client/features/home/views/widgets/menu_icon.dart';

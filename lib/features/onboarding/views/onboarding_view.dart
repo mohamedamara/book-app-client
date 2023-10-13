@@ -1,5 +1,5 @@
 import 'package:books_app_client/core/constants/assets_constants.dart';
-import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/features/onboarding/views/authentication_options_view.dart';
 import 'package:books_app_client/features/onboarding/views/onboarding_single_view.dart';
 import 'package:flutter/material.dart';

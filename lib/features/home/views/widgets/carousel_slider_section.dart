@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/features/home/views/widgets/carousel_item.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

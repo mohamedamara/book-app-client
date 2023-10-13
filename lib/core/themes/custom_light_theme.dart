@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/core/themes/custom_checkbox_theme.dart';
 import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:books_app_client/core/themes/custom_input_decoration_theme.dart';

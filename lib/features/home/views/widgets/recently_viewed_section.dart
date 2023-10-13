@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

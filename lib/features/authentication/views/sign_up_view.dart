@@ -1,4 +1,5 @@
-import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/extensions/string_extension.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
 import 'package:books_app_client/core/widgets/primary_button.dart';
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
@@ -56,26 +57,26 @@ class _SignUpViewState extends State<SignUpView> {
               CustomTextField(
                 controller: _firstNameTextEditingController,
                 labelText: "First Name",
-                onChanged: onTextFiledValueChanged,
+                onChanged: (_) => setState(() {}),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
                 controller: _lastNameTextEditingController,
                 labelText: "Last Name",
-                onChanged: onTextFiledValueChanged,
+                onChanged: (_) => setState(() {}),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
                 controller: _emailTextEditingController,
                 labelText: "Email",
-                onChanged: onTextFiledValueChanged,
+                onChanged: (_) => setState(() {}),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
                 controller: _passwordTextEditingController,
                 labelText: "Password",
                 obscureText: true,
-                onChanged: onTextFiledValueChanged,
+                onChanged: (_) => setState(() {}),
               ),
               SizedBox(height: context.setHeight(21)),
               CheckboxWithLabel(
@@ -97,7 +98,7 @@ class _SignUpViewState extends State<SignUpView> {
               SizedBox(height: context.setHeight(25)),
               PrimaryButtoon(
                 buttonText: "Sign Up",
-                isEnabled: areAllTextFieldsNotEmpty(),
+                isEnabled: areAllTextFieldsValid(),
                 onPressed: () {},
               ),
               SizedBox(height: context.setHeight(30)),
@@ -108,14 +109,14 @@ class _SignUpViewState extends State<SignUpView> {
     );
   }
 
-  bool areAllTextFieldsNotEmpty() {
-    return _firstNameTextEditingController.text.isNotEmpty &&
-        _lastNameTextEditingController.text.isNotEmpty &&
-        _emailTextEditingController.text.isNotEmpty &&
-        _passwordTextEditingController.text.isNotEmpty;
-  }
-
-  onTextFiledValueChanged(_) {
-    setState(() {});
+  bool areAllTextFieldsValid() {
+    bool isFirstNameValid = _firstNameTextEditingController.text.isNotEmpty;
+    bool isLastNameValid = _lastNameTextEditingController.text.isNotEmpty;
+    bool isEmailValid = _emailTextEditingController.text.isValidEmail;
+    bool isPasswordValid = _passwordTextEditingController.text.length >= 8;
+    return isFirstNameValid &&
+        isLastNameValid &&
+        isEmailValid &&
+        isPasswordValid;
   }
 }

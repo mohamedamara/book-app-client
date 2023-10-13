@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../features/onboarding/views/onboarding_view.dart';
 import 'navigation_paths.dart';
 
-const String initialRoute = NavigationPaths.topNavigationRoute;
+const String initialRoute = NavigationPaths.onboardingRoute;
 
 class NavigationRouter {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {

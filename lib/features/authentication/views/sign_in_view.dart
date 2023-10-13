@@ -1,4 +1,5 @@
-import 'package:books_app_client/core/extensions/context_extensions.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/extensions/string_extension.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
 import 'package:books_app_client/core/widgets/primary_button.dart';
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
@@ -50,14 +51,14 @@ class _SignInViewState extends State<SignInView> {
               CustomTextField(
                 controller: _emailTextEditingController,
                 labelText: "Email",
-                onChanged: onTextFiledValueChanged,
+                onChanged: (_) => setState(() {}),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
                 controller: _passwordTextEditingController,
                 labelText: "Password",
                 obscureText: true,
-                onChanged: onTextFiledValueChanged,
+                onChanged: (_) => setState(() {}),
               ),
               SizedBox(height: context.setHeight(21)),
               Row(
@@ -91,7 +92,7 @@ class _SignInViewState extends State<SignInView> {
               SizedBox(height: context.setHeight(25)),
               PrimaryButtoon(
                 buttonText: "Sign In",
-                isEnabled: areAllTextFieldsNotEmpty(),
+                isEnabled: areAllTextFieldsValid(),
                 onPressed: () {},
               ),
               SizedBox(height: context.setHeight(30)),
@@ -102,12 +103,9 @@ class _SignInViewState extends State<SignInView> {
     );
   }
 
-  bool areAllTextFieldsNotEmpty() {
-    return _emailTextEditingController.text.isNotEmpty &&
-        _passwordTextEditingController.text.isNotEmpty;
-  }
-
-  onTextFiledValueChanged(_) {
-    setState(() {});
+  bool areAllTextFieldsValid() {
+    bool isEmailValid = _emailTextEditingController.text.isValidEmail;
+    bool isPasswordValid = _passwordTextEditingController.text.length >= 8;
+    return isEmailValid && isPasswordValid;
   }
 }
