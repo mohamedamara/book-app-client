@@ -1,8 +1,8 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
-class OnboardingViewDotIndicator extends StatelessWidget {
-  const OnboardingViewDotIndicator({super.key, required this.isActive});
+class OnboardingViewSingleDot extends StatelessWidget {
+  const OnboardingViewSingleDot({super.key, required this.isActive});
 
   final bool isActive;
 

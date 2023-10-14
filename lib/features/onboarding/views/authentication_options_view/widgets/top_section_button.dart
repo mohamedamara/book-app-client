@@ -1,8 +1,8 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/navigation/navigation_paths.dart';
-import '../../../../core/widgets/primary_button.dart';
+import '../../../../../core/navigation/navigation_paths.dart';
+import '../../../../../core/widgets/primary_button.dart';
 
 class TopSectionButton extends StatelessWidget {
   const TopSectionButton({super.key});

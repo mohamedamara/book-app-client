@@ -1,7 +1,7 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/assets_constants.dart';
+import '../../../../../core/constants/assets_constants.dart';
 
 class LeavesRightImage extends StatelessWidget {
   const LeavesRightImage({super.key});

@@ -1,21 +1,18 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/features/onboarding/models/onboarding_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class OnboardingSingleView extends StatelessWidget {
   const OnboardingSingleView({
     super.key,
-    required this.title,
-    required this.subTitle,
+    required this.onboardingData,
     required this.subTitleSpacing,
-    required this.imageURL,
     required this.imageHeight,
   });
 
-  final String title;
-  final String subTitle;
+  final OnboardingViewModel onboardingData;
   final double subTitleSpacing;
-  final String imageURL;
   final double imageHeight;
 
   @override
@@ -26,7 +23,7 @@ class OnboardingSingleView extends StatelessWidget {
         children: [
           SizedBox(height: context.setHeight(78)),
           Text(
-            title,
+            onboardingData.title,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium,
           )
@@ -42,7 +39,7 @@ class OnboardingSingleView extends StatelessWidget {
               ),
           SizedBox(height: context.setHeight(16)),
           Text(
-            subTitle,
+            onboardingData.subTitle,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleSmall,
           )
@@ -58,7 +55,7 @@ class OnboardingSingleView extends StatelessWidget {
               ),
           SizedBox(height: subTitleSpacing),
           Image.asset(
-            imageURL,
+            onboardingData.imageURL,
             height: imageHeight,
           ),
         ],
