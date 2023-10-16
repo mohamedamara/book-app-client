@@ -1,38 +1,16 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
-import 'package:books_app_client/core/extensions/string_extension.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
 import 'package:books_app_client/core/widgets/primary_button.dart';
+import 'package:books_app_client/features/authentication/controllers/sing_in_controller.dart';
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SignInView extends StatefulWidget {
+class SignInView extends ConsumerWidget {
   const SignInView({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
-}
-
-class _SignInViewState extends State<SignInView> {
-  late TextEditingController _emailTextEditingController;
-  late TextEditingController _passwordTextEditingController;
-  bool _isStayLoggedInChecked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _emailTextEditingController = TextEditingController();
-    _passwordTextEditingController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _emailTextEditingController.dispose();
-    _passwordTextEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -49,35 +27,39 @@ class _SignInViewState extends State<SignInView> {
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
-                controller: _emailTextEditingController,
+                controller: ref
+                    .watch(signInControllerProvider)
+                    .emailTextEditingController,
                 labelText: "Email",
-                onChanged: (_) => setState(() {}),
+                onChanged: (_) => ref
+                    .read(signInControllerProvider.notifier)
+                    .onTextFieldChanged(),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
-                controller: _passwordTextEditingController,
+                controller: ref
+                    .watch(signInControllerProvider)
+                    .passwordTextEditingController,
                 labelText: "Password",
                 obscureText: true,
-                onChanged: (_) => setState(() {}),
+                onChanged: (_) => ref
+                    .read(signInControllerProvider.notifier)
+                    .onTextFieldChanged(),
               ),
               SizedBox(height: context.setHeight(21)),
               Row(
                 children: [
                   CheckboxWithLabel(
                     text: "Stay Logged In",
-                    isChecked: _isStayLoggedInChecked,
-                    onChanged: (bool? value) {
-                      if (value != null) {
-                        setState(() {
-                          _isStayLoggedInChecked = value;
-                        });
-                      }
-                    },
-                    onTextPressed: () {
-                      setState(() {
-                        _isStayLoggedInChecked = !_isStayLoggedInChecked;
-                      });
-                    },
+                    isChecked: ref
+                        .watch(signInControllerProvider)
+                        .isStayLoggedInChecked,
+                    onChanged: (_) => ref
+                        .read(signInControllerProvider.notifier)
+                        .updateStayLoggedInCheckedCheckBoxValue(),
+                    onTextPressed: () => ref
+                        .read(signInControllerProvider.notifier)
+                        .updateStayLoggedInCheckedCheckBoxValue(),
                   ),
                   const Spacer(),
                   InkWell(
@@ -92,7 +74,8 @@ class _SignInViewState extends State<SignInView> {
               SizedBox(height: context.setHeight(25)),
               PrimaryButtoon(
                 buttonText: "Sign In",
-                isEnabled: areAllTextFieldsValid(),
+                isEnabled:
+                    ref.watch(signInControllerProvider).areAllTextFieldsValid,
                 onPressed: () {},
               ),
               SizedBox(height: context.setHeight(30)),
@@ -101,11 +84,5 @@ class _SignInViewState extends State<SignInView> {
         ),
       ),
     );
-  }
-
-  bool areAllTextFieldsValid() {
-    bool isEmailValid = _emailTextEditingController.text.isValidEmail;
-    bool isPasswordValid = _passwordTextEditingController.text.length >= 8;
-    return isEmailValid && isPasswordValid;
   }
 }
