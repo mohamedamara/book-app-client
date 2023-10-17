@@ -56,28 +56,23 @@ class OnboardingView extends ConsumerWidget {
   ({double subtitleSpacing, double imageHeight}) getSpecificOnboardingViewSize({
     required BuildContext context,
     required int viewIndex,
-  }) {
-    switch (viewIndex) {
-      case 0:
-        return (
-          subtitleSpacing: context.setHeight(110),
-          imageHeight: context.setHeight(225),
-        );
-      case 1:
-        return (
-          subtitleSpacing: context.setHeight(75),
-          imageHeight: context.setHeight(244),
-        );
-      case 2:
-        return (
-          subtitleSpacing: context.setHeight(56),
-          imageHeight: context.setHeight(278),
-        );
-      default:
-        return (
-          subtitleSpacing: 0,
-          imageHeight: 0,
-        );
-    }
-  }
+  }) =>
+      switch (viewIndex) {
+        0 => (
+            subtitleSpacing: context.setHeight(110),
+            imageHeight: context.setHeight(225),
+          ),
+        1 => (
+            subtitleSpacing: context.setHeight(75),
+            imageHeight: context.setHeight(244),
+          ),
+        2 => (
+            subtitleSpacing: context.setHeight(56),
+            imageHeight: context.setHeight(278),
+          ),
+        _ => (
+            subtitleSpacing: 0,
+            imageHeight: 0,
+          ),
+      };
 }
