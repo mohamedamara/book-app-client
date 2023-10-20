@@ -12,6 +12,6 @@ class SignUpState with _$SignUpState {
     required TextEditingController passwordTextEditingController,
     @Default(false) bool isMonthlyNewsletterChecked,
     @Default(false) bool areAllTextFieldsValid,
-    @Default(false) bool isViewBusy,
+    @Default(false) bool isUserLoggedIn,
   }) = _SignUpState;
 }

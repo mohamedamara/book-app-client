@@ -22,7 +22,7 @@ mixin _$SignInState {
       throw _privateConstructorUsedError;
   bool get isStayLoggedInChecked => throw _privateConstructorUsedError;
   bool get areAllTextFieldsValid => throw _privateConstructorUsedError;
-  bool get isViewBusy => throw _privateConstructorUsedError;
+  bool get isUserLoggedIn => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignInStateCopyWith<SignInState> get copyWith =>
@@ -40,7 +40,7 @@ abstract class $SignInStateCopyWith<$Res> {
       TextEditingController passwordTextEditingController,
       bool isStayLoggedInChecked,
       bool areAllTextFieldsValid,
-      bool isViewBusy});
+      bool isUserLoggedIn});
 }
 
 /// @nodoc
@@ -60,7 +60,7 @@ class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
     Object? passwordTextEditingController = null,
     Object? isStayLoggedInChecked = null,
     Object? areAllTextFieldsValid = null,
-    Object? isViewBusy = null,
+    Object? isUserLoggedIn = null,
   }) {
     return _then(_value.copyWith(
       emailTextEditingController: null == emailTextEditingController
@@ -79,9 +79,9 @@ class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
           ? _value.areAllTextFieldsValid
           : areAllTextFieldsValid // ignore: cast_nullable_to_non_nullable
               as bool,
-      isViewBusy: null == isViewBusy
-          ? _value.isViewBusy
-          : isViewBusy // ignore: cast_nullable_to_non_nullable
+      isUserLoggedIn: null == isUserLoggedIn
+          ? _value.isUserLoggedIn
+          : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -100,7 +100,7 @@ abstract class _$$SignInStateImplCopyWith<$Res>
       TextEditingController passwordTextEditingController,
       bool isStayLoggedInChecked,
       bool areAllTextFieldsValid,
-      bool isViewBusy});
+      bool isUserLoggedIn});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class __$$SignInStateImplCopyWithImpl<$Res>
     Object? passwordTextEditingController = null,
     Object? isStayLoggedInChecked = null,
     Object? areAllTextFieldsValid = null,
-    Object? isViewBusy = null,
+    Object? isUserLoggedIn = null,
   }) {
     return _then(_$SignInStateImpl(
       emailTextEditingController: null == emailTextEditingController
@@ -137,9 +137,9 @@ class __$$SignInStateImplCopyWithImpl<$Res>
           ? _value.areAllTextFieldsValid
           : areAllTextFieldsValid // ignore: cast_nullable_to_non_nullable
               as bool,
-      isViewBusy: null == isViewBusy
-          ? _value.isViewBusy
-          : isViewBusy // ignore: cast_nullable_to_non_nullable
+      isUserLoggedIn: null == isUserLoggedIn
+          ? _value.isUserLoggedIn
+          : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -153,7 +153,7 @@ class _$SignInStateImpl implements _SignInState {
       required this.passwordTextEditingController,
       this.isStayLoggedInChecked = false,
       this.areAllTextFieldsValid = false,
-      this.isViewBusy = false});
+      this.isUserLoggedIn = false});
 
   @override
   final TextEditingController emailTextEditingController;
@@ -167,11 +167,11 @@ class _$SignInStateImpl implements _SignInState {
   final bool areAllTextFieldsValid;
   @override
   @JsonKey()
-  final bool isViewBusy;
+  final bool isUserLoggedIn;
 
   @override
   String toString() {
-    return 'SignInState(emailTextEditingController: $emailTextEditingController, passwordTextEditingController: $passwordTextEditingController, isStayLoggedInChecked: $isStayLoggedInChecked, areAllTextFieldsValid: $areAllTextFieldsValid, isViewBusy: $isViewBusy)';
+    return 'SignInState(emailTextEditingController: $emailTextEditingController, passwordTextEditingController: $passwordTextEditingController, isStayLoggedInChecked: $isStayLoggedInChecked, areAllTextFieldsValid: $areAllTextFieldsValid, isUserLoggedIn: $isUserLoggedIn)';
   }
 
   @override
@@ -191,8 +191,8 @@ class _$SignInStateImpl implements _SignInState {
                 other.isStayLoggedInChecked == isStayLoggedInChecked) &&
             (identical(other.areAllTextFieldsValid, areAllTextFieldsValid) ||
                 other.areAllTextFieldsValid == areAllTextFieldsValid) &&
-            (identical(other.isViewBusy, isViewBusy) ||
-                other.isViewBusy == isViewBusy));
+            (identical(other.isUserLoggedIn, isUserLoggedIn) ||
+                other.isUserLoggedIn == isUserLoggedIn));
   }
 
   @override
@@ -202,7 +202,7 @@ class _$SignInStateImpl implements _SignInState {
       passwordTextEditingController,
       isStayLoggedInChecked,
       areAllTextFieldsValid,
-      isViewBusy);
+      isUserLoggedIn);
 
   @JsonKey(ignore: true)
   @override
@@ -217,7 +217,7 @@ abstract class _SignInState implements SignInState {
       required final TextEditingController passwordTextEditingController,
       final bool isStayLoggedInChecked,
       final bool areAllTextFieldsValid,
-      final bool isViewBusy}) = _$SignInStateImpl;
+      final bool isUserLoggedIn}) = _$SignInStateImpl;
 
   @override
   TextEditingController get emailTextEditingController;
@@ -228,7 +228,7 @@ abstract class _SignInState implements SignInState {
   @override
   bool get areAllTextFieldsValid;
   @override
-  bool get isViewBusy;
+  bool get isUserLoggedIn;
   @override
   @JsonKey(ignore: true)
   _$$SignInStateImplCopyWith<_$SignInStateImpl> get copyWith =>

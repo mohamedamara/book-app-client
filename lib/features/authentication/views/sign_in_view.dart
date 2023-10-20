@@ -11,6 +11,14 @@ class SignInView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(signInControllerProvider, (previous, current) {
+      if (current.isUserLoggedIn) {
+        // Navigator.pushNamed(
+        //   context,
+        //   NavigationPaths.topNavigationRoute,
+        // );
+      }
+    });
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -76,7 +84,7 @@ class SignInView extends ConsumerWidget {
                 buttonText: "Sign In",
                 isEnabled:
                     ref.watch(signInControllerProvider).areAllTextFieldsValid,
-                onPressed: () {},
+                onPressed: ref.read(signInControllerProvider.notifier).signIn,
               ),
               SizedBox(height: context.setHeight(30)),
             ],

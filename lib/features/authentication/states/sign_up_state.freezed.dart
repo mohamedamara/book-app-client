@@ -26,7 +26,7 @@ mixin _$SignUpState {
       throw _privateConstructorUsedError;
   bool get isMonthlyNewsletterChecked => throw _privateConstructorUsedError;
   bool get areAllTextFieldsValid => throw _privateConstructorUsedError;
-  bool get isViewBusy => throw _privateConstructorUsedError;
+  bool get isUserLoggedIn => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpStateCopyWith<SignUpState> get copyWith =>
@@ -46,7 +46,7 @@ abstract class $SignUpStateCopyWith<$Res> {
       TextEditingController passwordTextEditingController,
       bool isMonthlyNewsletterChecked,
       bool areAllTextFieldsValid,
-      bool isViewBusy});
+      bool isUserLoggedIn});
 }
 
 /// @nodoc
@@ -68,7 +68,7 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
     Object? passwordTextEditingController = null,
     Object? isMonthlyNewsletterChecked = null,
     Object? areAllTextFieldsValid = null,
-    Object? isViewBusy = null,
+    Object? isUserLoggedIn = null,
   }) {
     return _then(_value.copyWith(
       firstNameTextEditingController: null == firstNameTextEditingController
@@ -95,9 +95,9 @@ class _$SignUpStateCopyWithImpl<$Res, $Val extends SignUpState>
           ? _value.areAllTextFieldsValid
           : areAllTextFieldsValid // ignore: cast_nullable_to_non_nullable
               as bool,
-      isViewBusy: null == isViewBusy
-          ? _value.isViewBusy
-          : isViewBusy // ignore: cast_nullable_to_non_nullable
+      isUserLoggedIn: null == isUserLoggedIn
+          ? _value.isUserLoggedIn
+          : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -118,7 +118,7 @@ abstract class _$$SignUpStateImplCopyWith<$Res>
       TextEditingController passwordTextEditingController,
       bool isMonthlyNewsletterChecked,
       bool areAllTextFieldsValid,
-      bool isViewBusy});
+      bool isUserLoggedIn});
 }
 
 /// @nodoc
@@ -138,7 +138,7 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
     Object? passwordTextEditingController = null,
     Object? isMonthlyNewsletterChecked = null,
     Object? areAllTextFieldsValid = null,
-    Object? isViewBusy = null,
+    Object? isUserLoggedIn = null,
   }) {
     return _then(_$SignUpStateImpl(
       firstNameTextEditingController: null == firstNameTextEditingController
@@ -165,9 +165,9 @@ class __$$SignUpStateImplCopyWithImpl<$Res>
           ? _value.areAllTextFieldsValid
           : areAllTextFieldsValid // ignore: cast_nullable_to_non_nullable
               as bool,
-      isViewBusy: null == isViewBusy
-          ? _value.isViewBusy
-          : isViewBusy // ignore: cast_nullable_to_non_nullable
+      isUserLoggedIn: null == isUserLoggedIn
+          ? _value.isUserLoggedIn
+          : isUserLoggedIn // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -183,7 +183,7 @@ class _$SignUpStateImpl implements _SignUpState {
       required this.passwordTextEditingController,
       this.isMonthlyNewsletterChecked = false,
       this.areAllTextFieldsValid = false,
-      this.isViewBusy = false});
+      this.isUserLoggedIn = false});
 
   @override
   final TextEditingController firstNameTextEditingController;
@@ -201,11 +201,11 @@ class _$SignUpStateImpl implements _SignUpState {
   final bool areAllTextFieldsValid;
   @override
   @JsonKey()
-  final bool isViewBusy;
+  final bool isUserLoggedIn;
 
   @override
   String toString() {
-    return 'SignUpState(firstNameTextEditingController: $firstNameTextEditingController, lastNameTextEditingController: $lastNameTextEditingController, emailTextEditingController: $emailTextEditingController, passwordTextEditingController: $passwordTextEditingController, isMonthlyNewsletterChecked: $isMonthlyNewsletterChecked, areAllTextFieldsValid: $areAllTextFieldsValid, isViewBusy: $isViewBusy)';
+    return 'SignUpState(firstNameTextEditingController: $firstNameTextEditingController, lastNameTextEditingController: $lastNameTextEditingController, emailTextEditingController: $emailTextEditingController, passwordTextEditingController: $passwordTextEditingController, isMonthlyNewsletterChecked: $isMonthlyNewsletterChecked, areAllTextFieldsValid: $areAllTextFieldsValid, isUserLoggedIn: $isUserLoggedIn)';
   }
 
   @override
@@ -235,8 +235,8 @@ class _$SignUpStateImpl implements _SignUpState {
                     isMonthlyNewsletterChecked) &&
             (identical(other.areAllTextFieldsValid, areAllTextFieldsValid) ||
                 other.areAllTextFieldsValid == areAllTextFieldsValid) &&
-            (identical(other.isViewBusy, isViewBusy) ||
-                other.isViewBusy == isViewBusy));
+            (identical(other.isUserLoggedIn, isUserLoggedIn) ||
+                other.isUserLoggedIn == isUserLoggedIn));
   }
 
   @override
@@ -248,7 +248,7 @@ class _$SignUpStateImpl implements _SignUpState {
       passwordTextEditingController,
       isMonthlyNewsletterChecked,
       areAllTextFieldsValid,
-      isViewBusy);
+      isUserLoggedIn);
 
   @JsonKey(ignore: true)
   @override
@@ -265,7 +265,7 @@ abstract class _SignUpState implements SignUpState {
       required final TextEditingController passwordTextEditingController,
       final bool isMonthlyNewsletterChecked,
       final bool areAllTextFieldsValid,
-      final bool isViewBusy}) = _$SignUpStateImpl;
+      final bool isUserLoggedIn}) = _$SignUpStateImpl;
 
   @override
   TextEditingController get firstNameTextEditingController;
@@ -280,7 +280,7 @@ abstract class _SignUpState implements SignUpState {
   @override
   bool get areAllTextFieldsValid;
   @override
-  bool get isViewBusy;
+  bool get isUserLoggedIn;
   @override
   @JsonKey(ignore: true)
   _$$SignUpStateImplCopyWith<_$SignUpStateImpl> get copyWith =>

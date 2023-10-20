@@ -10,6 +10,6 @@ class SignInState with _$SignInState {
     required TextEditingController passwordTextEditingController,
     @Default(false) bool isStayLoggedInChecked,
     @Default(false) bool areAllTextFieldsValid,
-    @Default(false) bool isViewBusy,
+    @Default(false) bool isUserLoggedIn,
   }) = _SignInState;
 }

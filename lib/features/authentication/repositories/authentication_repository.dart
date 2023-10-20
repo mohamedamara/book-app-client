@@ -1,4 +1,6 @@
-import 'package:books_app_client/core/network/network_configs.dart';
+import 'dart:developer';
+
+import 'package:books_app_client/core/network/dio_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -41,8 +43,9 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    final response = await dio.get(
-      'users',
+    log(dio.options.headers.toString());
+    final response = await dio.post(
+      'auth',
       data: {
         'email': email,
         'password': password,
