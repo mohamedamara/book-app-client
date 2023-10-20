@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../controllers/onboarding_controller.dart';
+import '../../../models/onboarding_view_model.dart';
 import 'onboarding_view_single_dot.dart';
 
-class OnboardingViewDots extends ConsumerWidget {
-  const OnboardingViewDots({super.key});
+class OnboardingViewDots extends StatelessWidget {
+  const OnboardingViewDots({super.key, required this.currentPageIndex});
+
+  final int currentPageIndex;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var onboardingState = ref.watch(onboardingControllerProvider);
+  Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        for (int i = 0; i < onboardingState.onboardingViewsData.length + 1; i++)
-          i == onboardingState.currentPageIndex
+        for (int i = 0; i < onboardingViewsData.length + 1; i++)
+          i == currentPageIndex
               ? const OnboardingViewSingleDot(isActive: true)
               : const OnboardingViewSingleDot(isActive: false)
       ],

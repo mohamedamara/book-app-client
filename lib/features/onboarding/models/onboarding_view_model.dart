@@ -1,19 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
 
 import '../../../core/constants/assets_constants.dart';
 
-part 'onboarding_view_model.freezed.dart';
-
-@freezed
-class OnboardingViewModel with _$OnboardingViewModel {
-  const factory OnboardingViewModel({
-    required String title,
-    required String subTitle,
-    required String imageURL,
-  }) = _OnboardingViewModel;
+@immutable
+class OnboardingViewModel {
+  const OnboardingViewModel({
+    required this.title,
+    required this.subTitle,
+    required this.imageURL,
+  });
+  final String title;
+  final String subTitle;
+  final String imageURL;
 }
 
-const List<OnboardingViewModel> onboardingData = [
+const List<OnboardingViewModel> onboardingViewsData = [
   OnboardingViewModel(
     title: "Discounted \nSecondhand Books",
     subTitle: "Used and near new secondhand books at great prices.",
