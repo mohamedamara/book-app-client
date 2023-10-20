@@ -1,60 +1,35 @@
-import 'package:books_app_client/core/extensions/string_extension.dart';
 import 'package:books_app_client/features/authentication/services/authentication_service.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../states/sign_in_state.dart';
+import '../enums/authentication_status.dart';
 
 final signInControllerProvider =
-    StateNotifierProvider.autoDispose<SignInController, SignInState>(
+    StateNotifierProvider.autoDispose<SignInController, AuthenticationStatus>(
   (ref) {
     final authenticationService = ref.watch(authenticationServiceProvider);
     return SignInController(
-      SignInState(
-        emailTextEditingController: TextEditingController(),
-        passwordTextEditingController: TextEditingController(),
-      ),
+      initialAuthenticationStatus: AuthenticationStatus.unauthenticated,
       authenticationService: authenticationService,
     );
   },
 );
 
-class SignInController extends StateNotifier<SignInState> {
-  SignInController(
-    SignInState state, {
+class SignInController extends StateNotifier<AuthenticationStatus> {
+  SignInController({
+    required this.initialAuthenticationStatus,
     required this.authenticationService,
-  }) : super(state);
+  }) : super(initialAuthenticationStatus);
 
   final AuthenticationService authenticationService;
+  final AuthenticationStatus initialAuthenticationStatus;
 
-  void onTextFieldChanged() {
-    bool isEmailValid = state.emailTextEditingController.text.isValidEmail;
-    bool isPasswordValid = state.passwordTextEditingController.text.length >= 8;
-    if (isEmailValid && isPasswordValid) {
-      state = state.copyWith(areAllTextFieldsValid: true);
-    } else {
-      state = state.copyWith(areAllTextFieldsValid: false);
-    }
-  }
-
-  void updateStayLoggedInCheckedCheckBoxValue() {
-    state = state.copyWith(isStayLoggedInChecked: !state.isStayLoggedInChecked);
-  }
-
-  Future<void> signIn() async {
+  Future<void> signIn({required String email, required String password}) async {
     final isSignInSuccess = await authenticationService.signIn(
-      email: state.emailTextEditingController.text,
-      password: state.passwordTextEditingController.text,
+      email: email,
+      password: password,
     );
     if (isSignInSuccess) {
-      state = state.copyWith(isUserLoggedIn: true);
+      state = AuthenticationStatus.authenticated;
     }
-  }
-
-  @override
-  void dispose() {
-    state.emailTextEditingController.dispose();
-    state.passwordTextEditingController.dispose();
-    super.dispose();
   }
 }
