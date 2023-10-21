@@ -40,68 +40,66 @@ class SignInView extends HookConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: context.setWidth(20)),
-          child: Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: context.setHeight(30)),
-                Text(
-                  "Sign In",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                SizedBox(height: context.setHeight(20)),
-                CustomTextField(
-                  controller: emailTextEditingController,
-                  labelText: "Email",
-                  onChanged: (_) => validateTextFields(),
-                ),
-                SizedBox(height: context.setHeight(20)),
-                CustomTextField(
-                  controller: passwordTextEditingController,
-                  labelText: "Password",
-                  obscureText: true,
-                  onChanged: (_) => validateTextFields(),
-                ),
-                SizedBox(height: context.setHeight(21)),
-                Row(
-                  children: [
-                    CheckboxWithLabel(
-                      text: "Stay Logged In",
-                      isChecked: isStayLoggedInChecked.value,
-                      onChanged: (_) {
-                        isStayLoggedInChecked.value =
-                            !isStayLoggedInChecked.value;
-                      },
-                      onTextPressed: () {
-                        isStayLoggedInChecked.value =
-                            !isStayLoggedInChecked.value;
-                      },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: context.setHeight(30)),
+              Text(
+                "Sign In",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              SizedBox(height: context.setHeight(20)),
+              CustomTextField(
+                controller: emailTextEditingController,
+                labelText: "Email",
+                onChanged: (_) => validateTextFields(),
+              ),
+              SizedBox(height: context.setHeight(20)),
+              CustomTextField(
+                controller: passwordTextEditingController,
+                labelText: "Password",
+                obscureText: true,
+                onChanged: (_) => validateTextFields(),
+              ),
+              SizedBox(height: context.setHeight(21)),
+              Row(
+                children: [
+                  CheckboxWithLabel(
+                    text: "Stay Logged In",
+                    isChecked: isStayLoggedInChecked.value,
+                    onChanged: (_) {
+                      isStayLoggedInChecked.value =
+                          !isStayLoggedInChecked.value;
+                    },
+                    onTextPressed: () {
+                      isStayLoggedInChecked.value =
+                          !isStayLoggedInChecked.value;
+                    },
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "Forgotten Passowrd?",
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        "Forgotten Passowrd?",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: context.setHeight(25)),
-                PrimaryButtoon(
-                  buttonText: "Sign In",
-                  isEnabled: areAllTextFieldsValid.value,
-                  onPressed: () {
-                    ref.read(authenticationControllerProvider.notifier).signIn(
-                          email: emailTextEditingController.text,
-                          password: passwordTextEditingController.text,
-                        );
-                  },
-                ),
-                SizedBox(height: context.setHeight(30)),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              SizedBox(height: context.setHeight(25)),
+              PrimaryButtoon(
+                buttonText: "Sign In",
+                isEnabled: areAllTextFieldsValid.value,
+                onPressed: () {
+                  ref.read(authenticationControllerProvider.notifier).signIn(
+                        email: emailTextEditingController.text,
+                        password: passwordTextEditingController.text,
+                      );
+                },
+              ),
+              SizedBox(height: context.setHeight(30)),
+            ],
           ),
         ),
       ),
