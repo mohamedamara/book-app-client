@@ -3,8 +3,7 @@ import 'package:books_app_client/core/extensions/string_extension.dart';
 import 'package:books_app_client/core/navigation/navigation_paths.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
 import 'package:books_app_client/core/widgets/primary_button.dart';
-import 'package:books_app_client/features/authentication/controllers/sing_in_controller.dart';
-import 'package:books_app_client/features/authentication/enums/authentication_status.dart';
+import 'package:books_app_client/features/authentication/controllers/authentication_controller.dart';
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -23,14 +22,11 @@ class SignInView extends HookConsumerWidget {
     void validateTextFields() {
       bool isEmailValid = emailTextEditingController.text.isValidEmail;
       bool isPasswordValid = passwordTextEditingController.text.length >= 8;
-      if (isEmailValid && isPasswordValid) {
-        areAllTextFieldsValid.value = true;
-      } else {
-        areAllTextFieldsValid.value = false;
-      }
+      areAllTextFieldsValid.value =
+          isEmailValid && isPasswordValid ? true : false;
     }
 
-    ref.listen(signInControllerProvider, (previous, current) {
+    ref.listen(authenticationControllerProvider, (previous, current) {
       if (current == AuthenticationStatus.authenticated) {
         Navigator.pushNamedAndRemoveUntil(
           context,
@@ -97,7 +93,7 @@ class SignInView extends HookConsumerWidget {
                   buttonText: "Sign In",
                   isEnabled: areAllTextFieldsValid.value,
                   onPressed: () {
-                    ref.read(signInControllerProvider.notifier).signIn(
+                    ref.read(authenticationControllerProvider.notifier).signIn(
                           email: emailTextEditingController.text,
                           password: passwordTextEditingController.text,
                         );

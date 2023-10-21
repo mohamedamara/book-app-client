@@ -1,16 +1,48 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/extensions/string_extension.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
 import 'package:books_app_client/core/widgets/primary_button.dart';
-import 'package:books_app_client/features/authentication/controllers/sign_up_controller.dart';
+import 'package:books_app_client/features/authentication/controllers/authentication_controller.dart';
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SignUpView extends ConsumerWidget {
+import '../../../core/navigation/navigation_paths.dart';
+
+class SignUpView extends HookConsumerWidget {
   const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final firstNameTextEditingController = useTextEditingController();
+    final lastNameTextEditingController = useTextEditingController();
+    final emailTextEditingController = useTextEditingController();
+    final passwordTextEditingController = useTextEditingController();
+    final isMonthlyNewsletterChecked = useState(false);
+    final areAllTextFieldsValid = useState(false);
+
+    void validateTextFields() {
+      bool isFirstNameValid = firstNameTextEditingController.text.isNotEmpty;
+      bool isLastNameValid = lastNameTextEditingController.text.isNotEmpty;
+      bool isEmailValid = emailTextEditingController.text.isValidEmail;
+      bool isPasswordValid = passwordTextEditingController.text.length >= 8;
+      areAllTextFieldsValid.value =
+          isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid
+              ? true
+              : false;
+    }
+
+    ref.listen(authenticationControllerProvider, (previous, current) {
+      if (current == AuthenticationStatus.authenticated) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          NavigationPaths.topNavigationRoute,
+          (Route<dynamic> route) => false,
+        );
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -27,63 +59,46 @@ class SignUpView extends ConsumerWidget {
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
-                controller: ref
-                    .watch(signUpControllerProvider)
-                    .firstNameTextEditingController,
+                controller: firstNameTextEditingController,
                 labelText: "First Name",
-                onChanged: (_) => ref
-                    .read(signUpControllerProvider.notifier)
-                    .onTextFieldChanged(),
+                onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
-                controller: ref
-                    .watch(signUpControllerProvider)
-                    .lastNameTextEditingController,
+                controller: lastNameTextEditingController,
                 labelText: "Last Name",
-                onChanged: (_) => ref
-                    .read(signUpControllerProvider.notifier)
-                    .onTextFieldChanged(),
+                onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
-                controller: ref
-                    .watch(signUpControllerProvider)
-                    .emailTextEditingController,
+                controller: emailTextEditingController,
                 labelText: "Email",
-                onChanged: (_) => ref
-                    .read(signUpControllerProvider.notifier)
-                    .onTextFieldChanged(),
+                onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
-                controller: ref
-                    .watch(signUpControllerProvider)
-                    .passwordTextEditingController,
+                controller: passwordTextEditingController,
                 labelText: "Password",
                 obscureText: true,
-                onChanged: (_) => ref
-                    .read(signUpControllerProvider.notifier)
-                    .onTextFieldChanged(),
+                onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(21)),
               CheckboxWithLabel(
                 text: "Please sign me up for the monthly newsletter.",
-                isChecked: ref
-                    .watch(signUpControllerProvider)
-                    .isMonthlyNewsletterChecked,
-                onChanged: (_) => ref
-                    .read(signUpControllerProvider.notifier)
-                    .updateMonthlyNewsletterCheckBoxValue(),
-                onTextPressed: () => ref
-                    .read(signUpControllerProvider.notifier)
-                    .updateMonthlyNewsletterCheckBoxValue(),
+                isChecked: isMonthlyNewsletterChecked.value,
+                onChanged: (_) {
+                  isMonthlyNewsletterChecked.value =
+                      !isMonthlyNewsletterChecked.value;
+                },
+                onTextPressed: () {
+                  isMonthlyNewsletterChecked.value =
+                      !isMonthlyNewsletterChecked.value;
+                },
               ),
               SizedBox(height: context.setHeight(25)),
               PrimaryButtoon(
                 buttonText: "Sign Up",
-                isEnabled:
-                    ref.watch(signUpControllerProvider).areAllTextFieldsValid,
+                isEnabled: areAllTextFieldsValid.value,
                 onPressed: () {},
               ),
               SizedBox(height: context.setHeight(30)),

@@ -1,21 +1,19 @@
 import 'package:books_app_client/features/authentication/services/authentication_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../enums/authentication_status.dart';
+enum AuthenticationStatus { authenticated, unauthenticated }
 
-final signInControllerProvider =
-    StateNotifierProvider.autoDispose<SignInController, AuthenticationStatus>(
-  (ref) {
-    final authenticationService = ref.watch(authenticationServiceProvider);
-    return SignInController(
-      initialAuthenticationStatus: AuthenticationStatus.unauthenticated,
-      authenticationService: authenticationService,
-    );
-  },
-);
+final authenticationControllerProvider = StateNotifierProvider.autoDispose<
+    AuthenticationController, AuthenticationStatus>((ref) {
+  final authenticationService = ref.watch(authenticationServiceProvider);
+  return AuthenticationController(
+    initialAuthenticationStatus: AuthenticationStatus.unauthenticated,
+    authenticationService: authenticationService,
+  );
+});
 
-class SignInController extends StateNotifier<AuthenticationStatus> {
-  SignInController({
+class AuthenticationController extends StateNotifier<AuthenticationStatus> {
+  AuthenticationController({
     required this.initialAuthenticationStatus,
     required this.authenticationService,
   }) : super(initialAuthenticationStatus);
