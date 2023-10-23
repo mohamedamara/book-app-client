@@ -6,11 +6,13 @@ class PrimaryButtoon extends StatelessWidget {
     super.key,
     required this.buttonText,
     this.isEnabled = true,
+    this.isLoading = false,
     required this.onPressed,
   });
 
   final String buttonText;
   final bool isEnabled;
+  final bool isLoading;
   final VoidCallback? onPressed;
 
   @override
@@ -46,14 +48,25 @@ class PrimaryButtoon extends StatelessWidget {
         ),
         onPressed: isEnabled ? onPressed : null,
         child: Center(
-          child: Text(
-            buttonText.toUpperCase(),
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: isEnabled
-                      ? Colors.white
-                      : Theme.of(context).colorScheme.primary,
+          child: isLoading
+              ? SizedBox(
+                  height: context.setHeight(30),
+                  width: context.setHeight(30),
+                  child: const CircularProgressIndicator(
+                    strokeWidth: 3,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Colors.white,
+                    ),
+                  ),
+                )
+              : Text(
+                  buttonText.toUpperCase(),
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: isEnabled
+                            ? Colors.white
+                            : Theme.of(context).colorScheme.primary,
+                      ),
                 ),
-          ),
         ),
       ),
     );
