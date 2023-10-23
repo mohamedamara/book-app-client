@@ -1,7 +1,9 @@
-import 'package:books_app_client/core/network/jwt_state_provider.dart';
+import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
 import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/network/jwt_state_provider.dart';
 
 final authenticationServiceProvider = Provider<AuthenticationService>(
   (ref) {
@@ -51,16 +53,20 @@ class AuthenticationServiceImpl implements AuthenticationService {
 
   @override
   Future<bool> signIn({required String email, required String password}) async {
-    final jwt = await authenticationRepository.signIn(
-      email: email,
-      password: password,
-    );
-    if (jwt.isNotEmpty) {
-      secureStorageRepository.addData("jwt", jwt);
-      ref.read(jwtStateProvider.notifier).state = jwt;
-      return true;
-    } else {
-      return false;
+    try {
+      final jwt = await authenticationRepository.signIn(
+        email: email,
+        password: password,
+      );
+      if (jwt.isNotEmpty) {
+        secureStorageRepository.addData("jwt", jwt);
+        ref.read(jwtStateProvider.notifier).state = jwt;
+        return true;
+      } else {
+        return false;
+      }
+    } on Failure catch (_) {
+      rethrow;
     }
   }
 }

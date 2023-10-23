@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../core/models/failure.dart';
 import '../../../core/navigation/navigation_paths.dart';
 
 class SignUpView extends HookConsumerWidget {
@@ -33,8 +34,14 @@ class SignUpView extends HookConsumerWidget {
               : false;
     }
 
-    ref.listen(authenticationControllerProvider, (previous, current) {
-      if (current == AuthenticationStatus.authenticated) {
+    ref.listen(authenticationControllerProvider, (_, current) {
+      if (current is AsyncError && current.error is Failure) {
+        final snackBar = SnackBar(
+          content: Text(current.error.toString()),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else if (current is AsyncData &&
+          current.value == AuthenticationStatus.authenticated) {
         Navigator.pushNamedAndRemoveUntil(
           context,
           NavigationPaths.topNavigationRoute,

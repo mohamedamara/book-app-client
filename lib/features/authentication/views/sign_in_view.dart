@@ -1,5 +1,6 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/core/extensions/string_extension.dart';
+import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/core/navigation/navigation_paths.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
 import 'package:books_app_client/core/widgets/primary_button.dart';
@@ -26,8 +27,14 @@ class SignInView extends HookConsumerWidget {
           isEmailValid && isPasswordValid ? true : false;
     }
 
-    ref.listen(authenticationControllerProvider, (previous, current) {
-      if (current == AuthenticationStatus.authenticated) {
+    ref.listen(authenticationControllerProvider, (_, current) {
+      if (current is AsyncError && current.error is Failure) {
+        final snackBar = SnackBar(
+          content: Text(current.error.toString()),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else if (current is AsyncData &&
+          current.value == AuthenticationStatus.authenticated) {
         Navigator.pushNamedAndRemoveUntil(
           context,
           NavigationPaths.topNavigationRoute,
@@ -35,6 +42,7 @@ class SignInView extends HookConsumerWidget {
         );
       }
     });
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -91,6 +99,8 @@ class SignInView extends HookConsumerWidget {
               PrimaryButtoon(
                 buttonText: "Sign In",
                 isEnabled: areAllTextFieldsValid.value,
+                isLoading:
+                    ref.watch(authenticationControllerProvider) is AsyncLoading,
                 onPressed: () {
                   ref.read(authenticationControllerProvider.notifier).signIn(
                         email: emailTextEditingController.text,
