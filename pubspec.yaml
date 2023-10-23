@@ -43,6 +43,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   flutter_hooks: ^0.20.3
   hooks_riverpod: ^2.4.4
+  mocktail: ^1.0.1
 
 dev_dependencies:
   flutter_test:
