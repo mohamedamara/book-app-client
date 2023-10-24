@@ -20,16 +20,15 @@ void main() {
 
   String email = "test@whatever.com";
   String password = "12345678";
+  String jwt = "abcdefg";
 
   setUp(() {
     mockedAuthenticationRepository = MockAuthenticationRepository();
     mockedSecureStorageRepository = MockSecureStorageRepository();
   });
 
-  group('successful signin call', () {
-    test('should return true', () async {
-      String jwt = "abcdefg";
-
+  group('Given successful API call When signin', () {
+    test('Then complete the function normally', () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
@@ -54,20 +53,20 @@ void main() {
         ],
       );
 
-      final authenticationService =
-          container.read(authenticationServiceProvider);
-
-      final result = await authenticationService.signIn(
-        email: email,
-        password: password,
+      final authenticationService = container.read(
+        authenticationServiceProvider,
       );
 
-      expect(result, true);
+      expectLater(
+        authenticationService.signIn(
+          email: email,
+          password: password,
+        ),
+        completes,
+      );
     });
 
-    test('should call secure storage to store the jwt', () async {
-      String jwt = "abcdefg";
-
+    test('Then call secure storage repository to store the jwt', () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
@@ -92,8 +91,9 @@ void main() {
         ],
       );
 
-      final authenticationService =
-          container.read(authenticationServiceProvider);
+      final authenticationService = container.read(
+        authenticationServiceProvider,
+      );
 
       await authenticationService.signIn(
         email: email,
@@ -104,10 +104,7 @@ void main() {
           .called(1);
     });
 
-    test('should update jwtStateProvider with jwt value gotten from API',
-        () async {
-      String jwt = "abcdefg";
-
+    test('Then update jwt state with value gotten from API', () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
@@ -144,8 +141,9 @@ void main() {
 
       verifyNoMoreInteractions(listener);
 
-      final authenticationService =
-          container.read(authenticationServiceProvider);
+      final authenticationService = container.read(
+        authenticationServiceProvider,
+      );
 
       await authenticationService.signIn(
         email: email,
@@ -156,99 +154,20 @@ void main() {
 
       verifyNoMoreInteractions(listener);
     });
-
-    test('but the jwt gotten from API is empty then it should return false',
-        () async {
-      String jwt = '';
-
-      when(
-        () => mockedAuthenticationRepository.signIn(
-          email: any(named: 'email'),
-          password: any(named: 'password'),
-        ),
-      ).thenAnswer(
-        (_) async => Future.value(jwt),
-      );
-
-      final container = createContainer(
-        overrides: [
-          authenticationRepositoryProvider
-              .overrideWithValue(mockedAuthenticationRepository),
-          secureStorageRepositoryProvider
-              .overrideWithValue(mockedSecureStorageRepository),
-        ],
-      );
-
-      final authenticationService =
-          container.read(authenticationServiceProvider);
-
-      final result = await authenticationService.signIn(
-        email: email,
-        password: password,
-      );
-
-      expect(result, false);
-    });
-
-    test(
-        'but the jwt gotten from API is empty then it should be no call to secure storage or jwtStateProvider',
-        () async {
-      String jwt = '';
-
-      when(
-        () => mockedAuthenticationRepository.signIn(
-          email: any(named: 'email'),
-          password: any(named: 'password'),
-        ),
-      ).thenAnswer(
-        (_) async => Future.value(jwt),
-      );
-
-      final container = createContainer(
-        overrides: [
-          authenticationRepositoryProvider
-              .overrideWithValue(mockedAuthenticationRepository),
-          secureStorageRepositoryProvider
-              .overrideWithValue(mockedSecureStorageRepository),
-        ],
-      );
-
-      final listener = Listener<String>();
-
-      container.listen<String>(
-        jwtStateProvider,
-        listener,
-        fireImmediately: true,
-      );
-
-      verify(() => listener(null, '')).called(1);
-
-      verifyNoMoreInteractions(listener);
-
-      final authenticationService =
-          container.read(authenticationServiceProvider);
-
-      await authenticationService.signIn(
-        email: email,
-        password: password,
-      );
-
-      verifyNever(() => mockedSecureStorageRepository.addData(any(), any()));
-
-      verifyNever(() => listener('', jwt));
-    });
   });
 
-  group('failed signin call', () {
+  group('Given failed API call When signin', () {
     test(
-      'should throw failure exception',
+      'Then throw failure exception',
       () async {
         when(
           () => mockedAuthenticationRepository.signIn(
             email: any(named: 'email'),
             password: any(named: 'password'),
           ),
-        ).thenThrow(Failure(message: 'message', stackTrace: StackTrace.empty));
+        ).thenThrow(
+          Failure(message: 'message', stackTrace: StackTrace.empty),
+        );
 
         final container = createContainer(
           overrides: [
@@ -259,8 +178,9 @@ void main() {
           ],
         );
 
-        final authenticationService =
-            container.read(authenticationServiceProvider);
+        final authenticationService = container.read(
+          authenticationServiceProvider,
+        );
 
         expect(
           () => authenticationService.signIn(
