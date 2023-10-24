@@ -6,10 +6,12 @@ import 'package:books_app_client/features/authentication/controllers/authenticat
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/models/failure.dart';
 import '../../../core/navigation/navigation_paths.dart';
+import '../../../core/widgets/custom_flutter_toast.dart';
 
 class SignUpView extends HookConsumerWidget {
   const SignUpView({super.key});
@@ -22,6 +24,7 @@ class SignUpView extends HookConsumerWidget {
     final passwordTextEditingController = useTextEditingController();
     final isMonthlyNewsletterChecked = useState(false);
     final areAllTextFieldsValid = useState(false);
+    FToast fToast = FToast();
 
     void validateTextFields() {
       bool isFirstNameValid = firstNameTextEditingController.text.isNotEmpty;
@@ -36,10 +39,11 @@ class SignUpView extends HookConsumerWidget {
 
     ref.listen(authenticationControllerProvider, (_, current) {
       if (current is AsyncError && current.error is Failure) {
-        final snackBar = SnackBar(
-          content: Text(current.error.toString()),
+        showToast(
+          context,
+          fToast,
+          current.error.toString(),
         );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else if (current is AsyncData &&
           current.value == AuthenticationStatus.authenticated) {
         Navigator.pushNamedAndRemoveUntil(
@@ -106,7 +110,16 @@ class SignUpView extends HookConsumerWidget {
               PrimaryButtoon(
                 buttonText: "Sign Up",
                 isEnabled: areAllTextFieldsValid.value,
-                onPressed: () {},
+                isLoading:
+                    ref.watch(authenticationControllerProvider) is AsyncLoading,
+                onPressed: () {
+                  ref.read(authenticationControllerProvider.notifier).signUp(
+                        firstName: firstNameTextEditingController.text,
+                        lastName: lastNameTextEditingController.text,
+                        email: emailTextEditingController.text,
+                        password: passwordTextEditingController.text,
+                      );
+                },
               ),
               SizedBox(height: context.setHeight(30)),
             ],

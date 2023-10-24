@@ -25,6 +25,26 @@ class AuthenticationController
   final AuthenticationService authenticationService;
   final AsyncValue<AuthenticationStatus> initialAuthenticationStatus;
 
+  Future<void> signUp({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+  }) async {
+    state = const AsyncValue.loading();
+    try {
+      await authenticationService.signUp(
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      );
+      state = const AsyncValue.data(AuthenticationStatus.authenticated);
+    } on Failure catch (failure) {
+      state = AsyncValue.error(failure, failure.stackTrace);
+    }
+  }
+
   Future<void> signIn({required String email, required String password}) async {
     state = const AsyncValue.loading();
     try {

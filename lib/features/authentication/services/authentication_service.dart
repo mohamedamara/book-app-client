@@ -5,27 +5,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/network/jwt_state_provider.dart';
 
-final authenticationServiceProvider = Provider<AuthenticationService>(
-  (ref) {
-    final authenticationRepository =
-        ref.watch(authenticationRepositoryProvider);
-    final secureStorageRepository = ref.watch(secureStorageRepositoryProvider);
-    return AuthenticationServiceImpl(
-      authenticationRepository: authenticationRepository,
-      secureStorageRepository: secureStorageRepository,
-      ref: ref,
-    );
-  },
-);
+final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
+  final authenticationRepository = ref.watch(authenticationRepositoryProvider);
+  final secureStorageRepository = ref.watch(secureStorageRepositoryProvider);
+  return AuthenticationServiceImpl(
+    authenticationRepository: authenticationRepository,
+    secureStorageRepository: secureStorageRepository,
+    ref: ref,
+  );
+});
 
 abstract class AuthenticationService {
-  Future<bool> signUp({
+  Future<void> signUp({
     required String firstName,
     required String lastName,
     required String email,
     required String password,
   });
-  Future<bool> signIn({
+  Future<void> signIn({
     required String email,
     required String password,
   });
@@ -42,31 +39,45 @@ class AuthenticationServiceImpl implements AuthenticationService {
   final Ref ref;
 
   @override
-  Future<bool> signUp({
+  Future<void> signUp({
     required String firstName,
     required String lastName,
     required String email,
     required String password,
   }) async {
-    throw UnimplementedError();
+    try {
+      final jwt = await authenticationRepository.signUp(
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      );
+      saveJwtInSecureStorage(jwt);
+      updateJwtStateValue(jwt);
+    } on Failure catch (_) {
+      rethrow;
+    }
   }
 
   @override
-  Future<bool> signIn({required String email, required String password}) async {
+  Future<void> signIn({required String email, required String password}) async {
     try {
       final jwt = await authenticationRepository.signIn(
         email: email,
         password: password,
       );
-      if (jwt.isNotEmpty) {
-        secureStorageRepository.addData("jwt", jwt);
-        ref.read(jwtStateProvider.notifier).state = jwt;
-        return true;
-      } else {
-        return false;
-      }
+      saveJwtInSecureStorage(jwt);
+      updateJwtStateValue(jwt);
     } on Failure catch (_) {
       rethrow;
     }
+  }
+
+  void saveJwtInSecureStorage(String jwt) {
+    secureStorageRepository.addData("jwt", jwt);
+  }
+
+  void updateJwtStateValue(String jwt) {
+    ref.read(jwtStateProvider.notifier).state = jwt;
   }
 }

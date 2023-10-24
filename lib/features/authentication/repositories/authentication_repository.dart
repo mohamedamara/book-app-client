@@ -34,7 +34,42 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     required String email,
     required String password,
   }) async {
-    throw UnimplementedError();
+    try {
+      final response = await dio.post(
+        'users',
+        data: {
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': email,
+          'password': password,
+        },
+      );
+      String jwt = response.data['jwt'];
+      return jwt;
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw Failure(
+          message: 'No internet connection',
+          stackTrace: e.stackTrace,
+        );
+      }
+      if (e.type == DioExceptionType.connectionTimeout) {
+        throw Failure(
+          message: 'Connection timeout',
+          stackTrace: e.stackTrace,
+        );
+      }
+      if (e.response?.statusCode == 401) {
+        throw Failure(
+          message: 'Wrong email or password',
+          stackTrace: e.stackTrace,
+        );
+      }
+      throw Failure(
+        message: 'An error occurred',
+        stackTrace: e.stackTrace,
+      );
+    }
   }
 
   @override
