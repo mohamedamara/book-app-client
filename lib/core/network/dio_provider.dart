@@ -1,6 +1,6 @@
 import 'package:books_app_client/core/network/jwt_state_provider.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final jwt = ref.watch(jwtStateProvider);

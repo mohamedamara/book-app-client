@@ -1,6 +1,6 @@
 import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/features/authentication/services/authentication_service.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 enum AuthenticationStatus { authenticated, unauthenticated }
 

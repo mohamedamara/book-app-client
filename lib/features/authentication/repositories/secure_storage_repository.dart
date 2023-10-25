@@ -1,6 +1,6 @@
 import 'package:books_app_client/core/storage/secure_storage_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final secureStorageRepositoryProvider = Provider<SecureStorageRepository>(
   (ref) {
