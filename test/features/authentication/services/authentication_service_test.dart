@@ -4,6 +4,7 @@ import 'package:books_app_client/features/authentication/repositories/authentica
 import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
 import 'package:books_app_client/features/authentication/services/authentication_service.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../core/utils/test_utils.dart';
@@ -17,6 +18,8 @@ class MockSecureStorageRepository extends Mock
 void main() {
   late AuthenticationRepository mockedAuthenticationRepository;
   late SecureStorageRepository mockedSecureStorageRepository;
+  late ProviderContainer providerContainer;
+  late AuthenticationService authenticationService;
 
   String email = "test@whatever.com";
   String password = "12345678";
@@ -25,10 +28,25 @@ void main() {
   setUp(() {
     mockedAuthenticationRepository = MockAuthenticationRepository();
     mockedSecureStorageRepository = MockSecureStorageRepository();
+    providerContainer = createContainer(
+      overrides: [
+        authenticationRepositoryProvider.overrideWithValue(
+          mockedAuthenticationRepository,
+        ),
+        secureStorageRepositoryProvider.overrideWithValue(
+          mockedSecureStorageRepository,
+        ),
+      ],
+    );
+    authenticationService = providerContainer.read(
+      authenticationServiceProvider,
+    );
   });
 
-  group('Given successful API call When signin', () {
-    test('Then complete the function normally', () async {
+  group('Authentication service tests -', () {
+    test(
+        'Given successful API call When signin Then complete the function normally',
+        () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
@@ -42,19 +60,6 @@ void main() {
         () => mockedSecureStorageRepository.addData(any(), any()),
       ).thenAnswer(
         (_) async {},
-      );
-
-      final container = createContainer(
-        overrides: [
-          authenticationRepositoryProvider
-              .overrideWithValue(mockedAuthenticationRepository),
-          secureStorageRepositoryProvider
-              .overrideWithValue(mockedSecureStorageRepository),
-        ],
-      );
-
-      final authenticationService = container.read(
-        authenticationServiceProvider,
       );
 
       expectLater(
@@ -66,7 +71,9 @@ void main() {
       );
     });
 
-    test('Then call secure storage repository to store the jwt', () async {
+    test(
+        'Given successful API call When signin Then call secure storage repository to store the jwt',
+        () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
@@ -80,19 +87,6 @@ void main() {
         () => mockedSecureStorageRepository.addData(any(), any()),
       ).thenAnswer(
         (_) async {},
-      );
-
-      final container = createContainer(
-        overrides: [
-          authenticationRepositoryProvider
-              .overrideWithValue(mockedAuthenticationRepository),
-          secureStorageRepositoryProvider
-              .overrideWithValue(mockedSecureStorageRepository),
-        ],
-      );
-
-      final authenticationService = container.read(
-        authenticationServiceProvider,
       );
 
       await authenticationService.signIn(
@@ -104,7 +98,9 @@ void main() {
           .called(1);
     });
 
-    test('Then update jwt state with value gotten from API', () async {
+    test(
+        'Given successful API call When signin Then update jwt state with value gotten from API',
+        () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
@@ -120,18 +116,9 @@ void main() {
         (_) async {},
       );
 
-      final container = createContainer(
-        overrides: [
-          authenticationRepositoryProvider
-              .overrideWithValue(mockedAuthenticationRepository),
-          secureStorageRepositoryProvider
-              .overrideWithValue(mockedSecureStorageRepository),
-        ],
-      );
-
       final listener = Listener<String>();
 
-      container.listen<String>(
+      providerContainer.listen<String>(
         jwtStateProvider,
         listener,
         fireImmediately: true,
@@ -140,10 +127,6 @@ void main() {
       verify(() => listener(null, '')).called(1);
 
       verifyNoMoreInteractions(listener);
-
-      final authenticationService = container.read(
-        authenticationServiceProvider,
-      );
 
       await authenticationService.signIn(
         email: email,
@@ -154,42 +137,25 @@ void main() {
 
       verifyNoMoreInteractions(listener);
     });
-  });
 
-  group('Given failed API call When signin', () {
-    test(
-      'Then throw failure exception',
-      () async {
-        when(
-          () => mockedAuthenticationRepository.signIn(
-            email: any(named: 'email'),
-            password: any(named: 'password'),
-          ),
-        ).thenThrow(
-          Failure(message: 'message', stackTrace: StackTrace.empty),
-        );
+    test('Given failed API call When signin Then throw failure exception',
+        () async {
+      when(
+        () => mockedAuthenticationRepository.signIn(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenThrow(
+        Failure(message: 'message', stackTrace: StackTrace.empty),
+      );
 
-        final container = createContainer(
-          overrides: [
-            authenticationRepositoryProvider
-                .overrideWithValue(mockedAuthenticationRepository),
-            secureStorageRepositoryProvider
-                .overrideWithValue(mockedSecureStorageRepository),
-          ],
-        );
-
-        final authenticationService = container.read(
-          authenticationServiceProvider,
-        );
-
-        expect(
-          () => authenticationService.signIn(
-            email: email,
-            password: password,
-          ),
-          throwsA(isA<Failure>()),
-        );
-      },
-    );
+      expect(
+        () => authenticationService.signIn(
+          email: email,
+          password: password,
+        ),
+        throwsA(isA<Failure>()),
+      );
+    });
   });
 }
