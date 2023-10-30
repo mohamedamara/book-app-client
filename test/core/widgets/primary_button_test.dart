@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('Primary button circular progress tests -', () {
+  group('Primary button tests -', () {
     testWidgets(
       'When is loading is false Then no circular progress should be displated',
       (tester) async {
@@ -36,9 +36,7 @@ void main() {
         expect(circularProgressFinder, findsOneWidget);
       },
     );
-  });
 
-  group('Primary button enabled/disabled clicking tests -', () {
     testWidgets(
       'When is enabled is false Then the button is not clickable',
       (tester) async {
