@@ -45,7 +45,7 @@ void main() {
 
   group('Authentication service tests -', () {
     test(
-        'Given successful API call When signin Then complete the function normally',
+        'When signin API call is successful Then complete the function normally',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -72,7 +72,7 @@ void main() {
     });
 
     test(
-        'Given successful API call When signin Then call secure storage repository to store the jwt',
+        'When signin API call is successful Then call secure storage repository to store the jwt',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -99,7 +99,7 @@ void main() {
     });
 
     test(
-        'Given successful API call When signin Then update jwt state with value gotten from API',
+        'When signin API call is successful Then update jwt state with value gotten from API',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -138,7 +138,7 @@ void main() {
       verifyNoMoreInteractions(listener);
     });
 
-    test('Given failed API call When signin Then throw failure exception',
+    test('When signin API call fails Then throw failure exception',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(

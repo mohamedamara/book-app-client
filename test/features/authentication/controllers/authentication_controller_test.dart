@@ -29,7 +29,7 @@ void main() {
 
   group('Authentication controller tests -', () {
     test(
-        "Controller's initial state is AsyncValue.data(AuthenticationStatus.unauthenticated)",
+        "Controller's initial state should be AsyncValue.data(AuthenticationStatus.unauthenticated)",
         () async {
       final listener = Listener<AsyncValue<AuthenticationStatus>>();
 
@@ -48,7 +48,7 @@ void main() {
     });
 
     test(
-        'Given normally completed function When signin Then the state should be in this order : AsyncValue.loading() -> AsyncValue.data(AuthenticationStatus.authenticated)',
+        'When signin function completes normally Then the state should be in this order : AsyncValue.loading() -> AsyncValue.data(AuthenticationStatus.authenticated)',
         () async {
       final listener = Listener<AsyncValue<AuthenticationStatus>>();
 
@@ -103,7 +103,7 @@ void main() {
     });
 
     test(
-        'Given thrown function When signin Then the state should be in this order : AsyncValue.loading() -> AsyncValue.error(failure, failure.stackTrace)',
+        'When signin function throws an exception Then the state should be in this order : AsyncValue.loading() -> AsyncValue.error(failure, failure.stackTrace)',
         () async {
       final listener = Listener<AsyncValue<AuthenticationStatus>>();
 
