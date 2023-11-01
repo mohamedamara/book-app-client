@@ -20,7 +20,7 @@ void main() {
           ),
         );
 
-        expectLater(
+        await expectLater(
           find.byType(SignInView),
           matchesGoldenFile('goldens/sign_in_view.png'),
         );
