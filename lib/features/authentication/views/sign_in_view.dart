@@ -63,12 +63,14 @@ class SignInView extends HookConsumerWidget {
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
+                key: const Key('email_textField'),
                 controller: emailTextEditingController,
                 labelText: "Email",
                 onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
+                key: const Key('password_textField'),
                 controller: passwordTextEditingController,
                 labelText: "Password",
                 obscureText: true,
