@@ -76,5 +76,65 @@ void main() {
         );
       },
     );
+
+    testWidgets(
+      "When checkbox is taped Then it's value should be true",
+      (tester) async {
+        await tester.pumpWidget(
+          const ProviderScope(
+            child: MaterialApp(
+              home: SignInView(),
+            ),
+          ),
+        );
+
+        final checkboxFinder = find.byType(Checkbox);
+
+        await tester.tap(checkboxFinder);
+
+        await tester.pumpAndSettle();
+
+        final checkboxValue = tester
+            .widget<Checkbox>(
+              find.byType(Checkbox),
+            )
+            .value;
+
+        expect(
+          checkboxValue,
+          isTrue,
+        );
+      },
+    );
+
+    testWidgets(
+      "When checkbox's label is taped Then checkbox value should be true",
+      (tester) async {
+        await tester.pumpWidget(
+          const ProviderScope(
+            child: MaterialApp(
+              home: SignInView(),
+            ),
+          ),
+        );
+
+        final checkboxLabelFinder = find.text('Stay Logged In');
+
+        await tester.tap(checkboxLabelFinder);
+
+        await tester.pumpAndSettle();
+
+        final checkboxValue = tester
+            .widget<Checkbox>(
+              find.byType(Checkbox),
+            )
+            .value;
+
+        expect(
+          checkboxValue,
+          isTrue,
+        );
+      },
+    );
   });
 }
