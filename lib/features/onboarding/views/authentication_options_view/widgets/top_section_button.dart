@@ -19,6 +19,7 @@ class TopSectionButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             PrimaryButtoon(
+              key: const Key('authentication_options_signin'),
               buttonText: "Sign In",
               onPressed: () => Navigator.pushNamed(
                 context,
