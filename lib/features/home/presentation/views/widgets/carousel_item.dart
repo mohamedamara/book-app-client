@@ -3,14 +3,16 @@ import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/book.dart';
+
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
     super.key,
-    required this.bookImage,
+    required this.book,
     required this.isActiveItem,
   });
 
-  final String bookImage;
+  final Book book;
   final bool isActiveItem;
 
   @override
@@ -29,7 +31,7 @@ class CarouselItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(context.setRadius(10)),
                   child: CachedNetworkImage(
-                    imageUrl: bookImage,
+                    imageUrl: book.coverImageURL,
                     fit: BoxFit.fitHeight,
                     placeholder: (_, __) => const SizedBox(),
                   ),
@@ -49,7 +51,7 @@ class CarouselItem extends StatelessWidget {
                         ),
                       ) ??
                   const TextStyle(),
-          child: const Text("Fatherhood"),
+          child: Text(book.title, textAlign: TextAlign.center),
         ),
         SizedBox(height: context.setHeight(5)),
         AnimatedDefaultTextStyle(
@@ -62,7 +64,7 @@ class CarouselItem extends StatelessWidget {
                         ),
                       ) ??
                   const TextStyle(),
-          child: const Text("Marcus Berkmann"),
+          child: Text(book.author, textAlign: TextAlign.center),
         ),
       ],
     );

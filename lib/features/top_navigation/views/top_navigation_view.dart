@@ -1,40 +1,34 @@
+import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../core/utils/scaffold_utils.dart';
 import 'widgets/animated_indexed_stack.dart';
 
-class TopNavigationView extends StatefulWidget {
+class TopNavigationView extends HookWidget {
   const TopNavigationView({super.key});
 
   @override
-  State<TopNavigationView> createState() => _TopNavigationViewState();
-}
-
-class _TopNavigationViewState extends State<TopNavigationView> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _viewOptions = <Widget>[
-    const HomeView(),
-    Container(color: Colors.amber),
-    Container(color: Colors.blue),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final selectedIndex = useState(0);
     return Scaffold(
       key: ScaffoldUtils.topNavigationScaffoldKey,
-      endDrawer: const Drawer(),
+      endDrawer: Drawer(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(context.setRadius(300)),
+          ),
+        ),
+      ),
       endDrawerEnableOpenDragGesture: false,
       body: AnimatedIndexedStack(
-        index: _selectedIndex,
-        children: _viewOptions,
+        index: selectedIndex.value,
+        children: [
+          const HomeView(),
+          Container(color: Colors.amber),
+          Container(color: Colors.blue),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -51,8 +45,8 @@ class _TopNavigationViewState extends State<TopNavigationView> {
             label: "Favorites",
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: selectedIndex.value,
+        onTap: (index) => selectedIndex.value = index,
       ),
     );
   }
