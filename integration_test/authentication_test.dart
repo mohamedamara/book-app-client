@@ -1,5 +1,5 @@
 import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
-import 'package:books_app_client/features/home/views/home_view.dart';
+import 'package:books_app_client/features/home/presentation/views/home_view.dart';
 import 'package:books_app_client/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

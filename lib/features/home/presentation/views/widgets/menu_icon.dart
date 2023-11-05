@@ -1,7 +1,7 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/scaffold_utils.dart';
+import '../../../../../core/utils/scaffold_utils.dart';
 
 class MenuIcon extends StatelessWidget {
   const MenuIcon({super.key});

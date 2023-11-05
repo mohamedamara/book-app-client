@@ -1,15 +1,17 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
-import 'package:books_app_client/features/home/views/widgets/carousel_item.dart';
+import 'package:books_app_client/features/home/presentation/views/widgets/carousel_item.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import '../../../domain/book.dart';
 
 class CarouselSliderSection extends StatefulWidget {
   const CarouselSliderSection({
     super.key,
-    required this.dummyBooksCoverImageURLs,
+    required this.topBooks,
   });
 
-  final List<String> dummyBooksCoverImageURLs;
+  final List<Book> topBooks;
 
   @override
   State<CarouselSliderSection> createState() => _CarouselSliderSectionState();
@@ -39,10 +41,10 @@ class _CarouselSliderSectionState extends State<CarouselSliderSection> {
             });
           },
         ),
-        itemCount: widget.dummyBooksCoverImageURLs.length,
+        itemCount: widget.topBooks.length,
         itemBuilder: (_, index, __) {
           return CarouselItem(
-            bookImage: widget.dummyBooksCoverImageURLs[index],
+            bookImage: widget.topBooks[index].coverImageURL,
             isActiveItem: _selectedCarouselItem == index,
           );
         },

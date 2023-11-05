@@ -1,4 +1,4 @@
-import 'package:books_app_client/features/home/views/home_view.dart';
+import 'package:books_app_client/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/scaffold_utils.dart';

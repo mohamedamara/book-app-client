@@ -2,13 +2,15 @@ import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/book.dart';
+
 class RecentlyViewedSection extends StatelessWidget {
   const RecentlyViewedSection({
     super.key,
-    required this.dummyBooksCoverImageURLs,
+    required this.recentlyViewedBooks,
   });
 
-  final List<String> dummyBooksCoverImageURLs;
+  final List<Book> recentlyViewedBooks;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class RecentlyViewedSection extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: context.setWidth(20)),
-        itemCount: dummyBooksCoverImageURLs.length,
+        itemCount: recentlyViewedBooks.length,
         separatorBuilder: (context, index) => SizedBox(
           width: context.setWidth(25),
         ),
@@ -37,7 +39,7 @@ class RecentlyViewedSection extends StatelessWidget {
                         context.setRadius(10),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl: dummyBooksCoverImageURLs[index],
+                        imageUrl: recentlyViewedBooks[index].coverImageURL,
                         fit: BoxFit.fitHeight,
                         placeholder: (_, __) => const SizedBox(),
                       ),
