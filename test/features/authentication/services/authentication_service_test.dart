@@ -1,5 +1,5 @@
 import 'package:books_app_client/core/models/failure.dart';
-import 'package:books_app_client/core/network/jwt_state_provider.dart';
+import 'package:books_app_client/core/providers/jwt_state_provider.dart';
 import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
 import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
 import 'package:books_app_client/features/authentication/services/authentication_service.dart';

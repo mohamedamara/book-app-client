@@ -1,18 +1,21 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/providers/top_navigation_scaffold_key_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/utils/scaffold_utils.dart';
-
-class MenuIcon extends StatelessWidget {
+class MenuIcon extends ConsumerWidget {
   const MenuIcon({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Positioned(
       top: context.setHeight(92),
       right: context.setWidth(0),
       child: InkWell(
-        onTap: () => ScaffoldUtils.openEndDrawer(),
+        onTap: () => ref
+            .read(topNavigationScaffoldKeyProvider)
+            .currentState!
+            .openEndDrawer(),
         child: Padding(
           padding: EdgeInsets.all(context.setHeight(20)),
           child: SizedBox(

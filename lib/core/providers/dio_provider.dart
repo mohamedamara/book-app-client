@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/network/jwt_state_provider.dart';
+import 'package:books_app_client/core/providers/jwt_state_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
