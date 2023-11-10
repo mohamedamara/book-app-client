@@ -1,5 +1,6 @@
 import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/features/authentication/controllers/authentication_controller.dart';
+import 'package:books_app_client/features/authentication/enums/authentication_status.dart';
 import 'package:books_app_client/features/authentication/services/authentication_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +16,7 @@ void main() {
 
   String email = "test@whatever.com";
   String password = "12345678";
+  bool isStayLoggedInChecked = true;
 
   setUp(() {
     mockedAuthenticationService = MockAuthenticationService();
@@ -69,6 +71,7 @@ void main() {
         () => mockedAuthenticationService.signIn(
           email: any(named: 'email'),
           password: any(named: 'password'),
+          isStayLoggedInChecked: isStayLoggedInChecked,
         ),
       ).thenAnswer(
         (_) async {},
@@ -79,12 +82,14 @@ void main() {
           .signIn(
             email: email,
             password: password,
+            isStayLoggedInChecked: isStayLoggedInChecked,
           );
 
       verify(
         () => mockedAuthenticationService.signIn(
           email: any(named: 'email'),
           password: any(named: 'password'),
+          isStayLoggedInChecked: isStayLoggedInChecked,
         ),
       ).called(1);
 
@@ -129,6 +134,7 @@ void main() {
         () => mockedAuthenticationService.signIn(
           email: any(named: 'email'),
           password: any(named: 'password'),
+          isStayLoggedInChecked: isStayLoggedInChecked,
         ),
       ).thenThrow(failure);
 
@@ -137,12 +143,14 @@ void main() {
           .signIn(
             email: email,
             password: password,
+            isStayLoggedInChecked: isStayLoggedInChecked,
           );
 
       verify(
         () => mockedAuthenticationService.signIn(
           email: any(named: 'email'),
           password: any(named: 'password'),
+          isStayLoggedInChecked: isStayLoggedInChecked,
         ),
       ).called(1);
 

@@ -66,13 +66,14 @@ void main() {
         authenticationService.signIn(
           email: email,
           password: password,
+          isStayLoggedInChecked: true,
         ),
         completes,
       );
     });
 
     test(
-        'When signin API call is successful Then call secure storage repository to store the jwt',
+        'When signin API call is successful and isStayLoggedInChecked is true Then call secure storage repository to store the jwt',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -92,10 +93,38 @@ void main() {
       await authenticationService.signIn(
         email: email,
         password: password,
+        isStayLoggedInChecked: true,
       );
 
       verify(() => mockedSecureStorageRepository.addData(any(), any()))
           .called(1);
+    });
+
+    test(
+        'When signin API call is successful and isStayLoggedInChecked is false Then no call to the secure storage repository should occur',
+        () async {
+      when(
+        () => mockedAuthenticationRepository.signIn(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenAnswer(
+        (_) async => Future.value(jwt),
+      );
+
+      when(
+        () => mockedSecureStorageRepository.addData(any(), any()),
+      ).thenAnswer(
+        (_) async {},
+      );
+
+      await authenticationService.signIn(
+        email: email,
+        password: password,
+        isStayLoggedInChecked: false,
+      );
+
+      verifyNever(() => mockedSecureStorageRepository.addData(any(), any()));
     });
 
     test(
@@ -131,6 +160,7 @@ void main() {
       await authenticationService.signIn(
         email: email,
         password: password,
+        isStayLoggedInChecked: true,
       );
 
       verify(() => listener('', jwt)).called(1);
@@ -138,8 +168,7 @@ void main() {
       verifyNoMoreInteractions(listener);
     });
 
-    test('When signin API call fails Then throw failure exception',
-        () async {
+    test('When signin API call fails Then throw failure exception', () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
@@ -153,6 +182,7 @@ void main() {
         () => authenticationService.signIn(
           email: email,
           password: password,
+          isStayLoggedInChecked: true,
         ),
         throwsA(isA<Failure>()),
       );

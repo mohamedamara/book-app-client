@@ -1,5 +1,6 @@
 import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
 import 'package:books_app_client/features/home/presentation/views/home_view.dart';
+import 'package:books_app_client/features/startup/application/services/startup_service.dart';
 import 'package:books_app_client/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'stubs/stub_authentication_repository.dart';
+import 'stubs/stub_startup_service.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +26,15 @@ void main() {
               authenticationRepositoryProvider.overrideWithValue(
                 StubAuthenticationRepository(),
               ),
+              startupServiceProvider.overrideWithValue(
+                StubStatupService(),
+              ),
             ],
             child: const App(),
           ),
         );
+        // wait for startup logic
+        await tester.pumpAndSettle();
 
         // the onboarding flow
         await tester.drag(find.byType(PageView), const Offset(-300, 0.0));
