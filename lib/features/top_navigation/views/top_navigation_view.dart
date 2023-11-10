@@ -1,4 +1,5 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/navigation/navigation_paths.dart';
 import 'package:books_app_client/core/providers/top_navigation_scaffold_key_provider.dart';
 import 'package:books_app_client/features/home/presentation/views/home_view.dart';
 import 'package:books_app_client/features/top_navigation/views/widgets/drawer_item.dart';
@@ -47,7 +48,10 @@ class TopNavigationView extends HookConsumerWidget {
               title: 'Account',
               icon: Icons.account_circle,
               isSelected: false,
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(
+                context,
+                NavigationPaths.userProfileRoute,
+              ),
             ),
             DrawerItem(
               title: 'Careers',

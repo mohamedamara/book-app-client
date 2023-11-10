@@ -1,6 +1,7 @@
 import 'package:books_app_client/features/authentication/views/sign_in_view.dart';
 import 'package:books_app_client/features/authentication/views/sign_up_view.dart';
 import 'package:books_app_client/features/top_navigation/views/top_navigation_view.dart';
+import 'package:books_app_client/features/user_profile/views/user_profile_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/onboarding/views/onboarding_view/onboarding_view.dart';
@@ -29,6 +30,11 @@ class NavigationRouter {
       case NavigationPaths.topNavigationRoute:
         return MaterialPageRoute(
           builder: (_) => const TopNavigationView(),
+          settings: RouteSettings(name: routeSettings.name),
+        );
+      case NavigationPaths.userProfileRoute:
+        return MaterialPageRoute(
+          builder: (_) => const UserProfileView(),
           settings: RouteSettings(name: routeSettings.name),
         );
       default:

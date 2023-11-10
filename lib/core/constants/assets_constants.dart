@@ -6,4 +6,5 @@ class AssetsConstants {
   static const String leavesRightImage = "assets/images/leaves_right.png";
   static const String girlReadingBookImage =
       "assets/images/girl_reading_book.png";
+  static const String profileImage = "assets/images/profile_image.png";
 }

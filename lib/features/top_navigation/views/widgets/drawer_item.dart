@@ -40,7 +40,7 @@ class DrawerItem extends StatelessWidget {
       ),
       selected: isSelected,
       onTap: () {
-        Navigator.of(context).pop();
+        Navigator.pop(context);
         onTap();
       },
       selectedTileColor: Theme.of(context).colorScheme.primary,

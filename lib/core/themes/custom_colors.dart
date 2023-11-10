@@ -6,4 +6,5 @@ class CustomColors {
   static Color textFieldBackgroundColor =
       const Color(0xFFEFEFEF).withOpacity(0.4);
   static const Color textFieldSelectionColor = Color(0XFF00FF81);
+  static const Color reviewCardBackgroundColor = Color(0XFFF9F9F9);
 }
