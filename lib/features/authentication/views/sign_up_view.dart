@@ -12,6 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/models/failure.dart';
 import '../../../core/navigation/navigation_paths.dart';
 import '../../../core/widgets/custom_flutter_toast.dart';
+import '../enums/authentication_status.dart';
 
 class SignUpView extends HookConsumerWidget {
   const SignUpView({super.key});

@@ -1,3 +1,4 @@
+import 'package:books_app_client/core/constants/secure_storage_constants.dart';
 import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
 import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
@@ -25,6 +26,7 @@ abstract class AuthenticationService {
   Future<void> signIn({
     required String email,
     required String password,
+    required bool isStayLoggedInChecked,
   });
 }
 
@@ -60,13 +62,19 @@ class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @override
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signIn({
+    required String email,
+    required String password,
+    required bool isStayLoggedInChecked,
+  }) async {
     try {
       final jwt = await authenticationRepository.signIn(
         email: email,
         password: password,
       );
-      saveJwtInSecureStorage(jwt);
+      if (isStayLoggedInChecked) {
+        saveJwtInSecureStorage(jwt);
+      }
       updateJwtStateValue(jwt);
     } on Failure catch (_) {
       rethrow;
@@ -74,7 +82,7 @@ class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   void saveJwtInSecureStorage(String jwt) {
-    secureStorageRepository.addData("jwt", jwt);
+    secureStorageRepository.addData(SecureStorageConstants.jwt, jwt);
   }
 
   void updateJwtStateValue(String jwt) {

@@ -2,7 +2,7 @@ import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/features/authentication/services/authentication_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-enum AuthenticationStatus { authenticated, unauthenticated }
+import '../enums/authentication_status.dart';
 
 final authenticationControllerProvider = StateNotifierProvider.autoDispose<
     AuthenticationController, AsyncValue<AuthenticationStatus>>((ref) {
@@ -45,12 +45,17 @@ class AuthenticationController
     }
   }
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signIn({
+    required String email,
+    required String password,
+    required bool isStayLoggedInChecked,
+  }) async {
     state = const AsyncValue.loading();
     try {
       await authenticationService.signIn(
         email: email,
         password: password,
+        isStayLoggedInChecked: isStayLoggedInChecked,
       );
       state = const AsyncValue.data(AuthenticationStatus.authenticated);
     } on Failure catch (failure) {

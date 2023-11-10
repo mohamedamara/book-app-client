@@ -12,6 +12,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../enums/authentication_status.dart';
+
 class SignInView extends HookConsumerWidget {
   const SignInView({super.key});
 
@@ -111,6 +113,7 @@ class SignInView extends HookConsumerWidget {
                   ref.read(authenticationControllerProvider.notifier).signIn(
                         email: emailTextEditingController.text,
                         password: passwordTextEditingController.text,
+                        isStayLoggedInChecked: isStayLoggedInChecked.value,
                       );
                 },
               ),
