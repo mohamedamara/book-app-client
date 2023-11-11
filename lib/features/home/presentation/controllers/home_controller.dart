@@ -1,45 +1,37 @@
-import 'package:books_app_client/core/models/failure.dart';
+import 'package:books_app_client/features/home/domain/home_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../application/services/home_service.dart';
-import '../states/home_state.dart';
+import '../../data/repositories/home_repository.dart';
 
 final homeControllerProvider =
-    StateNotifierProvider.autoDispose<HomeController, AsyncValue<HomeState>>(
+    StateNotifierProvider.autoDispose<HomeController, AsyncValue<HomeData>>(
   (ref) {
-    final homeService = ref.watch(homeServiceProvider);
+    final homeRepository = ref.watch(homeRepositoryProvider);
     return HomeController(
       initialHomeData: const AsyncValue.data(
-        HomeState(
-          homeData: (
-            topBooks: [],
-            recentlyViewedBooks: [],
-          ),
+        HomeData(
+          topBooks: [],
+          recentlyViewedBooks: [],
         ),
       ),
-      homeService: homeService,
+      homeRepository: homeRepository,
     );
   },
 );
 
-class HomeController extends StateNotifier<AsyncValue<HomeState>> {
+class HomeController extends StateNotifier<AsyncValue<HomeData>> {
   HomeController({
     required this.initialHomeData,
-    required this.homeService,
+    required this.homeRepository,
   }) : super(initialHomeData) {
     getHomeData();
   }
 
-  final HomeService homeService;
-  final AsyncValue<HomeState> initialHomeData;
+  final HomeRepository homeRepository;
+  final AsyncValue<HomeData> initialHomeData;
 
   Future<void> getHomeData() async {
     state = const AsyncValue.loading();
-    try {
-      final homeData = await homeService.getHomeData();
-      state = AsyncValue.data(HomeState(homeData: homeData));
-    } on Failure catch (failure) {
-      state = AsyncValue.error(failure, failure.stackTrace);
-    }
+    state = await AsyncValue.guard(() => homeRepository.getHomeData());
   }
 }

@@ -13,7 +13,7 @@ _$BookImpl _$$BookImplFromJson(Map<String, dynamic> json) => _$BookImpl(
       coverImageURL: json['coverImageURL'] as String,
       genre: json['genre'] as String,
       publicationDate: DateTime.parse(json['publicationDate'] as String),
-      readCount: json['readCount'] as int,
+      rating: json['rating'] as num,
     );
 
 Map<String, dynamic> _$$BookImplToJson(_$BookImpl instance) =>
@@ -24,5 +24,5 @@ Map<String, dynamic> _$$BookImplToJson(_$BookImpl instance) =>
       'coverImageURL': instance.coverImageURL,
       'genre': instance.genre,
       'publicationDate': instance.publicationDate.toIso8601String(),
-      'readCount': instance.readCount,
+      'rating': instance.rating,
     };

@@ -12,7 +12,7 @@ class Book with _$Book {
     required String coverImageURL,
     required String genre,
     required DateTime publicationDate,
-    required int readCount,
+    required num rating,
   }) = _Book;
 
   factory Book.fromJson(Map<String, Object?> json) => _$BookFromJson(json);

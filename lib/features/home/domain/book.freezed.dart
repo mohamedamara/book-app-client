@@ -26,7 +26,7 @@ mixin _$Book {
   String get coverImageURL => throw _privateConstructorUsedError;
   String get genre => throw _privateConstructorUsedError;
   DateTime get publicationDate => throw _privateConstructorUsedError;
-  int get readCount => throw _privateConstructorUsedError;
+  num get rating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +45,7 @@ abstract class $BookCopyWith<$Res> {
       String coverImageURL,
       String genre,
       DateTime publicationDate,
-      int readCount});
+      num rating});
 }
 
 /// @nodoc
@@ -67,7 +67,7 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
     Object? coverImageURL = null,
     Object? genre = null,
     Object? publicationDate = null,
-    Object? readCount = null,
+    Object? rating = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -94,10 +94,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
           ? _value.publicationDate
           : publicationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      readCount: null == readCount
-          ? _value.readCount
-          : readCount // ignore: cast_nullable_to_non_nullable
-              as int,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as num,
     ) as $Val);
   }
 }
@@ -116,7 +116,7 @@ abstract class _$$BookImplCopyWith<$Res> implements $BookCopyWith<$Res> {
       String coverImageURL,
       String genre,
       DateTime publicationDate,
-      int readCount});
+      num rating});
 }
 
 /// @nodoc
@@ -135,7 +135,7 @@ class __$$BookImplCopyWithImpl<$Res>
     Object? coverImageURL = null,
     Object? genre = null,
     Object? publicationDate = null,
-    Object? readCount = null,
+    Object? rating = null,
   }) {
     return _then(_$BookImpl(
       title: null == title
@@ -162,10 +162,10 @@ class __$$BookImplCopyWithImpl<$Res>
           ? _value.publicationDate
           : publicationDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      readCount: null == readCount
-          ? _value.readCount
-          : readCount // ignore: cast_nullable_to_non_nullable
-              as int,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as num,
     ));
   }
 }
@@ -180,7 +180,7 @@ class _$BookImpl implements _Book {
       required this.coverImageURL,
       required this.genre,
       required this.publicationDate,
-      required this.readCount});
+      required this.rating});
 
   factory _$BookImpl.fromJson(Map<String, dynamic> json) =>
       _$$BookImplFromJson(json);
@@ -198,11 +198,11 @@ class _$BookImpl implements _Book {
   @override
   final DateTime publicationDate;
   @override
-  final int readCount;
+  final num rating;
 
   @override
   String toString() {
-    return 'Book(title: $title, author: $author, contentURL: $contentURL, coverImageURL: $coverImageURL, genre: $genre, publicationDate: $publicationDate, readCount: $readCount)';
+    return 'Book(title: $title, author: $author, contentURL: $contentURL, coverImageURL: $coverImageURL, genre: $genre, publicationDate: $publicationDate, rating: $rating)';
   }
 
   @override
@@ -219,14 +219,13 @@ class _$BookImpl implements _Book {
             (identical(other.genre, genre) || other.genre == genre) &&
             (identical(other.publicationDate, publicationDate) ||
                 other.publicationDate == publicationDate) &&
-            (identical(other.readCount, readCount) ||
-                other.readCount == readCount));
+            (identical(other.rating, rating) || other.rating == rating));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, author, contentURL,
-      coverImageURL, genre, publicationDate, readCount);
+      coverImageURL, genre, publicationDate, rating);
 
   @JsonKey(ignore: true)
   @override
@@ -250,7 +249,7 @@ abstract class _Book implements Book {
       required final String coverImageURL,
       required final String genre,
       required final DateTime publicationDate,
-      required final int readCount}) = _$BookImpl;
+      required final num rating}) = _$BookImpl;
 
   factory _Book.fromJson(Map<String, dynamic> json) = _$BookImpl.fromJson;
 
@@ -267,7 +266,7 @@ abstract class _Book implements Book {
   @override
   DateTime get publicationDate;
   @override
-  int get readCount;
+  num get rating;
   @override
   @JsonKey(ignore: true)
   _$$BookImplCopyWith<_$BookImpl> get copyWith =>

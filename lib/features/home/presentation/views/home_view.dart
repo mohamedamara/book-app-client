@@ -43,7 +43,7 @@ class HomeView extends ConsumerWidget {
                         ),
                         const MenuIcon(),
                         CarouselSliderSection(
-                          topBooks: data.homeData.topBooks,
+                          topBooks: data.topBooks,
                         ),
                       ],
                     ),
@@ -58,8 +58,9 @@ class HomeView extends ConsumerWidget {
                   ),
                   SizedBox(height: context.setHeight(25)),
                   RecentlyViewedSection(
-                    recentlyViewedBooks: data.homeData.recentlyViewedBooks,
+                    recentlyViewedBooks: data.recentlyViewedBooks,
                   ),
+                  SizedBox(height: context.setHeight(30)),
                 ],
               ),
             ),
