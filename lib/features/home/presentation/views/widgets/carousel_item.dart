@@ -26,7 +26,7 @@ class CarouselItem extends StatelessWidget {
             onTap: () {},
             child: SizedBox(
               height: context.setHeight(200),
-              width: context.setWidth(127),
+              width: context.setHeight(127),
               child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(context.setRadius(10)),

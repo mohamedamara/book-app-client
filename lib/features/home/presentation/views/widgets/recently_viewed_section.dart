@@ -45,6 +45,8 @@ class RecentlyViewedSection extends StatelessWidget {
                             ),
                             child: CachedNetworkImage(
                               imageUrl: book.coverImageURL,
+                              height: context.setHeight(200),
+                              width: context.setHeight(130),
                               fit: BoxFit.fitHeight,
                               placeholder: (_, __) => const SizedBox(),
                             ),
