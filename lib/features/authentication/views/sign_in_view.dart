@@ -2,14 +2,13 @@ import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/core/extensions/string_extension.dart';
 import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/core/navigation/navigation_paths.dart';
-import 'package:books_app_client/core/widgets/custom_flutter_toast.dart';
+import 'package:books_app_client/core/widgets/custom_snack_bar.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
 import 'package:books_app_client/core/widgets/primary_button.dart';
 import 'package:books_app_client/features/authentication/controllers/authentication_controller.dart';
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../enums/authentication_status.dart';
@@ -23,7 +22,6 @@ class SignInView extends HookConsumerWidget {
     final passwordTextEditingController = useTextEditingController();
     final isStayLoggedInChecked = useState(false);
     final areAllTextFieldsValid = useState(false);
-    FToast fToast = FToast();
 
     void validateTextFields() {
       bool isEmailValid = emailTextEditingController.text.isValidEmail;
@@ -34,10 +32,9 @@ class SignInView extends HookConsumerWidget {
 
     ref.listen(authenticationControllerProvider, (_, current) {
       if (current is AsyncError && current.error is Failure) {
-        showToast(
-          context,
-          fToast,
-          current.error.toString(),
+        showSnackBar(
+          context: context,
+          message: current.error.toString(),
         );
       } else if (current is AsyncData &&
           current.value == AuthenticationStatus.authenticated) {

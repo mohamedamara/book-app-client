@@ -6,12 +6,11 @@ import 'package:books_app_client/features/authentication/controllers/authenticat
 import 'package:books_app_client/features/authentication/views/widgets/checkbox_with_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/models/failure.dart';
 import '../../../core/navigation/navigation_paths.dart';
-import '../../../core/widgets/custom_flutter_toast.dart';
+import '../../../core/widgets/custom_snack_bar.dart';
 import '../enums/authentication_status.dart';
 
 class SignUpView extends HookConsumerWidget {
@@ -25,7 +24,6 @@ class SignUpView extends HookConsumerWidget {
     final passwordTextEditingController = useTextEditingController();
     final isMonthlyNewsletterChecked = useState(false);
     final areAllTextFieldsValid = useState(false);
-    FToast fToast = FToast();
 
     void validateTextFields() {
       bool isFirstNameValid = firstNameTextEditingController.text.isNotEmpty;
@@ -40,10 +38,9 @@ class SignUpView extends HookConsumerWidget {
 
     ref.listen(authenticationControllerProvider, (_, current) {
       if (current is AsyncError && current.error is Failure) {
-        showToast(
-          context,
-          fToast,
-          current.error.toString(),
+        showSnackBar(
+          context: context,
+          message: current.error.toString(),
         );
       } else if (current is AsyncData &&
           current.value == AuthenticationStatus.authenticated) {
