@@ -4,7 +4,7 @@ import '../../features/authentication/views/sign_in_view.dart';
 import '../../features/authentication/views/sign_up_view.dart';
 import '../../features/onboarding/views/onboarding_view/onboarding_view.dart';
 import '../../features/startup/presentation/views/startup_view.dart';
-import '../../features/top_navigation/views/top_navigation_view.dart';
+import '../../features/top_navigation/presentation/views/top_navigation_view.dart';
 import '../../features/user_profile/views/user_profile_view.dart';
 import 'navigation_paths.dart';
 

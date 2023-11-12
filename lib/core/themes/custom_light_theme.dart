@@ -26,6 +26,9 @@ class CustomLightTheme {
         scrolledUnderElevation: 0,
       ),
       scaffoldBackgroundColor: Colors.white,
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: CustomColors.drawerBackgroundColor,
+      ),
       pageTransitionsTheme: CustomPageTransitionsTheme.getTheme(),
       textTheme: CustomTextTheme.getTheme(context),
       iconTheme: const IconThemeData(

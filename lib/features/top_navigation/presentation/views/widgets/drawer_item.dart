@@ -6,13 +6,11 @@ class DrawerItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
-    required this.isSelected,
     required this.onTap,
   });
 
   final String title;
   final IconData icon;
-  final bool isSelected;
   final VoidCallback onTap;
 
   @override
@@ -29,21 +27,17 @@ class DrawerItem extends StatelessWidget {
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 22,
               letterSpacing: 0.5,
-              color: isSelected ? Colors.white : null,
             ),
       ),
       trailing: Icon(
         icon,
         size: 30,
-        color:
-            isSelected ? Colors.white : Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.primary,
       ),
-      selected: isSelected,
       onTap: () {
         Navigator.pop(context);
         onTap();
       },
-      selectedTileColor: Theme.of(context).colorScheme.primary,
     );
   }
 }
