@@ -26,7 +26,7 @@ class HomeRepositoryImpl implements HomeRepository {
       final homeData = HomeData.fromJson(response.data);
       return homeData;
     } on DioException catch (error) {
-      throw error.toFailure;
+      throw error.failure;
     }
   }
 }
