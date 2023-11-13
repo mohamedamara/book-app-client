@@ -3,7 +3,7 @@ import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/book.dart';
+import '../../../../../core/models/book/book.dart';
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({

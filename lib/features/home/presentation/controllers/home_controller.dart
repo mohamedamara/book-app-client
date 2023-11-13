@@ -1,18 +1,15 @@
-import 'package:books_app_client/features/home/domain/home_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/repositories/home_repository.dart';
+import '../../domain/home_data/home_data.dart';
 
 final homeControllerProvider =
     StateNotifierProvider.autoDispose<HomeController, AsyncValue<HomeData>>(
   (ref) {
     final homeRepository = ref.watch(homeRepositoryProvider);
     return HomeController(
-      initialHomeData: const AsyncValue.data(
-        HomeData(
-          topBooks: [],
-          recentlyViewedBooks: [],
-        ),
+      initialHomeData: AsyncValue.data(
+        HomeData.empty(),
       ),
       homeRepository: homeRepository,
     );

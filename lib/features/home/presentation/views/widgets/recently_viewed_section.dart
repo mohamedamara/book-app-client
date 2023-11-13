@@ -2,7 +2,7 @@ import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/book.dart';
+import '../../../../../core/models/book/book.dart';
 
 class RecentlyViewedSection extends StatelessWidget {
   const RecentlyViewedSection({
