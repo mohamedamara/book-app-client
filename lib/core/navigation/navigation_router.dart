@@ -38,7 +38,7 @@ class NavigationRouter {
           builder: (_) => const TopNavigationView(),
           settings: RouteSettings(name: routeSettings.name),
         );
-      case NavigationPaths.userProfileRoute:
+      case NavigationPaths.profileRoute:
         return MaterialPageRoute(
           builder: (_) => const ProfileView(),
           settings: RouteSettings(name: routeSettings.name),

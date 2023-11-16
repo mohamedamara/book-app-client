@@ -2,6 +2,7 @@ import 'package:books_app_client/core/constants/assets_constants.dart';
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/core/navigation/navigation_paths.dart';
 import 'package:books_app_client/core/providers/top_navigation_scaffold_key_provider.dart';
+import 'package:books_app_client/features/favorites/presentation/views/favorites_view.dart';
 import 'package:books_app_client/features/home/presentation/views/home_view.dart';
 import 'package:books_app_client/features/top_navigation/presentation/controllers/top_navigation_controller.dart';
 import 'package:books_app_client/features/top_navigation/presentation/views/widgets/drawer_item.dart';
@@ -43,7 +44,7 @@ class TopNavigationView extends HookConsumerWidget {
               icon: Icons.account_circle,
               onTap: () => Navigator.pushNamed(
                 context,
-                NavigationPaths.userProfileRoute,
+                NavigationPaths.profileRoute,
               ),
             ),
             DrawerItem(
@@ -86,7 +87,7 @@ class TopNavigationView extends HookConsumerWidget {
         children: [
           const HomeView(),
           Container(color: Colors.amber),
-          Container(color: Colors.blue),
+          const FavoritesView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
