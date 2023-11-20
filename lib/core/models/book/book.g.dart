@@ -7,6 +7,7 @@ part of 'book.dart';
 // **************************************************************************
 
 _$BookImpl _$$BookImplFromJson(Map<String, dynamic> json) => _$BookImpl(
+      id: json['_id'] as String,
       title: json['title'] as String,
       author: json['author'] as String,
       contentURL: json['contentURL'] as String,
@@ -18,6 +19,7 @@ _$BookImpl _$$BookImplFromJson(Map<String, dynamic> json) => _$BookImpl(
 
 Map<String, dynamic> _$$BookImplToJson(_$BookImpl instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'title': instance.title,
       'author': instance.author,
       'contentURL': instance.contentURL,

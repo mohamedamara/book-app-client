@@ -20,6 +20,8 @@ Book _$BookFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Book {
+  @JsonKey(name: '_id')
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   String get contentURL => throw _privateConstructorUsedError;
@@ -39,7 +41,8 @@ abstract class $BookCopyWith<$Res> {
       _$BookCopyWithImpl<$Res, Book>;
   @useResult
   $Res call(
-      {String title,
+      {@JsonKey(name: '_id') String id,
+      String title,
       String author,
       String contentURL,
       String coverImageURL,
@@ -61,6 +64,7 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? author = null,
     Object? contentURL = null,
@@ -70,6 +74,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
     Object? rating = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -110,7 +118,8 @@ abstract class _$$BookImplCopyWith<$Res> implements $BookCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String title,
+      {@JsonKey(name: '_id') String id,
+      String title,
       String author,
       String contentURL,
       String coverImageURL,
@@ -129,6 +138,7 @@ class __$$BookImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? author = null,
     Object? contentURL = null,
@@ -138,6 +148,10 @@ class __$$BookImplCopyWithImpl<$Res>
     Object? rating = null,
   }) {
     return _then(_$BookImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -174,7 +188,8 @@ class __$$BookImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BookImpl implements _Book {
   const _$BookImpl(
-      {required this.title,
+      {@JsonKey(name: '_id') required this.id,
+      required this.title,
       required this.author,
       required this.contentURL,
       required this.coverImageURL,
@@ -185,6 +200,9 @@ class _$BookImpl implements _Book {
   factory _$BookImpl.fromJson(Map<String, dynamic> json) =>
       _$$BookImplFromJson(json);
 
+  @override
+  @JsonKey(name: '_id')
+  final String id;
   @override
   final String title;
   @override
@@ -202,7 +220,7 @@ class _$BookImpl implements _Book {
 
   @override
   String toString() {
-    return 'Book(title: $title, author: $author, contentURL: $contentURL, coverImageURL: $coverImageURL, genre: $genre, publicationDate: $publicationDate, rating: $rating)';
+    return 'Book(id: $id, title: $title, author: $author, contentURL: $contentURL, coverImageURL: $coverImageURL, genre: $genre, publicationDate: $publicationDate, rating: $rating)';
   }
 
   @override
@@ -210,6 +228,7 @@ class _$BookImpl implements _Book {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BookImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.author, author) || other.author == author) &&
             (identical(other.contentURL, contentURL) ||
@@ -224,7 +243,7 @@ class _$BookImpl implements _Book {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title, author, contentURL,
+  int get hashCode => Object.hash(runtimeType, id, title, author, contentURL,
       coverImageURL, genre, publicationDate, rating);
 
   @JsonKey(ignore: true)
@@ -243,7 +262,8 @@ class _$BookImpl implements _Book {
 
 abstract class _Book implements Book {
   const factory _Book(
-      {required final String title,
+      {@JsonKey(name: '_id') required final String id,
+      required final String title,
       required final String author,
       required final String contentURL,
       required final String coverImageURL,
@@ -253,6 +273,9 @@ abstract class _Book implements Book {
 
   factory _Book.fromJson(Map<String, dynamic> json) = _$BookImpl.fromJson;
 
+  @override
+  @JsonKey(name: '_id')
+  String get id;
   @override
   String get title;
   @override
