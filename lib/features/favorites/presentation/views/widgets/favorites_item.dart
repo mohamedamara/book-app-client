@@ -1,13 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../../core/models/book/book.dart';
 import '../../../../../core/themes/custom_colors.dart';
 
 class FavoritesItem extends StatelessWidget {
-  const FavoritesItem({super.key});
+  const FavoritesItem({super.key, required this.book});
+
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,22 @@ class FavoritesItem extends StatelessWidget {
       height: context.setHeight(180),
       child: Row(
         children: [
-          Container(
+          SizedBox(
+            height: double.infinity,
             width: context.setHeight(115.94),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(10),
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  context.setRadius(10),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl: book.coverImageURL,
+                  height: double.infinity,
+                  width: context.setHeight(115.94),
+                  fit: BoxFit.fitHeight,
+                  placeholder: (_, __) => const SizedBox(),
+                ),
+              ),
             ),
           ),
           SizedBox(width: context.setWidth(10.06)),
@@ -30,43 +44,25 @@ class FavoritesItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: context.setHeight(10)),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: AutoSizeText(
-                        "The Secret of Heroism: A Memoir of Henry Albert Harpe",
-                        textAlign: TextAlign.start,
-                        maxLines: 4,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              fontSize: context.setSp(18),
-                              color: CustomColors.textColorAlmostBlack
-                                  .withOpacity(0.75),
-                            ),
+                AutoSizeText(
+                  book.title,
+                  textAlign: TextAlign.start,
+                  maxLines: 4,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontSize: context.setSp(18),
+                        color:
+                            CustomColors.textColorAlmostBlack.withOpacity(0.75),
                       ),
-                    ),
-                    SizedBox(width: context.setHeight(5)),
-                    GestureDetector(
-                      onTap: () {},
-                      child: FaIcon(
-                        FontAwesomeIcons.trashCan,
-                        color: CustomColors.textColorAlmostBlack.withOpacity(
-                          0.2,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 SizedBox(height: context.setHeight(5)),
                 Text(
-                  'Mitch Weiss',
+                  book.author,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 SizedBox(height: context.setHeight(14.63)),
                 RatingBarIndicator(
-                  rating: 4,
+                  rating: book.rating.toDouble(),
                   itemBuilder: (context, index) => const Icon(
                     Icons.star,
                     color: CustomColors.mainGreenColor,
@@ -91,7 +87,7 @@ class FavoritesItem extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'Children',
+                        book.genre,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: CustomColors.mainGreenColor,
                               fontWeight: FontWeight.bold,
