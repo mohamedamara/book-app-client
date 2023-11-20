@@ -16,4 +16,6 @@ class CustomColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+  static const Color snackBarSuccessBackgroundColor = mainGreenColor;
+  static Color snackBarFailureBackgroundColor = Colors.red.withOpacity(0.72);
 }

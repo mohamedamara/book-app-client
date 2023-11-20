@@ -41,6 +41,7 @@ class SignUpView extends HookConsumerWidget {
         showSnackBar(
           context: context,
           message: current.error.toString(),
+          messageType: SnackBarMessageType.failure,
         );
       } else if (current is AsyncData &&
           current.value == AuthenticationStatus.authenticated) {

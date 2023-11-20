@@ -1,12 +1,18 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:flutter/material.dart';
+
+enum SnackBarMessageType { success, failure }
 
 showSnackBar({
   required BuildContext context,
   required String message,
+  required SnackBarMessageType messageType,
 }) {
   final snackBar = SnackBar(
-    backgroundColor: Colors.red.withOpacity(0.72),
+    backgroundColor: messageType == SnackBarMessageType.success
+        ? CustomColors.snackBarSuccessBackgroundColor
+        : CustomColors.snackBarFailureBackgroundColor,
     duration: const Duration(milliseconds: 1500),
     content: Stack(
       alignment: Alignment.center,
@@ -30,5 +36,6 @@ showSnackBar({
       ],
     ),
   );
+  ScaffoldMessenger.of(context).hideCurrentSnackBar();
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
