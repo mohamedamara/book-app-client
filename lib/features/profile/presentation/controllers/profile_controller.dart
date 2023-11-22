@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/profile_repository.dart';
+import '../../data/repositories/profile_repository.dart';
 import '../../domain/profile_data/profile_data.dart';
 
 final profileControllerProvider = StateNotifierProvider.autoDispose<

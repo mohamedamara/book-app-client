@@ -3,7 +3,7 @@ import 'package:books_app_client/core/providers/dio_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../domain/profile_data/profile_data.dart';
+import '../../domain/profile_data/profile_data.dart';
 
 final profileRepositoryProvider = Provider<ProfileRepository>(
   (ref) {
