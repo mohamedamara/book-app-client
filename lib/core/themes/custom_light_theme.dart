@@ -3,6 +3,7 @@ import 'package:books_app_client/core/themes/custom_checkbox_theme.dart';
 import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:books_app_client/core/themes/custom_input_decoration_theme.dart';
 import 'package:books_app_client/core/themes/custom_page_transitions_theme.dart';
+import 'package:books_app_client/core/themes/custom_radio_theme.dart';
 import 'package:books_app_client/core/themes/custom_text_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -34,8 +35,10 @@ class CustomLightTheme {
       iconTheme: const IconThemeData(
         color: CustomColors.mainGreenColor,
       ),
+      unselectedWidgetColor: Colors.black.withOpacity(0.25),
       inputDecorationTheme: CustomInputDecorationTheme.getTheme(context),
       checkboxTheme: CustomCheckBoxTheme.getTheme(context),
+      radioTheme: CustomRadioTheme.getTheme(context),
       textSelectionTheme: const TextSelectionThemeData(
         selectionHandleColor: CustomColors.mainGreenColor,
         cursorColor: CustomColors.mainGreenColor,
@@ -50,6 +53,15 @@ class CustomLightTheme {
         ),
         unselectedLabelStyle: TextStyle(
           fontSize: context.setSp(11),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          textStyle: TextStyle(
+            fontSize: context.setSp(16),
+            fontWeight: FontWeight.w400,
+          ),
+          foregroundColor: CustomColors.textColorAlmostBlack,
         ),
       ),
     );
