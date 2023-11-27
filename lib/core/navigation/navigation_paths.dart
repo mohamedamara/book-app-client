@@ -5,4 +5,5 @@ class NavigationPaths {
   static const String signIpRoute = 'signIp';
   static const String topNavigationRoute = 'topNavigation';
   static const String profileRoute = 'profile';
+  static const String filterBooksRoute = 'filterBooks';
 }
