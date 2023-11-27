@@ -10,8 +10,10 @@ class CustomTextField extends StatelessWidget {
     this.textCapitalization,
     this.keyboardType,
     this.unlimitedLength = false,
+    this.autofocus = false,
     this.onChanged,
     this.onSubmitted,
+    this.prefixIcon,
     this.suffixIcon,
     this.onTap,
   }) : super(key: key);
@@ -22,8 +24,10 @@ class CustomTextField extends StatelessWidget {
   final TextCapitalization? textCapitalization;
   final TextInputType? keyboardType;
   final bool unlimitedLength;
+  final bool autofocus;
   final void Function(String)? onChanged;
   final void Function(String)? onSubmitted;
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
   final VoidCallback? onTap;
 
@@ -36,6 +40,7 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         textCapitalization: textCapitalization ?? TextCapitalization.sentences,
         keyboardType: keyboardType,
+        autofocus: autofocus,
         maxLength: unlimitedLength
             ? null
             : keyboardType == TextInputType.emailAddress
@@ -63,6 +68,7 @@ class CustomTextField extends StatelessWidget {
               .textTheme
               .labelLarge
               ?.copyWith(color: Colors.black.withOpacity(0.5)),
+          prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
         ),
         onChanged: onChanged,
