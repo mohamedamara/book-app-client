@@ -79,6 +79,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
                 prefixIcon: const Icon(Icons.search_rounded),
                 suffixIcon: IconButton(
                   onPressed: () async {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     filterBooksResult = await Navigator.pushNamed(
                       context,
                       NavigationPaths.filterBooksRoute,
