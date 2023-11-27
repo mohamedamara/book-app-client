@@ -4,6 +4,7 @@ import 'package:books_app_client/core/navigation/navigation_paths.dart';
 import 'package:books_app_client/core/providers/top_navigation_scaffold_key_provider.dart';
 import 'package:books_app_client/features/favorites/presentation/views/favorites_view.dart';
 import 'package:books_app_client/features/home/presentation/views/home_view.dart';
+import 'package:books_app_client/features/search/presentation/views/search_view.dart';
 import 'package:books_app_client/features/top_navigation/presentation/controllers/top_navigation_controller.dart';
 import 'package:books_app_client/features/top_navigation/presentation/views/widgets/drawer_item.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class TopNavigationView extends HookConsumerWidget {
     final selectedIndex = useState(0);
     return Scaffold(
       key: ref.watch(topNavigationScaffoldKeyProvider),
+      resizeToAvoidBottomInset: false,
       endDrawer: Drawer(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -84,10 +86,10 @@ class TopNavigationView extends HookConsumerWidget {
       endDrawerEnableOpenDragGesture: false,
       body: AnimatedIndexedStack(
         index: selectedIndex.value,
-        children: [
-          const HomeView(),
-          Container(color: Colors.amber),
-          const FavoritesView(),
+        children: const [
+          HomeView(),
+          SearchView(),
+          FavoritesView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

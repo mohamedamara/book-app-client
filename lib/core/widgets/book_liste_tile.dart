@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../../../core/models/book/book.dart';
-import '../../../../../core/themes/custom_colors.dart';
+import '../models/book/book.dart';
+import '../themes/custom_colors.dart';
 
-class FavoritesItem extends StatelessWidget {
-  const FavoritesItem({super.key, required this.book});
+class BookListTile extends StatelessWidget {
+  const BookListTile({super.key, required this.book});
 
   final Book book;
 

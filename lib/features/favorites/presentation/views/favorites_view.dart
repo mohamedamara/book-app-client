@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/models/failure.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../controllers/favorites_controller.dart';
-import 'widgets/favorites_item.dart';
+import '../../../../core/widgets/book_liste_tile.dart';
 
 class FavoritesView extends ConsumerWidget {
   const FavoritesView({super.key});
@@ -111,7 +111,7 @@ class FavoritesView extends ConsumerWidget {
                                       )
                                       .removeBookFromFavorites(book.id);
                                 },
-                                child: FavoritesItem(book: book),
+                                child: BookListTile(book: book),
                               );
                             },
                           );
