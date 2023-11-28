@@ -1,4 +1,4 @@
-import 'package:books_app_client/features/search/presentation/views/widget/search_filter_view.dart';
+import 'package:books_app_client/features/search/presentation/views/widget/filter_books_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/authentication/views/sign_in_view.dart';

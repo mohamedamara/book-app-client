@@ -1,7 +1,7 @@
 import 'package:books_app_client/core/extensions/dio_exceptions_extension.dart';
 import 'package:books_app_client/core/models/book/book.dart';
 import 'package:books_app_client/core/providers/dio_provider.dart';
-import 'package:books_app_client/features/search/presentation/views/widget/search_filter_view.dart';
+import 'package:books_app_client/features/search/presentation/views/widget/filter_books_view.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

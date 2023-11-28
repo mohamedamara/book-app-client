@@ -2,17 +2,18 @@ import 'dart:async';
 
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/core/extensions/string_extension.dart';
+import 'package:books_app_client/features/search/presentation/views/widget/empty_search_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/constants/assets_constants.dart';
 import '../../../../core/navigation/navigation_paths.dart';
-import '../../../../core/themes/custom_colors.dart';
 import '../../../../core/widgets/custom_textfield.dart';
 import '../../../../core/widgets/book_liste_tile.dart';
 import '../controllers/search_controller.dart';
-import 'widget/search_filter_view.dart';
+import 'widget/empty_filter_result.dart';
+import 'widget/filter_books_view.dart';
 
 class SearchView extends ConsumerStatefulWidget {
   const SearchView({super.key});
@@ -40,7 +41,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
     super.dispose();
   }
 
-  _onSearchChanged(String currentValue) {
+  void _onSearchChanged(String currentValue) {
     filterBooksResult = null;
     if (_debouncer?.isActive ?? false) {
       _debouncer?.cancel();
@@ -86,6 +87,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
                     );
                     if (filterBooksResult != null) {
                       searchTextEditingController.clear();
+                      lastSearchValue = "";
                       await ref
                           .read(searchControllerProvider.notifier)
                           .getFilteredBooks(
@@ -108,80 +110,16 @@ class _SearchViewState extends ConsumerState<SearchView> {
                       ),
                       data: (data) {
                         if (data.isEmpty && filterBooksResult != null) {
-                          return Center(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: context.setHeight(150),
-                                ),
-                                Icon(
-                                  Icons.tune,
-                                  size: context.setHeight(200),
-                                  color: CustomColors.textColorAlmostBlack
-                                      .withOpacity(0.25),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: context.setWidth(30),
-                                  ),
-                                  child: Text(
-                                    'No book found for this filter',
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                          color: CustomColors
-                                              .textColorAlmostBlack
-                                              .withOpacity(0.25),
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return const EmptyfilterResult();
+                        } else if (data.isEmpty &&
+                            searchTextEditingController.text.isNotEmpty) {
+                          return const EmptySearchResult();
                         } else if (data.isEmpty &&
                             searchTextEditingController.text.isEmpty) {
                           return Center(
                             child: SvgPicture.asset(
                               AssetsConstants.searchImage,
                               height: context.setHeight(300),
-                            ),
-                          );
-                        } else if (data.isEmpty &&
-                            searchTextEditingController.text.isNotEmpty) {
-                          return Center(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: context.setHeight(150),
-                                ),
-                                Icon(
-                                  Icons.search_rounded,
-                                  size: context.setHeight(200),
-                                  color: CustomColors.textColorAlmostBlack
-                                      .withOpacity(0.25),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: context.setWidth(30),
-                                  ),
-                                  child: Text(
-                                    'No book found for this search',
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge
-                                        ?.copyWith(
-                                          color: CustomColors
-                                              .textColorAlmostBlack
-                                              .withOpacity(0.25),
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                  ),
-                                ),
-                              ],
                             ),
                           );
                         } else {

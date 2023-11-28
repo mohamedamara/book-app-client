@@ -2,7 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/book/book.dart';
 import '../../data/repositories/search_repository.dart';
-import '../views/widget/search_filter_view.dart';
+import '../views/widget/filter_books_view.dart';
 
 final searchControllerProvider =
     StateNotifierProvider.autoDispose<SearchController, AsyncValue<List<Book>>>(
