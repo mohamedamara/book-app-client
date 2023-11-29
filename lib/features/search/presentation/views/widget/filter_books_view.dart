@@ -336,7 +336,7 @@ class FilterBooksView extends HookConsumerWidget {
                 boxShadow: const [
                   BoxShadow(
                     color: Colors.grey,
-                    offset: Offset(0, 1), //(x,y)
+                    offset: Offset(0, 1),
                     blurRadius: 6,
                   ),
                 ],
