@@ -1,3 +1,4 @@
+import 'package:books_app_client/features/book_details/presentation/views/book_details_view.dart';
 import 'package:books_app_client/features/search/presentation/views/widget/filter_books_view.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,15 @@ class NavigationRouter {
       case NavigationPaths.filterBooksRoute:
         return MaterialPageRoute(
           builder: (_) => const FilterBooksView(),
+          settings: RouteSettings(name: routeSettings.name),
+        );
+      case NavigationPaths.bookDetailsRoute:
+        final bookDetailsArguments =
+            routeSettings.arguments as BookDetailsArguments;
+        return MaterialPageRoute(
+          builder: (_) => BookDetailsView(
+            bookDetailsArguments: bookDetailsArguments,
+          ),
           settings: RouteSettings(name: routeSettings.name),
         );
       default:

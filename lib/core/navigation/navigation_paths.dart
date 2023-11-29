@@ -6,4 +6,5 @@ class NavigationPaths {
   static const String topNavigationRoute = 'topNavigation';
   static const String profileRoute = 'profile';
   static const String filterBooksRoute = 'filterBooks';
+  static const String bookDetailsRoute = 'bookDetails';
 }
