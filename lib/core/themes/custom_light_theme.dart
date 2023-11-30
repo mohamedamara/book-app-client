@@ -1,11 +1,13 @@
-import 'package:books_app_client/core/extensions/context_extension.dart';
-import 'package:books_app_client/core/themes/custom_checkbox_theme.dart';
-import 'package:books_app_client/core/themes/custom_colors.dart';
-import 'package:books_app_client/core/themes/custom_input_decoration_theme.dart';
-import 'package:books_app_client/core/themes/custom_page_transitions_theme.dart';
-import 'package:books_app_client/core/themes/custom_radio_theme.dart';
-import 'package:books_app_client/core/themes/custom_text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:books_app_client/core/extensions/context_extension.dart';
+
+import 'custom_checkbox_theme.dart';
+import 'custom_colors.dart';
+import 'custom_input_decoration_theme.dart';
+import 'custom_page_transitions_theme.dart';
+import 'custom_radio_theme.dart';
+import 'custom_tab_bar_theme.dart';
+import 'custom_text_theme.dart';
 
 class CustomLightTheme {
   static ThemeData getTheme(BuildContext context) {
@@ -64,6 +66,7 @@ class CustomLightTheme {
           foregroundColor: CustomColors.textColorAlmostBlack,
         ),
       ),
+      tabBarTheme: CustomTabBarTheme.getTheme(context),
     );
   }
 }
