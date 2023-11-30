@@ -111,7 +111,10 @@ class FavoritesView extends ConsumerWidget {
                                       )
                                       .removeBookFromFavorites(book.id);
                                 },
-                                child: BookListTile(book: book),
+                                child: BookListTile(
+                                  book: book,
+                                  parentViewName: 'favorites',
+                                ),
                               );
                             },
                           );

@@ -3,6 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/models/book/book.dart';
+import '../../../../../core/navigation/navigation_paths.dart';
+import '../../../../book_details/presentation/views/book_details_view.dart';
 
 class RecentlyViewedSection extends StatelessWidget {
   const RecentlyViewedSection({
@@ -14,6 +16,7 @@ class RecentlyViewedSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String heroTagPrefix = 'recenty_viewed';
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.only(
@@ -34,21 +37,31 @@ class RecentlyViewedSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () {},
-                      child: SizedBox(
-                        height: context.setHeight(200),
-                        width: context.setHeight(130),
-                        child: Center(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              context.setRadius(10),
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: book.coverImageURL,
-                              height: context.setHeight(200),
-                              width: context.setHeight(130),
-                              fit: BoxFit.fitHeight,
-                              placeholder: (_, __) => const SizedBox(),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        NavigationPaths.bookDetailsRoute,
+                        arguments: BookDetailsArguments(
+                          book: book,
+                          bookAnimationHeroTag: '$heroTagPrefix${book.id}',
+                        ),
+                      ),
+                      child: Hero(
+                        tag: '$heroTagPrefix${book.id}',
+                        child: SizedBox(
+                          height: context.setHeight(200),
+                          width: context.setHeight(130),
+                          child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                context.setRadius(10),
+                              ),
+                              child: CachedNetworkImage(
+                                imageUrl: book.coverImageURL,
+                                height: context.setHeight(200),
+                                width: context.setHeight(130),
+                                fit: BoxFit.fitHeight,
+                                placeholder: (_, __) => const SizedBox(),
+                              ),
                             ),
                           ),
                         ),

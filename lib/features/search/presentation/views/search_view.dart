@@ -135,7 +135,10 @@ class _SearchViewState extends ConsumerState<SearchView> {
                             },
                             itemBuilder: (context, index) {
                               var book = data[index];
-                              return BookListTile(book: book);
+                              return BookListTile(
+                                book: book,
+                                parentViewName: 'search',
+                              );
                             },
                           );
                         }

@@ -4,34 +4,55 @@ import 'package:flutter/material.dart';
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../features/book_details/presentation/views/book_details_view.dart';
 import '../models/book/book.dart';
+import '../navigation/navigation_paths.dart';
 import '../themes/custom_colors.dart';
 
 class BookListTile extends StatelessWidget {
-  const BookListTile({super.key, required this.book});
+  const BookListTile({
+    super.key,
+    required this.book,
+    required this.parentViewName,
+  });
 
   final Book book;
+  final String parentViewName;
 
   @override
   Widget build(BuildContext context) {
+    String bookAnimationHeroTag = '${parentViewName}book_list_tile${book.id}';
     return SizedBox(
       height: context.setHeight(180),
       child: Row(
         children: [
-          SizedBox(
-            height: double.infinity,
-            width: context.setHeight(115.94),
-            child: Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(
-                  context.setRadius(10),
-                ),
-                child: CachedNetworkImage(
-                  imageUrl: book.coverImageURL,
-                  height: double.infinity,
-                  width: context.setHeight(115.94),
-                  fit: BoxFit.fitHeight,
-                  placeholder: (_, __) => const SizedBox(),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(
+              context,
+              NavigationPaths.bookDetailsRoute,
+              arguments: BookDetailsArguments(
+                book: book,
+                bookAnimationHeroTag: bookAnimationHeroTag,
+              ),
+            ),
+            child: Hero(
+              tag: bookAnimationHeroTag,
+              child: SizedBox(
+                height: double.infinity,
+                width: context.setHeight(115.94),
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(
+                      context.setRadius(10),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: book.coverImageURL,
+                      height: double.infinity,
+                      width: context.setHeight(130),
+                      fit: BoxFit.fitHeight,
+                      placeholder: (_, __) => const SizedBox(),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -57,7 +78,7 @@ class BookListTile extends StatelessWidget {
                 SizedBox(height: context.setHeight(5)),
                 Text(
                   book.author,
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 SizedBox(height: context.setHeight(14.63)),

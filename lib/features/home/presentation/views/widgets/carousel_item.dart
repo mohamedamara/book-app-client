@@ -1,9 +1,11 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/core/themes/custom_colors.dart';
+import 'package:books_app_client/features/book_details/presentation/views/book_details_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/models/book/book.dart';
+import '../../../../../core/navigation/navigation_paths.dart';
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
@@ -17,23 +19,34 @@ class CarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String bookAnimationHeroTag = 'carousel${book.id}';
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: () {},
-            child: SizedBox(
-              height: context.setHeight(200),
-              width: context.setHeight(127),
-              child: Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(context.setRadius(10)),
-                  child: CachedNetworkImage(
-                    imageUrl: book.coverImageURL,
-                    fit: BoxFit.fitHeight,
-                    placeholder: (_, __) => const SizedBox(),
+            onTap: () => Navigator.pushNamed(
+              context,
+              NavigationPaths.bookDetailsRoute,
+              arguments: BookDetailsArguments(
+                book: book,
+                bookAnimationHeroTag: bookAnimationHeroTag,
+              ),
+            ),
+            child: Hero(
+              tag: bookAnimationHeroTag,
+              child: SizedBox(
+                height: context.setHeight(200),
+                width: context.setHeight(127),
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(context.setRadius(10)),
+                    child: CachedNetworkImage(
+                      imageUrl: book.coverImageURL,
+                      fit: BoxFit.fitHeight,
+                      placeholder: (_, __) => const SizedBox(),
+                    ),
                   ),
                 ),
               ),
