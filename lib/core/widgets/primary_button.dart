@@ -60,7 +60,7 @@ class PrimaryButtoon extends StatelessWidget {
                   ),
                 )
               : Text(
-                  buttonText.toUpperCase(),
+                  buttonText,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         color: isEnabled
                             ? Colors.white
