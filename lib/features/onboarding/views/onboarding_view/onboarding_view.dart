@@ -2,7 +2,7 @@ import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../models/onboarding_view_model.dart';
+import 'onboarding_data.dart';
 import '../authentication_options_view/authentication_options_view.dart';
 import 'widgets/onboarding_single_view.dart';
 import 'widgets/onboarding_view_dots.dart';

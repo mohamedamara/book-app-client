@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/onboarding_view_model.dart';
+import '../onboarding_data.dart';
 import 'onboarding_view_single_dot.dart';
 
 class OnboardingViewDots extends StatelessWidget {

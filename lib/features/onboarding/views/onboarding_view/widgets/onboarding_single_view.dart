@@ -1,5 +1,5 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
-import 'package:books_app_client/features/onboarding/models/onboarding_view_model.dart';
+import 'package:books_app_client/features/onboarding/views/onboarding_view/onboarding_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -11,7 +11,7 @@ class OnboardingSingleView extends StatelessWidget {
     required this.imageHeight,
   });
 
-  final OnboardingViewModel onboardingData;
+  final OnboardingData onboardingData;
   final double subTitleSpacing;
   final double imageHeight;
 
