@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../review/review.dart';
+import '../../../../core/models/review/review.dart';
 import '../user/user.dart';
 
 part 'profile_data.freezed.dart';

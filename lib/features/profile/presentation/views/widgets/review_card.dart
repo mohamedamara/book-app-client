@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../../../core/models/review/review.dart';
 import '../../../../../core/themes/custom_colors.dart';
-import '../../../domain/review/review.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({super.key, required this.review});
