@@ -1,4 +1,4 @@
-enum Sort {
+enum SortBy {
   bookTitleAZ((
     sortBy: 'title',
     sortOrder: 'ascending',
@@ -16,6 +16,6 @@ enum Sort {
     sortOrder: 'descending',
   ));
 
-  const Sort(this.value);
+  const SortBy(this.value);
   final ({String sortBy, String sortOrder}) value;
 }
