@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/models/book/book.dart';
 import '../../../../../core/navigation/navigation_paths.dart';
+import '../../../../../core/themes/custom_colors.dart';
 import '../../../../book_details/presentation/views/book_details_view.dart';
 
 class RecentlyViewedSection extends StatelessWidget {
@@ -17,6 +18,22 @@ class RecentlyViewedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String heroTagPrefix = 'recenty_viewed';
+    if (recentlyViewedBooks.isEmpty) {
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: context.setWidth(20),
+        ),
+        child: Text(
+          'No recently viewed books yet.',
+          textAlign: TextAlign.start,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: CustomColors.textColorAlmostBlack.withOpacity(0.25),
+                fontWeight: FontWeight.normal,
+                height: 1.6,
+              ),
+        ),
+      );
+    }
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.only(
