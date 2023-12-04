@@ -115,7 +115,7 @@ class SignUpView extends HookConsumerWidget {
                   ref.read(authenticationControllerProvider.notifier).signUp(
                         firstName: firstNameTextEditingController.text,
                         lastName: lastNameTextEditingController.text,
-                        email: emailTextEditingController.text,
+                        email: emailTextEditingController.text.toLowerCase(),
                         password: passwordTextEditingController.text,
                       );
                 },

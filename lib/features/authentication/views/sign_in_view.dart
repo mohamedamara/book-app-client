@@ -109,7 +109,7 @@ class SignInView extends HookConsumerWidget {
                     ref.watch(authenticationControllerProvider) is AsyncLoading,
                 onPressed: () {
                   ref.read(authenticationControllerProvider.notifier).signIn(
-                        email: emailTextEditingController.text,
+                        email: emailTextEditingController.text.toLowerCase(),
                         password: passwordTextEditingController.text,
                         isStayLoggedInChecked: isStayLoggedInChecked.value,
                       );
