@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/models/review/review.dart';
-import '../user/user.dart';
+import '../../../../core/models/user/user.dart';
 
 part 'profile_data.freezed.dart';
 part 'profile_data.g.dart';

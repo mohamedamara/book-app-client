@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:books_app_client/core/extensions/context_extension.dart';
 
 import '../../../../../core/constants/assets_constants.dart';
+import '../../../../../core/models/user/user.dart';
 import '../../../../../core/themes/custom_colors.dart';
-import '../../../domain/user/user.dart';
 
 class UserInfoSection extends StatelessWidget {
   const UserInfoSection({super.key, required this.user});
