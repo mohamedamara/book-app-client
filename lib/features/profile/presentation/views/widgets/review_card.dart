@@ -77,7 +77,7 @@ class ReviewCard extends StatelessWidget {
                     context.setRadius(10),
                   ),
                   child: CachedNetworkImage(
-                    imageUrl: review.createdFor.coverImageURL,
+                    imageUrl: review.createdFor!.coverImageURL,
                     height: context.setHeight(100),
                     width: context.setHeight(62.5),
                     fit: BoxFit.fitHeight,

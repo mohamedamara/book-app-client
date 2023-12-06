@@ -22,7 +22,8 @@ Review _$ReviewFromJson(Map<String, dynamic> json) {
 mixin _$Review {
   String get reviewContent => throw _privateConstructorUsedError;
   num get reviewRating => throw _privateConstructorUsedError;
-  Book get createdFor => throw _privateConstructorUsedError;
+  User? get createdBy => throw _privateConstructorUsedError;
+  Book? get createdFor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,9 +35,14 @@ abstract class $ReviewCopyWith<$Res> {
   factory $ReviewCopyWith(Review value, $Res Function(Review) then) =
       _$ReviewCopyWithImpl<$Res, Review>;
   @useResult
-  $Res call({String reviewContent, num reviewRating, Book createdFor});
+  $Res call(
+      {String reviewContent,
+      num reviewRating,
+      User? createdBy,
+      Book? createdFor});
 
-  $BookCopyWith<$Res> get createdFor;
+  $UserCopyWith<$Res>? get createdBy;
+  $BookCopyWith<$Res>? get createdFor;
 }
 
 /// @nodoc
@@ -54,7 +60,8 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
   $Res call({
     Object? reviewContent = null,
     Object? reviewRating = null,
-    Object? createdFor = null,
+    Object? createdBy = freezed,
+    Object? createdFor = freezed,
   }) {
     return _then(_value.copyWith(
       reviewContent: null == reviewContent
@@ -65,17 +72,37 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
           ? _value.reviewRating
           : reviewRating // ignore: cast_nullable_to_non_nullable
               as num,
-      createdFor: null == createdFor
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as User?,
+      createdFor: freezed == createdFor
           ? _value.createdFor
           : createdFor // ignore: cast_nullable_to_non_nullable
-              as Book,
+              as Book?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $BookCopyWith<$Res> get createdFor {
-    return $BookCopyWith<$Res>(_value.createdFor, (value) {
+  $UserCopyWith<$Res>? get createdBy {
+    if (_value.createdBy == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.createdBy!, (value) {
+      return _then(_value.copyWith(createdBy: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookCopyWith<$Res>? get createdFor {
+    if (_value.createdFor == null) {
+      return null;
+    }
+
+    return $BookCopyWith<$Res>(_value.createdFor!, (value) {
       return _then(_value.copyWith(createdFor: value) as $Val);
     });
   }
@@ -88,10 +115,16 @@ abstract class _$$ReviewImplCopyWith<$Res> implements $ReviewCopyWith<$Res> {
       __$$ReviewImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String reviewContent, num reviewRating, Book createdFor});
+  $Res call(
+      {String reviewContent,
+      num reviewRating,
+      User? createdBy,
+      Book? createdFor});
 
   @override
-  $BookCopyWith<$Res> get createdFor;
+  $UserCopyWith<$Res>? get createdBy;
+  @override
+  $BookCopyWith<$Res>? get createdFor;
 }
 
 /// @nodoc
@@ -107,7 +140,8 @@ class __$$ReviewImplCopyWithImpl<$Res>
   $Res call({
     Object? reviewContent = null,
     Object? reviewRating = null,
-    Object? createdFor = null,
+    Object? createdBy = freezed,
+    Object? createdFor = freezed,
   }) {
     return _then(_$ReviewImpl(
       reviewContent: null == reviewContent
@@ -118,10 +152,14 @@ class __$$ReviewImplCopyWithImpl<$Res>
           ? _value.reviewRating
           : reviewRating // ignore: cast_nullable_to_non_nullable
               as num,
-      createdFor: null == createdFor
+      createdBy: freezed == createdBy
+          ? _value.createdBy
+          : createdBy // ignore: cast_nullable_to_non_nullable
+              as User?,
+      createdFor: freezed == createdFor
           ? _value.createdFor
           : createdFor // ignore: cast_nullable_to_non_nullable
-              as Book,
+              as Book?,
     ));
   }
 }
@@ -132,7 +170,8 @@ class _$ReviewImpl implements _Review {
   const _$ReviewImpl(
       {required this.reviewContent,
       required this.reviewRating,
-      required this.createdFor});
+      this.createdBy,
+      this.createdFor});
 
   factory _$ReviewImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReviewImplFromJson(json);
@@ -142,11 +181,13 @@ class _$ReviewImpl implements _Review {
   @override
   final num reviewRating;
   @override
-  final Book createdFor;
+  final User? createdBy;
+  @override
+  final Book? createdFor;
 
   @override
   String toString() {
-    return 'Review(reviewContent: $reviewContent, reviewRating: $reviewRating, createdFor: $createdFor)';
+    return 'Review(reviewContent: $reviewContent, reviewRating: $reviewRating, createdBy: $createdBy, createdFor: $createdFor)';
   }
 
   @override
@@ -158,14 +199,16 @@ class _$ReviewImpl implements _Review {
                 other.reviewContent == reviewContent) &&
             (identical(other.reviewRating, reviewRating) ||
                 other.reviewRating == reviewRating) &&
+            (identical(other.createdBy, createdBy) ||
+                other.createdBy == createdBy) &&
             (identical(other.createdFor, createdFor) ||
                 other.createdFor == createdFor));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, reviewContent, reviewRating, createdFor);
+  int get hashCode => Object.hash(
+      runtimeType, reviewContent, reviewRating, createdBy, createdFor);
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +228,8 @@ abstract class _Review implements Review {
   const factory _Review(
       {required final String reviewContent,
       required final num reviewRating,
-      required final Book createdFor}) = _$ReviewImpl;
+      final User? createdBy,
+      final Book? createdFor}) = _$ReviewImpl;
 
   factory _Review.fromJson(Map<String, dynamic> json) = _$ReviewImpl.fromJson;
 
@@ -194,7 +238,9 @@ abstract class _Review implements Review {
   @override
   num get reviewRating;
   @override
-  Book get createdFor;
+  User? get createdBy;
+  @override
+  Book? get createdFor;
   @override
   @JsonKey(ignore: true)
   _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
