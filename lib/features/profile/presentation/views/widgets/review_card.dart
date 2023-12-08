@@ -19,7 +19,7 @@ class ReviewCard extends StatelessWidget {
         context.setRadius(20),
       ),
       color: CustomColors.reviewCardBackgroundColor,
-      elevation: 16,
+      elevation: 8,
       child: SizedBox(
         height: context.setHeight(120),
         width: double.infinity,
