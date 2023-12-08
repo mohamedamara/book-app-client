@@ -18,7 +18,10 @@ class CustomTabBarTheme {
       ),
       labelColor: CustomColors.mainGreenColor,
       unselectedLabelColor: CustomColors.textColorAlmostBlack.withOpacity(0.5),
-      labelPadding: const EdgeInsets.symmetric(horizontal: 20),
+      labelPadding: EdgeInsets.symmetric(
+        horizontal: context.setWidth(15),
+        vertical: context.setHeight(5),
+      ),
     );
   }
 }

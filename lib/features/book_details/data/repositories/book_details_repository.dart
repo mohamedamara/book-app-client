@@ -1,0 +1,91 @@
+import 'package:books_app_client/core/extensions/dio_exceptions_extension.dart';
+import 'package:books_app_client/core/providers/dio_provider.dart';
+import 'package:dio/dio.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../domain/book_details_data/book_details_data.dart';
+
+final bookDetailsRepositoryProvider = Provider<BookDetailsRepository>(
+  (ref) {
+    final dio = ref.watch(dioProvider);
+    return BookDetailsRepositoryImpl(dio: dio);
+  },
+);
+
+abstract class BookDetailsRepository {
+  Future<BookDetailsData> getBookDetails({required String bookId});
+  Future<bool> addBookToFavorites({required String bookId});
+  Future<bool> removeBookFromFavorites({required String bookId});
+  Future<bool> addReview({
+    required String reviewContent,
+    required num reviewRating,
+    required String bookId,
+  });
+}
+
+class BookDetailsRepositoryImpl implements BookDetailsRepository {
+  BookDetailsRepositoryImpl({required this.dio});
+  final Dio dio;
+
+  @override
+  Future<BookDetailsData> getBookDetails({required String bookId}) async {
+    try {
+      final response = await dio.get('books/$bookId/book-details');
+      final bookDetailsData = BookDetailsData.fromJson(response.data);
+      return bookDetailsData;
+    } on DioException catch (error) {
+      throw error.failure;
+    }
+  }
+
+  @override
+  Future<bool> addBookToFavorites({required String bookId}) async {
+    try {
+      await dio.post(
+        'favoritebooks',
+        data: {
+          'bookId': bookId,
+        },
+      );
+      return true;
+    } on DioException catch (error) {
+      throw error.failure;
+    }
+  }
+
+  @override
+  Future<bool> removeBookFromFavorites({required String bookId}) async {
+    try {
+      await dio.delete(
+        'favoritebooks',
+        data: {
+          'bookId': bookId,
+        },
+      );
+      return false;
+    } on DioException catch (error) {
+      throw error.failure;
+    }
+  }
+
+  @override
+  Future<bool> addReview({
+    required String reviewContent,
+    required num reviewRating,
+    required String bookId,
+  }) async {
+    try {
+      await dio.post(
+        'reviews',
+        data: {
+          'reviewContent': reviewContent,
+          'reviewRating': reviewRating,
+          'bookId': bookId,
+        },
+      );
+      return true;
+    } on DioException catch (error) {
+      throw error.failure;
+    }
+  }
+}

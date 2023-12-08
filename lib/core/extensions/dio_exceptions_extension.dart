@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:books_app_client/core/models/failure.dart';
 import 'package:dio/dio.dart';
 
@@ -11,8 +13,9 @@ extension DioExceptionsExtension on DioException {
       );
     }
     if (response?.statusCode == 409) {
+      var decodedResponse = jsonDecode(response.toString());
       return Failure(
-        message: 'User with this email already exists',
+        message: decodedResponse['message'],
         stackTrace: stackTrace,
       );
     }
