@@ -1,4 +1,5 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/models/review/review.dart';
 import 'package:books_app_client/core/themes/custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,12 +23,12 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final reviewTextEditingController = useTextEditingController();
     final reviewScrollController = useScrollController();
-    final isBookReviewedByUser = useState(false);
+    final userReviewForThisBook = useState<Review?>(null);
     final isBookInUserFavorites = useState(false);
     ref
         .watch(bookDetailsControllerProvider(bookId))
-        .isBookReviewedByUser
-        .whenData((value) => isBookReviewedByUser.value = value);
+        .userReviewForThisBook
+        .whenData((value) => userReviewForThisBook.value = value);
     ref
         .watch(bookDetailsControllerProvider(bookId))
         .isBookInUserFavorites
@@ -36,27 +37,11 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
     ref.listen(
       bookDetailsControllerProvider(bookId),
       (_, current) {
-        // if (current.isBookReviewedByUser is AsyncData) {
-        //   if (current.isBookReviewedByUser.value == true) {
-        //     isBookReviewedByUser.value = true;
-        //   } else if (current.isBookReviewedByUser.value == false) {
-        //     isBookReviewedByUser.value = false;
-        //   }
-        // }
-
-        // if (current.isBookInUserFavorites is AsyncData) {
-        //   if (current.isBookInUserFavorites.value == true) {
-        //     isBookInUserFavorites.value = true;
-        //   } else if (current.isBookInUserFavorites.value == false) {
-        //     isBookInUserFavorites.value = false;
-        //   }
-        // }
-
-        if (current.isBookReviewedByUser is AsyncError &&
-            current.isBookReviewedByUser.error is Failure) {
+        if (current.userReviewForThisBook is AsyncError &&
+            current.userReviewForThisBook.error is Failure) {
           showSnackBar(
             context: context,
-            message: current.isBookReviewedByUser.error.toString(),
+            message: current.userReviewForThisBook.error.toString(),
             messageType: SnackBarMessageType.failure,
           );
         }
@@ -103,7 +88,7 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
               child: InkWell(
                 customBorder: const CircleBorder(),
                 onTap: () {
-                  if (isBookReviewedByUser.value) {
+                  if (userReviewForThisBook.value != null) {
                     showSnackBar(
                       context: context,
                       message: 'You already reviewed this book',

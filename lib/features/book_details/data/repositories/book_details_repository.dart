@@ -3,6 +3,7 @@ import 'package:books_app_client/core/providers/dio_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/models/review/review.dart';
 import '../../domain/book_details_data/book_details_data.dart';
 
 final bookDetailsRepositoryProvider = Provider<BookDetailsRepository>(
@@ -16,7 +17,7 @@ abstract class BookDetailsRepository {
   Future<BookDetailsData> getBookDetails({required String bookId});
   Future<bool> addBookToFavorites({required String bookId});
   Future<bool> removeBookFromFavorites({required String bookId});
-  Future<bool> addReview({
+  Future<Review> addReview({
     required String reviewContent,
     required num reviewRating,
     required String bookId,
@@ -69,13 +70,13 @@ class BookDetailsRepositoryImpl implements BookDetailsRepository {
   }
 
   @override
-  Future<bool> addReview({
+  Future<Review> addReview({
     required String reviewContent,
     required num reviewRating,
     required String bookId,
   }) async {
     try {
-      await dio.post(
+      final response = await dio.post(
         'reviews',
         data: {
           'reviewContent': reviewContent,
@@ -83,7 +84,8 @@ class BookDetailsRepositoryImpl implements BookDetailsRepository {
           'bookId': bookId,
         },
       );
-      return true;
+      final reviewData = Review.fromJson(response.data);
+      return reviewData;
     } on DioException catch (error) {
       throw error.failure;
     }

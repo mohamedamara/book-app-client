@@ -9,14 +9,14 @@ part 'book_details_data.g.dart';
 class BookDetailsData with _$BookDetailsData {
   const factory BookDetailsData({
     required List<Review> bookReviews,
-    required bool isBookReviewedByUser,
+    Review? userReviewForThisBook,
     required bool isBookInUserFavorites,
   }) = _BookDetailsData;
 
   factory BookDetailsData.empty() {
     return const BookDetailsData(
       bookReviews: [],
-      isBookReviewedByUser: false,
+      userReviewForThisBook: null,
       isBookInUserFavorites: false,
     );
   }

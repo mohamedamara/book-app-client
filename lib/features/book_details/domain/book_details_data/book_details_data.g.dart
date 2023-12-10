@@ -12,14 +12,17 @@ _$BookDetailsDataImpl _$$BookDetailsDataImplFromJson(
       bookReviews: (json['bookReviews'] as List<dynamic>)
           .map((e) => Review.fromJson(e as Map<String, dynamic>))
           .toList(),
-      isBookReviewedByUser: json['isBookReviewedByUser'] as bool,
       isBookInUserFavorites: json['isBookInUserFavorites'] as bool,
+      userReviewForThisBook: json['userReviewForThisBook'] == null
+          ? null
+          : Review.fromJson(
+              json['userReviewForThisBook'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BookDetailsDataImplToJson(
         _$BookDetailsDataImpl instance) =>
     <String, dynamic>{
       'bookReviews': instance.bookReviews,
-      'isBookReviewedByUser': instance.isBookReviewedByUser,
       'isBookInUserFavorites': instance.isBookInUserFavorites,
+      'userReviewForThisBook': instance.userReviewForThisBook,
     };

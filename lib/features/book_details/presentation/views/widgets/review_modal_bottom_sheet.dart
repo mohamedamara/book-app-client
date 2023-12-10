@@ -165,17 +165,17 @@ showReviewModalBottomSheet({
                           var cureentState =
                               ref.watch(bookDetailsControllerProvider(bookId));
                           return Visibility(
-                            visible: cureentState.isBookReviewedByUser
+                            visible: cureentState.userReviewForThisBook
                                     is AsyncError &&
-                                cureentState.isBookReviewedByUser.error
+                                cureentState.userReviewForThisBook.error
                                     is Failure,
                             child: Text(
-                              cureentState.isBookReviewedByUser.error
+                              cureentState.userReviewForThisBook.error
                                   .toString(),
                               style: TextStyle(
                                 fontSize: context.setSp(10),
                                 fontWeight: FontWeight.normal,
-                                color: const Color(0xFFE70202),
+                                color: Colors.red,
                               ),
                             ),
                           );
@@ -199,7 +199,7 @@ showReviewModalBottomSheet({
                                 .watch(
                                   bookDetailsControllerProvider(bookId),
                                 )
-                                .isBookReviewedByUser is AsyncLoading,
+                                .userReviewForThisBook is AsyncLoading,
                             onPressed: () async {
                               await ref
                                   .read(
@@ -211,14 +211,14 @@ showReviewModalBottomSheet({
                                     reviewRating: ratingValue,
                                     bookId: bookId,
                                   );
-                              var isBookReviewedSuccessfully = ref
+                              var review = ref
                                   .read(
                                     bookDetailsControllerProvider(bookId),
                                   )
-                                  .isBookReviewedByUser
+                                  .userReviewForThisBook
                                   .unwrapPrevious()
                                   .valueOrNull;
-                              if (isBookReviewedSuccessfully ?? false) {
+                              if (review != null) {
                                 if (context.mounted) {
                                   Navigator.pop(context);
                                 }

@@ -37,13 +37,13 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
       );
       state = state.copyWith(
         bookReviews: AsyncData(bookDetailsData.bookReviews),
-        isBookReviewedByUser: AsyncData(bookDetailsData.isBookReviewedByUser),
+        userReviewForThisBook: AsyncData(bookDetailsData.userReviewForThisBook),
         isBookInUserFavorites: AsyncData(bookDetailsData.isBookInUserFavorites),
       );
     } on Failure catch (failure) {
       state = state.copyWith(
         bookReviews: AsyncValue.error(failure, failure.stackTrace),
-        isBookReviewedByUser: const AsyncValue.data(false),
+        userReviewForThisBook: const AsyncValue.data(null),
         isBookInUserFavorites: const AsyncValue.data(false),
       );
     }
@@ -56,19 +56,6 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
         () => bookDetailsRepository.addBookToFavorites(bookId: bookId),
       ),
     );
-    // try {
-    //   await bookDetailsRepository.addBookToFavorites(bookId: bookId);
-    //   state = state.copyWith(
-    //     isBookInUserFavorites: const AsyncData(true),
-    //   );
-    // } on Failure catch (failure) {
-    //   state = state.copyWith(
-    //     isBookInUserFavorites: AsyncValue.error(
-    //       failure,
-    //       failure.stackTrace,
-    //     ),
-    //   );
-    // }
   }
 
   Future<void> removeBookFromFavorites({required String bookId}) async {
@@ -78,19 +65,6 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
         () => bookDetailsRepository.removeBookFromFavorites(bookId: bookId),
       ),
     );
-    // try {
-    //   await bookDetailsRepository.removeBookFromFavorites(bookId: bookId);
-    //   state = state.copyWith(
-    //     isBookInUserFavorites: const AsyncData(false),
-    //   );
-    // } on Failure catch (failure) {
-    //   state = state.copyWith(
-    //     isBookInUserFavorites: AsyncValue.error(
-    //       failure,
-    //       failure.stackTrace,
-    //     ),
-    //   );
-    // }
   }
 
   Future<void> addReview({
@@ -99,7 +73,7 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
     required String bookId,
   }) async {
     state = state.copyWith(
-      isBookReviewedByUser: const AsyncValue.loading(),
+      userReviewForThisBook: const AsyncValue.loading(),
     );
     if (reviewContent.isEmpty) {
       var failure = Failure(
@@ -107,38 +81,30 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
         stackTrace: StackTrace.empty,
       );
       state = state.copyWith(
-        isBookReviewedByUser: AsyncValue.error(
+        userReviewForThisBook: AsyncValue.error(
           failure,
           failure.stackTrace,
         ),
       );
       return;
     }
-    state = state.copyWith(
-      isBookReviewedByUser: await AsyncValue.guard(
-        () => bookDetailsRepository.addReview(
-          reviewContent: reviewContent,
-          reviewRating: reviewRating,
-          bookId: bookId,
+    try {
+      final review = await bookDetailsRepository.addReview(
+        reviewContent: reviewContent,
+        reviewRating: reviewRating,
+        bookId: bookId,
+      );
+      state = state.copyWith(
+        userReviewForThisBook: AsyncData(review),
+        bookReviews: AsyncValue.data([...state.bookReviews.value!, review]),
+      );
+    } on Failure catch (failure) {
+      state = state.copyWith(
+        userReviewForThisBook: AsyncValue.error(
+          failure,
+          failure.stackTrace,
         ),
-      ),
-    );
-    // try {
-    //   await bookDetailsRepository.addReview(
-    //     reviewContent: reviewContent,
-    //     reviewRating: 4,
-    //     bookId: bookId,
-    //   );
-    //   state = state.copyWith(
-    //     isBookReviewedByUser: const AsyncData(true),
-    //   );
-    // } on Failure catch (failure) {
-    //   state = state.copyWith(
-    //     isBookReviewedByUser: AsyncValue.error(
-    //       failure,
-    //       failure.stackTrace,
-    //     ),
-    //   );
-    // }
+      );
+    }
   }
 }

@@ -9,14 +9,14 @@ part 'book_details_view_states.freezed.dart';
 class BookDetailsViewStates with _$BookDetailsViewStates {
   const factory BookDetailsViewStates({
     required AsyncValue<List<Review>> bookReviews,
-    required AsyncValue<bool> isBookReviewedByUser,
+    required AsyncValue<Review?> userReviewForThisBook,
     required AsyncValue<bool> isBookInUserFavorites,
   }) = _BookDetailsViewStates;
 
   factory BookDetailsViewStates.initial() {
     return const BookDetailsViewStates(
       bookReviews: AsyncValue.data([]),
-      isBookReviewedByUser: AsyncValue.data(false),
+      userReviewForThisBook: AsyncValue.data(null),
       isBookInUserFavorites: AsyncValue.data(false),
     );
   }
