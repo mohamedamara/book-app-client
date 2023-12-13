@@ -1,4 +1,5 @@
 import 'package:books_app_client/features/book_details/presentation/views/book_details_view.dart';
+import 'package:books_app_client/features/in_app_reading/presentation/views/in_app_reading_view.dart';
 import 'package:books_app_client/features/search/presentation/views/widget/filter_books_view.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,11 @@ class NavigationRouter {
           builder: (_) => BookDetailsView(
             bookDetailsArguments: bookDetailsArguments,
           ),
+          settings: RouteSettings(name: routeSettings.name),
+        );
+      case NavigationPaths.inAppReadingRoute:
+        return MaterialPageRoute(
+          builder: (_) => const InAppReadingView(),
           settings: RouteSettings(name: routeSettings.name),
         );
       default:

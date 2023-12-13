@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/models/failure.dart';
+import '../../../../../core/navigation/navigation_paths.dart';
 import '../../../../../core/widgets/custom_snack_bar.dart';
 import 'review_modal_bottom_sheet.dart';
 import '../../../../../core/widgets/primary_button.dart';
@@ -126,7 +127,10 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
                 height: context.setHeight(45),
                 child: PrimaryButtoon(
                   buttonText: "Start Reading",
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(
+                    context,
+                    NavigationPaths.inAppReadingRoute,
+                  ),
                 ),
               ),
             ),
