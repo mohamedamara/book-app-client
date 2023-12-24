@@ -10,4 +10,7 @@ class AssetsConstants {
   static const String drawerHeaderImage = 'assets/images/drawer_header.png';
   static const String noFavoritesImage = 'assets/images/no_favorites.svg';
   static const String searchImage = 'assets/images/search.svg';
+  static const String phoneVerticalImage = 'assets/images/phone_vertical.svg';
+  static const String phoneHorizontalImage =
+      'assets/images/phone_horizontal.svg';
 }
