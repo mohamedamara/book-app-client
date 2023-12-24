@@ -16,22 +16,21 @@ class InAppReadingView extends StatefulHookWidget {
 
 class _InAppReadingViewState extends State<InAppReadingView> {
   late PdfViewerController _pdfViewerController;
+  double _pdfZoomLevel = 1.0;
+  DeviceOrientation _deviceOrientation = DeviceOrientation.portraitUp;
   OverlayEntry? _overlayEntry;
+
   @override
   void initState() {
     super.initState();
     _pdfViewerController = PdfViewerController();
-
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.landscapeLeft,
-    // ]);
   }
 
   @override
   void dispose() {
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    // ]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     _pdfViewerController.dispose();
     super.dispose();
   }
@@ -85,7 +84,8 @@ class _InAppReadingViewState extends State<InAppReadingView> {
               child: Theme(
                 data: Theme.of(context).copyWith(
                   textSelectionTheme: TextSelectionThemeData(
-                    selectionColor: const Color(0xFF00FF81).withOpacity(0.5),
+                    selectionColor:
+                        CustomColors.pdfTextSelectionColor.withOpacity(0.5),
                   ),
                 ),
                 child: SfPdfViewer.network(
@@ -93,6 +93,7 @@ class _InAppReadingViewState extends State<InAppReadingView> {
                   controller: _pdfViewerController,
                   pageSpacing: 0,
                   canShowPaginationDialog: false,
+                  enableDoubleTapZooming: false,
                   onDocumentLoadFailed: (_) {
                     isPdfLoadFailed.value = true;
                   },
@@ -124,12 +125,21 @@ class _InAppReadingViewState extends State<InAppReadingView> {
                       _pdfViewerController.clearSelection();
                       showInAppReadingSettingsModalBottomSheet(
                         context: context,
-                        onClick: (value) {
-                          print(value);
-                          
+                        pdfZoomLevel: _pdfZoomLevel,
+                        onZoomLevelChanged: (newZoomLevel) {
                           setState(() {
-                            _pdfViewerController.zoomLevel = value;
+                            _pdfViewerController.zoomLevel = newZoomLevel;
+                            _pdfZoomLevel = newZoomLevel;
                           });
+                        },
+                        deviceOrientation: _deviceOrientation,
+                        onOrientationChanged: (newOrientation) {
+                          setState(() {
+                            _deviceOrientation = newOrientation;
+                          });
+                          SystemChrome.setPreferredOrientations([
+                            _deviceOrientation,
+                          ]);
                         },
                       );
                     }),
@@ -142,7 +152,9 @@ class _InAppReadingViewState extends State<InAppReadingView> {
   }
 
   void _showContextMenu(
-      BuildContext context, PdfTextSelectionChangedDetails details) {
+    BuildContext context,
+    PdfTextSelectionChangedDetails details,
+  ) {
     final OverlayState overlayState = Overlay.of(context);
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
@@ -154,7 +166,7 @@ class _InAppReadingViewState extends State<InAppReadingView> {
               Size(context.setHeight(50), context.setHeight(38)),
             ),
             backgroundColor: MaterialStateProperty.all<Color>(
-              const Color(0xFF303030),
+              CustomColors.pdfContextMenuColor,
             ),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -167,9 +179,10 @@ class _InAppReadingViewState extends State<InAppReadingView> {
           child: Center(
             child: Text(
               'Copy',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelLarge
+                  ?.copyWith(color: Colors.white),
             ),
           ),
           onPressed: () {

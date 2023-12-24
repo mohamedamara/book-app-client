@@ -18,4 +18,8 @@ class CustomColors {
   );
   static const Color snackBarSuccessBackgroundColor = mainGreenColor;
   static Color snackBarFailureBackgroundColor = Colors.red.withOpacity(0.72);
+  static const Color pdfTextSelectionColor = Color(0xFF00FF81);
+  static const Color pdfContextMenuColor = Color(0xFF303030);
+  static const Color inAppReadingSettingsModalBottomSheetPhoneBackgroundColor =
+      Color(0xFFDFE2E1);
 }
