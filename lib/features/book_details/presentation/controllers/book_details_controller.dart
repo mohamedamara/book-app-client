@@ -1,4 +1,5 @@
 import 'package:books_app_client/features/book_details/data/repositories/book_details_repository.dart';
+import 'package:books_app_client/features/favorites/presentation/controllers/favorites_controller.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/failure.dart';
@@ -8,10 +9,12 @@ final bookDetailsControllerProvider = StateNotifierProvider.autoDispose
     .family<BookDetailsController, BookDetailsViewStates, String>(
   (ref, bookId) {
     final bookDetailsRepository = ref.watch(bookDetailsRepositoryProvider);
+    final favoritesController = ref.watch(favoritesControllerProvider.notifier);
     return BookDetailsController(
       initialState: BookDetailsViewStates.initial(),
       bookDetailsRepository: bookDetailsRepository,
       bookId: bookId,
+      favoritesController: favoritesController,
     );
   },
 );
@@ -21,6 +24,7 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
     required this.initialState,
     required this.bookDetailsRepository,
     required this.bookId,
+    required this.favoritesController,
   }) : super(initialState) {
     getBookDetailsData(bookId: bookId);
   }
@@ -28,6 +32,7 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
   final BookDetailsRepository bookDetailsRepository;
   final BookDetailsViewStates initialState;
   final String bookId;
+  final FavoritesController favoritesController;
 
   Future<void> getBookDetailsData({required String bookId}) async {
     state = state.copyWith(bookReviews: const AsyncValue.loading());
@@ -39,6 +44,7 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
         bookReviews: AsyncData(bookDetailsData.bookReviews),
         userReviewForThisBook: AsyncData(bookDetailsData.userReviewForThisBook),
         isBookInUserFavorites: AsyncData(bookDetailsData.isBookInUserFavorites),
+        isBookInUserRecents: AsyncData(bookDetailsData.isBookInUserRecents),
       );
     } on Failure catch (failure) {
       state = state.copyWith(
@@ -51,20 +57,34 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
 
   Future<void> addBookToFavorites({required String bookId}) async {
     state = state.copyWith(isBookInUserFavorites: const AsyncValue.loading());
-    state = state.copyWith(
-      isBookInUserFavorites: await AsyncValue.guard(
-        () => bookDetailsRepository.addBookToFavorites(bookId: bookId),
-      ),
-    );
+    try {
+      final removeBookFromFavoritesResult =
+          await bookDetailsRepository.addBookToFavorites(bookId: bookId);
+      state = state.copyWith(
+        isBookInUserFavorites: AsyncData(removeBookFromFavoritesResult),
+      );
+      favoritesController.getFavoritesBooks();
+    } on Failure catch (failure) {
+      state = state.copyWith(
+        isBookInUserFavorites: AsyncValue.error(failure, failure.stackTrace),
+      );
+    }
   }
 
   Future<void> removeBookFromFavorites({required String bookId}) async {
     state = state.copyWith(isBookInUserFavorites: const AsyncValue.loading());
-    state = state.copyWith(
-      isBookInUserFavorites: await AsyncValue.guard(
-        () => bookDetailsRepository.removeBookFromFavorites(bookId: bookId),
-      ),
-    );
+    try {
+      final removeBookFromFavoritesResult =
+          await bookDetailsRepository.removeBookFromFavorites(bookId: bookId);
+      state = state.copyWith(
+        isBookInUserFavorites: AsyncData(removeBookFromFavoritesResult),
+      );
+      favoritesController.getFavoritesBooks();
+    } on Failure catch (failure) {
+      state = state.copyWith(
+        isBookInUserFavorites: AsyncValue.error(failure, failure.stackTrace),
+      );
+    }
   }
 
   Future<void> addReview({
@@ -106,5 +126,16 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
         ),
       );
     }
+  }
+
+  Future<void> addBookToRecents({required String bookId}) async {
+    try {
+      await bookDetailsRepository.addBookToRecents(
+        bookId: bookId,
+      );
+      state = state.copyWith(
+        isBookInUserRecents: const AsyncData(true),
+      );
+    } on Failure catch (_) {}
   }
 }

@@ -21,8 +21,9 @@ BookDetailsData _$BookDetailsDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$BookDetailsData {
   List<Review> get bookReviews => throw _privateConstructorUsedError;
-  bool get isBookInUserFavorites => throw _privateConstructorUsedError;
   Review? get userReviewForThisBook => throw _privateConstructorUsedError;
+  bool get isBookInUserFavorites => throw _privateConstructorUsedError;
+  bool get isBookInUserRecents => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,8 +39,9 @@ abstract class $BookDetailsDataCopyWith<$Res> {
   @useResult
   $Res call(
       {List<Review> bookReviews,
+      Review? userReviewForThisBook,
       bool isBookInUserFavorites,
-      Review? userReviewForThisBook});
+      bool isBookInUserRecents});
 
   $ReviewCopyWith<$Res>? get userReviewForThisBook;
 }
@@ -58,22 +60,27 @@ class _$BookDetailsDataCopyWithImpl<$Res, $Val extends BookDetailsData>
   @override
   $Res call({
     Object? bookReviews = null,
-    Object? isBookInUserFavorites = null,
     Object? userReviewForThisBook = freezed,
+    Object? isBookInUserFavorites = null,
+    Object? isBookInUserRecents = null,
   }) {
     return _then(_value.copyWith(
       bookReviews: null == bookReviews
           ? _value.bookReviews
           : bookReviews // ignore: cast_nullable_to_non_nullable
               as List<Review>,
-      isBookInUserFavorites: null == isBookInUserFavorites
-          ? _value.isBookInUserFavorites
-          : isBookInUserFavorites // ignore: cast_nullable_to_non_nullable
-              as bool,
       userReviewForThisBook: freezed == userReviewForThisBook
           ? _value.userReviewForThisBook
           : userReviewForThisBook // ignore: cast_nullable_to_non_nullable
               as Review?,
+      isBookInUserFavorites: null == isBookInUserFavorites
+          ? _value.isBookInUserFavorites
+          : isBookInUserFavorites // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBookInUserRecents: null == isBookInUserRecents
+          ? _value.isBookInUserRecents
+          : isBookInUserRecents // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -100,8 +107,9 @@ abstract class _$$BookDetailsDataImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<Review> bookReviews,
+      Review? userReviewForThisBook,
       bool isBookInUserFavorites,
-      Review? userReviewForThisBook});
+      bool isBookInUserRecents});
 
   @override
   $ReviewCopyWith<$Res>? get userReviewForThisBook;
@@ -119,22 +127,27 @@ class __$$BookDetailsDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? bookReviews = null,
-    Object? isBookInUserFavorites = null,
     Object? userReviewForThisBook = freezed,
+    Object? isBookInUserFavorites = null,
+    Object? isBookInUserRecents = null,
   }) {
     return _then(_$BookDetailsDataImpl(
       bookReviews: null == bookReviews
           ? _value._bookReviews
           : bookReviews // ignore: cast_nullable_to_non_nullable
               as List<Review>,
-      isBookInUserFavorites: null == isBookInUserFavorites
-          ? _value.isBookInUserFavorites
-          : isBookInUserFavorites // ignore: cast_nullable_to_non_nullable
-              as bool,
       userReviewForThisBook: freezed == userReviewForThisBook
           ? _value.userReviewForThisBook
           : userReviewForThisBook // ignore: cast_nullable_to_non_nullable
               as Review?,
+      isBookInUserFavorites: null == isBookInUserFavorites
+          ? _value.isBookInUserFavorites
+          : isBookInUserFavorites // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isBookInUserRecents: null == isBookInUserRecents
+          ? _value.isBookInUserRecents
+          : isBookInUserRecents // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -144,8 +157,9 @@ class __$$BookDetailsDataImplCopyWithImpl<$Res>
 class _$BookDetailsDataImpl implements _BookDetailsData {
   const _$BookDetailsDataImpl(
       {required final List<Review> bookReviews,
+      this.userReviewForThisBook,
       required this.isBookInUserFavorites,
-      this.userReviewForThisBook})
+      required this.isBookInUserRecents})
       : _bookReviews = bookReviews;
 
   factory _$BookDetailsDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -160,13 +174,15 @@ class _$BookDetailsDataImpl implements _BookDetailsData {
   }
 
   @override
+  final Review? userReviewForThisBook;
+  @override
   final bool isBookInUserFavorites;
   @override
-  final Review? userReviewForThisBook;
+  final bool isBookInUserRecents;
 
   @override
   String toString() {
-    return 'BookDetailsData(bookReviews: $bookReviews, isBookInUserFavorites: $isBookInUserFavorites, userReviewForThisBook: $userReviewForThisBook)';
+    return 'BookDetailsData(bookReviews: $bookReviews, userReviewForThisBook: $userReviewForThisBook, isBookInUserFavorites: $isBookInUserFavorites, isBookInUserRecents: $isBookInUserRecents)';
   }
 
   @override
@@ -176,10 +192,12 @@ class _$BookDetailsDataImpl implements _BookDetailsData {
             other is _$BookDetailsDataImpl &&
             const DeepCollectionEquality()
                 .equals(other._bookReviews, _bookReviews) &&
+            (identical(other.userReviewForThisBook, userReviewForThisBook) ||
+                other.userReviewForThisBook == userReviewForThisBook) &&
             (identical(other.isBookInUserFavorites, isBookInUserFavorites) ||
                 other.isBookInUserFavorites == isBookInUserFavorites) &&
-            (identical(other.userReviewForThisBook, userReviewForThisBook) ||
-                other.userReviewForThisBook == userReviewForThisBook));
+            (identical(other.isBookInUserRecents, isBookInUserRecents) ||
+                other.isBookInUserRecents == isBookInUserRecents));
   }
 
   @JsonKey(ignore: true)
@@ -187,8 +205,9 @@ class _$BookDetailsDataImpl implements _BookDetailsData {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_bookReviews),
+      userReviewForThisBook,
       isBookInUserFavorites,
-      userReviewForThisBook);
+      isBookInUserRecents);
 
   @JsonKey(ignore: true)
   @override
@@ -208,8 +227,9 @@ class _$BookDetailsDataImpl implements _BookDetailsData {
 abstract class _BookDetailsData implements BookDetailsData {
   const factory _BookDetailsData(
       {required final List<Review> bookReviews,
+      final Review? userReviewForThisBook,
       required final bool isBookInUserFavorites,
-      final Review? userReviewForThisBook}) = _$BookDetailsDataImpl;
+      required final bool isBookInUserRecents}) = _$BookDetailsDataImpl;
 
   factory _BookDetailsData.fromJson(Map<String, dynamic> json) =
       _$BookDetailsDataImpl.fromJson;
@@ -217,9 +237,11 @@ abstract class _BookDetailsData implements BookDetailsData {
   @override
   List<Review> get bookReviews;
   @override
+  Review? get userReviewForThisBook;
+  @override
   bool get isBookInUserFavorites;
   @override
-  Review? get userReviewForThisBook;
+  bool get isBookInUserRecents;
   @override
   @JsonKey(ignore: true)
   _$$BookDetailsDataImplCopyWith<_$BookDetailsDataImpl> get copyWith =>

@@ -11,6 +11,7 @@ class BookDetailsData with _$BookDetailsData {
     required List<Review> bookReviews,
     Review? userReviewForThisBook,
     required bool isBookInUserFavorites,
+    required bool isBookInUserRecents,
   }) = _BookDetailsData;
 
   factory BookDetailsData.empty() {
@@ -18,6 +19,7 @@ class BookDetailsData with _$BookDetailsData {
       bookReviews: [],
       userReviewForThisBook: null,
       isBookInUserFavorites: false,
+      isBookInUserRecents: false,
     );
   }
 

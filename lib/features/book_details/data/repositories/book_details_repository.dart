@@ -22,6 +22,7 @@ abstract class BookDetailsRepository {
     required num reviewRating,
     required String bookId,
   });
+  Future<bool> addBookToRecents({required String bookId});
 }
 
 class BookDetailsRepositoryImpl implements BookDetailsRepository {
@@ -86,6 +87,21 @@ class BookDetailsRepositoryImpl implements BookDetailsRepository {
       );
       final reviewData = Review.fromJson(response.data);
       return reviewData;
+    } on DioException catch (error) {
+      throw error.failure;
+    }
+  }
+
+  @override
+  Future<bool> addBookToRecents({required String bookId}) async {
+    try {
+      await dio.post(
+        'recentlyviewedbooks',
+        data: {
+          'bookId': bookId,
+        },
+      );
+      return true;
     } on DioException catch (error) {
       throw error.failure;
     }

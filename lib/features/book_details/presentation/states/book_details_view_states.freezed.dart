@@ -22,6 +22,8 @@ mixin _$BookDetailsViewStates {
       throw _privateConstructorUsedError;
   AsyncValue<bool> get isBookInUserFavorites =>
       throw _privateConstructorUsedError;
+  AsyncValue<bool> get isBookInUserRecents =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookDetailsViewStatesCopyWith<BookDetailsViewStates> get copyWith =>
@@ -37,7 +39,8 @@ abstract class $BookDetailsViewStatesCopyWith<$Res> {
   $Res call(
       {AsyncValue<List<Review>> bookReviews,
       AsyncValue<Review?> userReviewForThisBook,
-      AsyncValue<bool> isBookInUserFavorites});
+      AsyncValue<bool> isBookInUserFavorites,
+      AsyncValue<bool> isBookInUserRecents});
 }
 
 /// @nodoc
@@ -57,6 +60,7 @@ class _$BookDetailsViewStatesCopyWithImpl<$Res,
     Object? bookReviews = null,
     Object? userReviewForThisBook = null,
     Object? isBookInUserFavorites = null,
+    Object? isBookInUserRecents = null,
   }) {
     return _then(_value.copyWith(
       bookReviews: null == bookReviews
@@ -70,6 +74,10 @@ class _$BookDetailsViewStatesCopyWithImpl<$Res,
       isBookInUserFavorites: null == isBookInUserFavorites
           ? _value.isBookInUserFavorites
           : isBookInUserFavorites // ignore: cast_nullable_to_non_nullable
+              as AsyncValue<bool>,
+      isBookInUserRecents: null == isBookInUserRecents
+          ? _value.isBookInUserRecents
+          : isBookInUserRecents // ignore: cast_nullable_to_non_nullable
               as AsyncValue<bool>,
     ) as $Val);
   }
@@ -87,7 +95,8 @@ abstract class _$$BookDetailsViewStatesImplCopyWith<$Res>
   $Res call(
       {AsyncValue<List<Review>> bookReviews,
       AsyncValue<Review?> userReviewForThisBook,
-      AsyncValue<bool> isBookInUserFavorites});
+      AsyncValue<bool> isBookInUserFavorites,
+      AsyncValue<bool> isBookInUserRecents});
 }
 
 /// @nodoc
@@ -105,6 +114,7 @@ class __$$BookDetailsViewStatesImplCopyWithImpl<$Res>
     Object? bookReviews = null,
     Object? userReviewForThisBook = null,
     Object? isBookInUserFavorites = null,
+    Object? isBookInUserRecents = null,
   }) {
     return _then(_$BookDetailsViewStatesImpl(
       bookReviews: null == bookReviews
@@ -119,6 +129,10 @@ class __$$BookDetailsViewStatesImplCopyWithImpl<$Res>
           ? _value.isBookInUserFavorites
           : isBookInUserFavorites // ignore: cast_nullable_to_non_nullable
               as AsyncValue<bool>,
+      isBookInUserRecents: null == isBookInUserRecents
+          ? _value.isBookInUserRecents
+          : isBookInUserRecents // ignore: cast_nullable_to_non_nullable
+              as AsyncValue<bool>,
     ));
   }
 }
@@ -129,7 +143,8 @@ class _$BookDetailsViewStatesImpl implements _BookDetailsViewStates {
   const _$BookDetailsViewStatesImpl(
       {required this.bookReviews,
       required this.userReviewForThisBook,
-      required this.isBookInUserFavorites});
+      required this.isBookInUserFavorites,
+      required this.isBookInUserRecents});
 
   @override
   final AsyncValue<List<Review>> bookReviews;
@@ -137,10 +152,12 @@ class _$BookDetailsViewStatesImpl implements _BookDetailsViewStates {
   final AsyncValue<Review?> userReviewForThisBook;
   @override
   final AsyncValue<bool> isBookInUserFavorites;
+  @override
+  final AsyncValue<bool> isBookInUserRecents;
 
   @override
   String toString() {
-    return 'BookDetailsViewStates(bookReviews: $bookReviews, userReviewForThisBook: $userReviewForThisBook, isBookInUserFavorites: $isBookInUserFavorites)';
+    return 'BookDetailsViewStates(bookReviews: $bookReviews, userReviewForThisBook: $userReviewForThisBook, isBookInUserFavorites: $isBookInUserFavorites, isBookInUserRecents: $isBookInUserRecents)';
   }
 
   @override
@@ -153,12 +170,14 @@ class _$BookDetailsViewStatesImpl implements _BookDetailsViewStates {
             (identical(other.userReviewForThisBook, userReviewForThisBook) ||
                 other.userReviewForThisBook == userReviewForThisBook) &&
             (identical(other.isBookInUserFavorites, isBookInUserFavorites) ||
-                other.isBookInUserFavorites == isBookInUserFavorites));
+                other.isBookInUserFavorites == isBookInUserFavorites) &&
+            (identical(other.isBookInUserRecents, isBookInUserRecents) ||
+                other.isBookInUserRecents == isBookInUserRecents));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, bookReviews, userReviewForThisBook, isBookInUserFavorites);
+  int get hashCode => Object.hash(runtimeType, bookReviews,
+      userReviewForThisBook, isBookInUserFavorites, isBookInUserRecents);
 
   @JsonKey(ignore: true)
   @override
@@ -172,7 +191,8 @@ abstract class _BookDetailsViewStates implements BookDetailsViewStates {
   const factory _BookDetailsViewStates(
           {required final AsyncValue<List<Review>> bookReviews,
           required final AsyncValue<Review?> userReviewForThisBook,
-          required final AsyncValue<bool> isBookInUserFavorites}) =
+          required final AsyncValue<bool> isBookInUserFavorites,
+          required final AsyncValue<bool> isBookInUserRecents}) =
       _$BookDetailsViewStatesImpl;
 
   @override
@@ -181,6 +201,8 @@ abstract class _BookDetailsViewStates implements BookDetailsViewStates {
   AsyncValue<Review?> get userReviewForThisBook;
   @override
   AsyncValue<bool> get isBookInUserFavorites;
+  @override
+  AsyncValue<bool> get isBookInUserRecents;
   @override
   @JsonKey(ignore: true)
   _$$BookDetailsViewStatesImplCopyWith<_$BookDetailsViewStatesImpl>

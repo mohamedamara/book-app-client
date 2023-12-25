@@ -26,6 +26,7 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
     final reviewScrollController = useScrollController();
     final userReviewForThisBook = useState<Review?>(null);
     final isBookInUserFavorites = useState(false);
+    final isBookInUserRecents = useState(false);
     ref
         .watch(bookDetailsControllerProvider(bookId))
         .userReviewForThisBook
@@ -34,6 +35,10 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
         .watch(bookDetailsControllerProvider(bookId))
         .isBookInUserFavorites
         .whenData((value) => isBookInUserFavorites.value = value);
+    ref
+        .watch(bookDetailsControllerProvider(bookId))
+        .isBookInUserRecents
+        .whenData((value) => isBookInUserRecents.value = value);
 
     ref.listen(
       bookDetailsControllerProvider(bookId),
@@ -127,10 +132,17 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
                 height: context.setHeight(45),
                 child: PrimaryButtoon(
                   buttonText: "Start Reading",
-                  onPressed: () => Navigator.pushNamed(
-                    context,
-                    NavigationPaths.inAppReadingRoute,
-                  ),
+                  onPressed: () {
+                    if (!isBookInUserRecents.value) {
+                      ref
+                          .read(bookDetailsControllerProvider(bookId).notifier)
+                          .addBookToRecents(bookId: bookId);
+                    }
+                    Navigator.pushNamed(
+                      context,
+                      NavigationPaths.inAppReadingRoute,
+                    );
+                  },
                 ),
               ),
             ),

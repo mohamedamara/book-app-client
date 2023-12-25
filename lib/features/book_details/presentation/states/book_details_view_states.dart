@@ -11,6 +11,7 @@ class BookDetailsViewStates with _$BookDetailsViewStates {
     required AsyncValue<List<Review>> bookReviews,
     required AsyncValue<Review?> userReviewForThisBook,
     required AsyncValue<bool> isBookInUserFavorites,
+    required AsyncValue<bool> isBookInUserRecents,
   }) = _BookDetailsViewStates;
 
   factory BookDetailsViewStates.initial() {
@@ -18,6 +19,7 @@ class BookDetailsViewStates with _$BookDetailsViewStates {
       bookReviews: AsyncValue.data([]),
       userReviewForThisBook: AsyncValue.data(null),
       isBookInUserFavorites: AsyncValue.data(false),
+      isBookInUserRecents: AsyncValue.data(false),
     );
   }
 }
