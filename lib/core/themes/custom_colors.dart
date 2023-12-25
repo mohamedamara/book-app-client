@@ -22,4 +22,10 @@ class CustomColors {
   static const Color pdfContextMenuColor = Color(0xFF303030);
   static const Color inAppReadingSettingsModalBottomSheetPhoneBackgroundColor =
       Color(0xFFDFE2E1);
+  static const Color
+      inAppReadingSettingsModalBottomSheetSliderActiveTrackColor =
+      Color(0xFF1C1C1C);
+  static const Color
+      inAppReadingSettingsModalBottomSheetSliderinactiveTrackColor =
+      Color(0xFFC6C6C6);
 }

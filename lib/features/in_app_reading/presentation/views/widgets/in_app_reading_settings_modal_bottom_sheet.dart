@@ -49,32 +49,86 @@ showInAppReadingSettingsModalBottomSheet({
                   ),
                   SizedBox(height: context.setHeight(30)),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Slider(
-                      value: pdfZoomLevel,
-                      min: 1.0,
-                      max: 3.0,
-                      onChanged: (double newZoomLevel) {
-                        setState(() {
-                          pdfZoomLevel = newZoomLevel;
-                        });
-                        onZoomLevelChanged(pdfZoomLevel);
-                      },
+                    padding: const EdgeInsets.symmetric(horizontal: 35),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: context.setWidth(25),
+                          child: Center(
+                            child: Text(
+                              'A',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(fontSize: context.setSp(16)),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Slider(
+                            value: pdfZoomLevel,
+                            min: 1.0,
+                            max: 3.0,
+                            onChanged: (double newZoomLevel) {
+                              setState(() {
+                                pdfZoomLevel = newZoomLevel;
+                              });
+                              onZoomLevelChanged(pdfZoomLevel);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: context.setWidth(25),
+                          child: Center(
+                            child: Text(
+                              'A',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: context.setHeight(30)),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Slider(
-                      value: pdfZoomLevel,
-                      min: 1.0,
-                      max: 3.0,
-                      onChanged: (double newZoomLevel) {
-                        setState(() {
-                          pdfZoomLevel = newZoomLevel;
-                        });
-                        onZoomLevelChanged(pdfZoomLevel);
-                      },
+                    padding: const EdgeInsets.symmetric(horizontal: 35),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: context.setWidth(25),
+                          child: Center(
+                            child: Icon(
+                              Icons.brightness_7_outlined,
+                              size: context.setSp(16),
+                              color: CustomColors.textColorAlmostBlack,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Slider(
+                            value: pdfZoomLevel,
+                            min: 1.0,
+                            max: 3.0,
+                            onChanged: (double newZoomLevel) {
+                              setState(() {
+                                pdfZoomLevel = newZoomLevel;
+                              });
+                              onZoomLevelChanged(pdfZoomLevel);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: context.setWidth(25),
+                          child: Center(
+                            child: Icon(
+                              Icons.brightness_7_sharp,
+                              size: context.setSp(24),
+                              color: CustomColors.textColorAlmostBlack,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: context.setHeight(30)),

@@ -1,3 +1,4 @@
+import 'package:books_app_client/core/themes/custom_slider_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:books_app_client/core/extensions/context_extension.dart';
 
@@ -67,6 +68,7 @@ class CustomLightTheme {
         ),
       ),
       tabBarTheme: CustomTabBarTheme.getTheme(context),
+      sliderTheme: CustomSliderTheme.getTheme(context),
     );
   }
 }
