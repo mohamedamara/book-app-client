@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../core/themes/custom_colors.dart';
 
@@ -24,6 +25,7 @@ class _InAppReadingViewState extends State<InAppReadingView> {
   void initState() {
     super.initState();
     _pdfViewerController = PdfViewerController();
+    WakelockPlus.enable();
   }
 
   @override
@@ -32,6 +34,7 @@ class _InAppReadingViewState extends State<InAppReadingView> {
       DeviceOrientation.portraitUp,
     ]);
     _pdfViewerController.dispose();
+    WakelockPlus.disable();
     super.dispose();
   }
 
