@@ -37,7 +37,7 @@ void main() {
 
       providerContainer.listen<AsyncValue<AuthenticationStatus>>(
         authenticationControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
 
@@ -56,7 +56,7 @@ void main() {
 
       providerContainer.listen<AsyncValue<AuthenticationStatus>>(
         authenticationControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
 
@@ -114,7 +114,7 @@ void main() {
 
       providerContainer.listen<AsyncValue<AuthenticationStatus>>(
         authenticationControllerProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
 

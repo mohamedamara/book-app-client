@@ -5,10 +5,10 @@ class AnimatedIndexedStack extends StatefulWidget {
   final List<Widget> children;
 
   const AnimatedIndexedStack({
-    Key? key,
+    super.key,
     required this.index,
     required this.children,
-  }) : super(key: key);
+  });
 
   @override
   State<AnimatedIndexedStack> createState() => _AnimatedIndexedStackState();

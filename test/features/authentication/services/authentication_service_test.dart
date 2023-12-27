@@ -149,7 +149,7 @@ void main() {
 
       providerContainer.listen<String>(
         jwtStateProvider,
-        listener,
+        listener.call,
         fireImmediately: true,
       );
 

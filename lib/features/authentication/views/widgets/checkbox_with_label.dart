@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class CheckboxWithLabel extends StatelessWidget {
   const CheckboxWithLabel({
-    Key? key,
+    super.key,
     required this.text,
     required this.isChecked,
     required this.onChanged,
     required this.onTextPressed,
-  }) : super(key: key);
+  });
 
   final bool isChecked;
   final String text;

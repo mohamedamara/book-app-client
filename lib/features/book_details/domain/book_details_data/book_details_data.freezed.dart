@@ -186,7 +186,7 @@ class _$BookDetailsDataImpl implements _BookDetailsData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BookDetailsDataImpl &&
