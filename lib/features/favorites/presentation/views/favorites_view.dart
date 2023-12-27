@@ -15,21 +15,25 @@ class FavoritesView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(favoritesControllerProvider, (_, current) {
-      var removeBookResult = current.removeBookFromFavoritesResult;
-      if (removeBookResult is AsyncData && removeBookResult.value == true) {
-        showSnackBar(
-          context: context,
-          message: 'Book removed from favorites',
-          messageType: SnackBarMessageType.success,
-        );
-      } else if (removeBookResult is AsyncError &&
-          removeBookResult.error is Failure) {
-        showSnackBar(
-          context: context,
-          message: removeBookResult.error.toString(),
-          messageType: SnackBarMessageType.failure,
-        );
+    ref.listen(favoritesControllerProvider, (previous, current) {
+      var previousRemoveBookResult = previous?.removeBookFromFavoritesResult;
+      var currentRemoveBookResult = current.removeBookFromFavoritesResult;
+      if (previousRemoveBookResult != currentRemoveBookResult) {
+        if (currentRemoveBookResult is AsyncData &&
+            currentRemoveBookResult.value == true) {
+          showSnackBar(
+            context: context,
+            message: 'Book removed from favorites',
+            messageType: SnackBarMessageType.success,
+          );
+        } else if (currentRemoveBookResult is AsyncError &&
+            currentRemoveBookResult.error is Failure) {
+          showSnackBar(
+            context: context,
+            message: currentRemoveBookResult.error.toString(),
+            messageType: SnackBarMessageType.failure,
+          );
+        }
       }
     });
 
