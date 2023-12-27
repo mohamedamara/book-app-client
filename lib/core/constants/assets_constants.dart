@@ -13,4 +13,6 @@ class AssetsConstants {
   static const String phoneVerticalImage = 'assets/images/phone_vertical.svg';
   static const String phoneHorizontalImage =
       'assets/images/phone_horizontal.svg';
+  static const String bookLoadingLottieAnimation =
+      'assets/lottie_animations/book_loading.json';
 }

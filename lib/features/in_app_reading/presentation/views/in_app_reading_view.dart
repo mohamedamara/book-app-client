@@ -1,14 +1,13 @@
+import 'package:books_app_client/core/constants/assets_constants.dart';
 import 'package:books_app_client/core/extensions/context_extension.dart';
-import 'package:books_app_client/features/in_app_reading/presentation/views/widgets/in_app_reading_settings_modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:lottie/lottie.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../core/themes/custom_colors.dart';
 
-class InAppReadingView extends StatefulHookWidget {
+class InAppReadingView extends StatefulWidget {
   const InAppReadingView({super.key});
 
   @override
@@ -16,40 +15,48 @@ class InAppReadingView extends StatefulHookWidget {
 }
 
 class _InAppReadingViewState extends State<InAppReadingView> {
-  late PdfViewerController _pdfViewerController;
-  double _pdfZoomLevel = 1.0;
-  DeviceOrientation _deviceOrientation = DeviceOrientation.portraitUp;
-  OverlayEntry? _overlayEntry;
-
   @override
   void initState() {
     super.initState();
-    _pdfViewerController = PdfViewerController();
     WakelockPlus.enable();
   }
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-    _pdfViewerController.dispose();
     WakelockPlus.disable();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final isPdfLoaded = useState(false);
-    final isPdfLoadFailed = useState(false);
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
-          fit: StackFit.expand,
-          children: [
-            if (isPdfLoadFailed.value) ...[
-              Center(
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            textSelectionTheme: TextSelectionThemeData(
+              selectionColor:
+                  CustomColors.pdfTextSelectionColor.withOpacity(0.5),
+            ),
+          ),
+          child: SafeArea(
+            child: const PDF(
+              swipeHorizontal: false,
+              pageFling: false,
+              fitEachPage: false,
+              autoSpacing: false,
+              pageSnap: false,
+              fitPolicy: FitPolicy.WIDTH,
+            ).cachedFromUrl(
+              'https://beq.ebooksgratuits.com/vents/Hugo-miserables-1.pdf',
+              placeholder: (progress) => Center(
+                child: Lottie.asset(
+                  AssetsConstants.bookLoadingLottieAnimation,
+                  width: context.setHeight(200),
+                  height: context.setHeight(200),
+                  fit: BoxFit.contain,
+                ),
+              ),
+              errorWidget: (_) => Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -76,125 +83,10 @@ class _InAppReadingViewState extends State<InAppReadingView> {
                   ],
                 ),
               ),
-            ],
-            if (!isPdfLoaded.value && !isPdfLoadFailed.value) ...[
-              const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ],
-            Opacity(
-              opacity: isPdfLoaded.value ? 1 : 0,
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  textSelectionTheme: TextSelectionThemeData(
-                    selectionColor:
-                        CustomColors.pdfTextSelectionColor.withOpacity(0.5),
-                  ),
-                ),
-                child: SfPdfViewer.network(
-                  'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-                  controller: _pdfViewerController,
-                  pageSpacing: 0,
-                  canShowPaginationDialog: false,
-                  enableDoubleTapZooming: false,
-                  onDocumentLoadFailed: (_) {
-                    isPdfLoadFailed.value = true;
-                  },
-                  onDocumentLoaded: (_) {
-                    isPdfLoaded.value = true;
-                  },
-                  onTextSelectionChanged: (details) {
-                    if (details.selectedText == null && _overlayEntry != null) {
-                      _overlayEntry!.remove();
-                      _overlayEntry = null;
-                    } else if (details.selectedText != null &&
-                        _overlayEntry == null) {
-                      _showContextMenu(context, details);
-                    }
-                  },
-                ),
-              ),
             ),
-            Opacity(
-              opacity: isPdfLoaded.value ? 1 : 0,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                    icon: const Icon(
-                      Icons.menu,
-                      color: CustomColors.textColorAlmostBlack,
-                    ),
-                    onPressed: () {
-                      _pdfViewerController.clearSelection();
-                      showInAppReadingSettingsModalBottomSheet(
-                        context: context,
-                        pdfZoomLevel: _pdfZoomLevel,
-                        onZoomLevelChanged: (newZoomLevel) {
-                          setState(() {
-                            _pdfViewerController.zoomLevel = newZoomLevel;
-                            _pdfZoomLevel = newZoomLevel;
-                          });
-                        },
-                        deviceOrientation: _deviceOrientation,
-                        onOrientationChanged: (newOrientation) {
-                          setState(() {
-                            _deviceOrientation = newOrientation;
-                          });
-                          SystemChrome.setPreferredOrientations([
-                            _deviceOrientation,
-                          ]);
-                        },
-                      );
-                    }),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
-  }
-
-  void _showContextMenu(
-    BuildContext context,
-    PdfTextSelectionChangedDetails details,
-  ) {
-    final OverlayState overlayState = Overlay.of(context);
-    _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        top: details.globalSelectedRegion!.center.dy - context.setHeight(60),
-        left: details.globalSelectedRegion!.bottomLeft.dx,
-        child: ElevatedButton(
-          style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all<Size>(
-              Size(context.setHeight(50), context.setHeight(38)),
-            ),
-            backgroundColor: MaterialStateProperty.all<Color>(
-              CustomColors.pdfContextMenuColor,
-            ),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  context.setRadius(10),
-                ),
-              ),
-            ),
-          ),
-          child: Center(
-            child: Text(
-              'Copy',
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge
-                  ?.copyWith(color: Colors.white),
-            ),
-          ),
-          onPressed: () {
-            Clipboard.setData(ClipboardData(text: details.selectedText!));
-            _pdfViewerController.clearSelection();
-          },
-        ),
-      ),
-    );
-    overlayState.insert(_overlayEntry!);
   }
 }
