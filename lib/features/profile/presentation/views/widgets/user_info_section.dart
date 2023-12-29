@@ -40,9 +40,16 @@ class UserInfoSection extends StatelessWidget {
           ),
         ),
         SizedBox(width: context.setWidth(44)),
-        Image.asset(
-          AssetsConstants.profileImage,
-          height: context.setHeight(84),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(84),
+          child: Center(
+            child: Image.asset(
+              AssetsConstants.profileImagePlaceholder,
+              height: context.setHeight(84),
+              alignment: Alignment.center,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
         SizedBox(width: context.setWidth(44)),
       ],
