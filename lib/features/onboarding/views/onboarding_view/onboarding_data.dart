@@ -16,19 +16,18 @@ class OnboardingData {
 
 const List<OnboardingData> onboardingViewsData = [
   OnboardingData(
-    title: "Discounted \nSecondhand Books",
-    subTitle: "Used and near new secondhand books at great prices.",
+    title: "Public Domain Books",
+    subTitle: "No exclusive intellectual property rights apply.",
     imageURL: AssetsConstants.bibliophileImage,
   ),
   OnboardingData(
-    title: "20 Book Grocers \nNationally",
-    subTitle: "We've successfully opened 20 stores across Australia.",
+    title: "Completely Free App",
+    subTitle: "Enjoy all tastes of books for free.",
     imageURL: AssetsConstants.businessShopImage,
   ),
   OnboardingData(
-    title: "Sell or Recycle Your \nOld Books With Us",
-    subTitle:
-        "If you're looking to downsize, sell or recycle old books, the Book Grocer can help.",
+    title: "Favorite Books",
+    subTitle: "Save your favorite books for easier access.",
     imageURL: AssetsConstants.collectingImage,
   ),
 ];

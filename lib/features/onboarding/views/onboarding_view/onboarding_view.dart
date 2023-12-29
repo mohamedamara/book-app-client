@@ -63,15 +63,15 @@ class OnboardingView extends HookWidget {
   }) =>
       switch (viewIndex) {
         0 => (
-            subtitleSpacing: context.setHeight(110),
+            subtitleSpacing: context.setHeight(130),
             imageHeight: context.setHeight(225),
           ),
         1 => (
-            subtitleSpacing: context.setHeight(75),
+            subtitleSpacing: context.setHeight(95),
             imageHeight: context.setHeight(244),
           ),
         2 => (
-            subtitleSpacing: context.setHeight(56),
+            subtitleSpacing: context.setHeight(76),
             imageHeight: context.setHeight(278),
           ),
         _ => (

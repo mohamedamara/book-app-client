@@ -37,7 +37,7 @@ class OnboardingSingleView extends StatelessWidget {
                 curve: Curves.easeInOut,
                 duration: 800.milliseconds,
               ),
-          SizedBox(height: context.setHeight(16)),
+          SizedBox(height: context.setHeight(6)),
           Text(
             onboardingData.subTitle,
             textAlign: TextAlign.center,
