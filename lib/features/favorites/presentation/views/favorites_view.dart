@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/failure.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
+import '../../../../core/widgets/error_view.dart';
 import '../controllers/favorites_controller.dart';
 import '../../../../core/widgets/book_liste_tile.dart';
 
@@ -62,8 +63,11 @@ class FavoritesView extends ConsumerWidget {
                       loading: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
-                      error: (e, s) => Center(
-                        child: Text(e.toString()),
+                      error: (e, _) => ErrorView(
+                        errorText: e.toString(),
+                        buttonAction: () => ref
+                            .read(favoritesControllerProvider.notifier)
+                            .getFavoritesBooks(),
                       ),
                       data: (data) {
                         if (data.isEmpty) {

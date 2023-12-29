@@ -1,4 +1,5 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
+import 'package:books_app_client/core/widgets/error_view.dart';
 import 'package:books_app_client/features/home/presentation/views/widgets/carousel_slider_section.dart';
 import 'package:books_app_client/features/home/presentation/views/widgets/curved_decoration_background.dart';
 import 'package:books_app_client/features/home/presentation/views/widgets/menu_icon.dart';
@@ -18,8 +19,10 @@ class HomeView extends ConsumerWidget {
             loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
-            error: (e, s) => Center(
-              child: Text(e.toString()),
+            error: (e, _) => ErrorView(
+              errorText: e.toString(),
+              buttonAction: () =>
+                  ref.read(homeControllerProvider.notifier).getHomeData(),
             ),
             data: (data) => SingleChildScrollView(
               child: Column(

@@ -6,6 +6,7 @@ import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/themes/custom_colors.dart';
+import '../../../../core/widgets/error_view.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends ConsumerWidget {
@@ -19,8 +20,10 @@ class ProfileView extends ConsumerWidget {
             loading: () => const Center(
               child: CircularProgressIndicator(),
             ),
-            error: (e, s) => Center(
-              child: Text(e.toString()),
+            error: (e, _) => ErrorView(
+              errorText: e.toString(),
+              buttonAction: () =>
+                  ref.read(profileControllerProvider.notifier).getProfileData(),
             ),
             data: (data) => SafeArea(
               child: Column(

@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../core/models/book/book.dart';
+import '../../../../core/widgets/error_view.dart';
 import 'widgets/book_details_floating_header_container.dart';
 
 class BookDetailsView extends ConsumerStatefulWidget {
@@ -84,8 +85,18 @@ class _BookDetailsViewState extends ConsumerState<BookDetailsView>
                       const CircularProgressIndicator(),
                     ],
                   ),
-                  error: (e, s) => Center(
-                    child: Text(e.toString()),
+                  error: (e, _) => ErrorView(
+                    errorText: e.toString(),
+                    buttonAction: () {
+                      var bookId = widget.bookDetailsArguments.book.id;
+                      ref
+                          .read(
+                            bookDetailsControllerProvider(bookId).notifier,
+                          )
+                          .getBookDetailsData(
+                            bookId: bookId,
+                          );
+                    },
                   ),
                   data: (data) => Column(
                     children: [
