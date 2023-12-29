@@ -71,18 +71,21 @@ class SignUpView extends HookConsumerWidget {
               CustomTextField(
                 controller: firstNameTextEditingController,
                 labelText: "First Name",
+                keyboardType: TextInputType.name,
                 onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
                 controller: lastNameTextEditingController,
                 labelText: "Last Name",
+                keyboardType: TextInputType.name,
                 onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(20)),
               CustomTextField(
                 controller: emailTextEditingController,
                 labelText: "Email",
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (_) => validateTextFields(),
               ),
               SizedBox(height: context.setHeight(20)),

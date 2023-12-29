@@ -65,6 +65,7 @@ class SignInView extends HookConsumerWidget {
               CustomTextField(
                 key: const Key('email_textField'),
                 controller: emailTextEditingController,
+                keyboardType: TextInputType.emailAddress,
                 labelText: "Email",
                 onChanged: (_) => validateTextFields(),
               ),

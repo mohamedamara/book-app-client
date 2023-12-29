@@ -38,7 +38,7 @@ class CustomTextField extends StatelessWidget {
       width: double.infinity,
       child: TextField(
         controller: controller,
-        textCapitalization: textCapitalization ?? TextCapitalization.sentences,
+        textCapitalization: textCapitalization ?? TextCapitalization.none,
         keyboardType: keyboardType,
         autofocus: autofocus,
         maxLength: unlimitedLength
