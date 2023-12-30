@@ -27,13 +27,9 @@ class BookListTile extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(
+            onTap: () => navigateToBookDetailsView(
               context,
-              NavigationPaths.bookDetailsRoute,
-              arguments: BookDetailsArguments(
-                book: book,
-                bookAnimationHeroTag: bookAnimationHeroTag,
-              ),
+              bookAnimationHeroTag,
             ),
             child: Hero(
               tag: bookAnimationHeroTag,
@@ -65,15 +61,21 @@ class BookListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: context.setHeight(10)),
-                AutoSizeText(
-                  book.title,
-                  textAlign: TextAlign.start,
-                  maxLines: 4,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontSize: context.setSp(18),
-                        color:
-                            CustomColors.textColorAlmostBlack.withOpacity(0.75),
-                      ),
+                GestureDetector(
+                  onTap: () => navigateToBookDetailsView(
+                    context,
+                    bookAnimationHeroTag,
+                  ),
+                  child: AutoSizeText(
+                    book.title,
+                    textAlign: TextAlign.start,
+                    maxLines: 4,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontSize: context.setSp(18),
+                          color: CustomColors.textColorAlmostBlack
+                              .withOpacity(0.75),
+                        ),
+                  ),
                 ),
                 SizedBox(height: context.setHeight(5)),
                 Text(
@@ -121,6 +123,20 @@ class BookListTile extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void navigateToBookDetailsView(
+    BuildContext context,
+    String bookAnimationHeroTag,
+  ) {
+    Navigator.pushNamed(
+      context,
+      NavigationPaths.bookDetailsRoute,
+      arguments: BookDetailsArguments(
+        book: book,
+        bookAnimationHeroTag: bookAnimationHeroTag,
       ),
     );
   }
