@@ -28,9 +28,6 @@ class _BookDetailsViewState extends ConsumerState<BookDetailsView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  String overview =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-
   @override
   void initState() {
     super.initState();
@@ -65,7 +62,11 @@ class _BookDetailsViewState extends ConsumerState<BookDetailsView>
                 BookDetailsHeader(
                   bookDetailsArguments: widget.bookDetailsArguments,
                 ),
-                const BookDetailsFloatingHeaderContainer(),
+                BookDetailsFloatingHeaderContainer(
+                  rating: widget.bookDetailsArguments.book.rating,
+                  numberOfPages: widget.bookDetailsArguments.book.numberOfPages,
+                  language: widget.bookDetailsArguments.book.language,
+                ),
               ],
             ),
           ),
@@ -157,7 +158,8 @@ class _BookDetailsViewState extends ConsumerState<BookDetailsView>
                               child: Column(
                                 children: [
                                   Text(
-                                    overview,
+                                    widget.bookDetailsArguments.book
+                                        .contentOverview,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodySmall
@@ -307,6 +309,8 @@ class _BookDetailsViewState extends ConsumerState<BookDetailsView>
                       ),
                       BookDetailsBottomActionBar(
                         bookId: widget.bookDetailsArguments.book.id,
+                        bookContentURL:
+                            widget.bookDetailsArguments.book.contentURL,
                       ),
                     ],
                   ),

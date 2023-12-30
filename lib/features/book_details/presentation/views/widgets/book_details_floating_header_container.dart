@@ -6,7 +6,14 @@ import 'book_details_floating_header_container_item.dart';
 class BookDetailsFloatingHeaderContainer extends StatelessWidget {
   const BookDetailsFloatingHeaderContainer({
     super.key,
+    required this.rating,
+    required this.numberOfPages,
+    required this.language,
   });
+
+  final num rating;
+  final int numberOfPages;
+  final String language;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +48,7 @@ class BookDetailsFloatingHeaderContainer extends StatelessWidget {
                   size: context.setHeight(16),
                 ),
                 label: 'Rating',
-                value: '4.2',
+                value: rating.toString(),
               ),
             ),
             VerticalDivider(
@@ -51,10 +58,10 @@ class BookDetailsFloatingHeaderContainer extends StatelessWidget {
               color: Colors.grey.shade300,
               thickness: 1,
             ),
-            const Expanded(
+            Expanded(
               child: BookDetailsFloatingHeaderContainerItem(
                 label: 'Pages',
-                value: '368',
+                value: numberOfPages.toString(),
               ),
             ),
             VerticalDivider(
@@ -64,10 +71,10 @@ class BookDetailsFloatingHeaderContainer extends StatelessWidget {
               color: Colors.grey.shade300,
               thickness: 1,
             ),
-            const Expanded(
+            Expanded(
               child: BookDetailsFloatingHeaderContainerItem(
                 label: 'language',
-                value: 'English',
+                value: language,
               ),
             ),
           ],

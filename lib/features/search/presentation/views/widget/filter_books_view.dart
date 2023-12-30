@@ -19,7 +19,7 @@ class FilterBooksView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ValueNotifier<SortBy> sortBy = useState(SortBy.bookTitleAZ);
-    final ValueNotifier<Genre> genre = useState(Genre.agriculture);
+    final ValueNotifier<Genre> genre = useState(Genre.architecture);
     final ValueNotifier<Rating> rating = useState(Rating.fiveStars);
     return Scaffold(
       body: SafeArea(

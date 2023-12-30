@@ -61,8 +61,9 @@ class NavigationRouter {
           settings: RouteSettings(name: routeSettings.name),
         );
       case NavigationPaths.inAppReadingRoute:
+        final bookContentURL = routeSettings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => const InAppReadingView(),
+          builder: (_) => InAppReadingView(bookContentURL: bookContentURL),
           settings: RouteSettings(name: routeSettings.name),
         );
       default:

@@ -8,7 +8,12 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 import '../../../../core/themes/custom_colors.dart';
 
 class InAppReadingView extends StatefulWidget {
-  const InAppReadingView({super.key});
+  const InAppReadingView({
+    super.key,
+    required this.bookContentURL,
+  });
+
+  final String bookContentURL;
 
   @override
   State<InAppReadingView> createState() => _InAppReadingViewState();
@@ -47,7 +52,7 @@ class _InAppReadingViewState extends State<InAppReadingView> {
               pageSnap: false,
               fitPolicy: FitPolicy.WIDTH,
             ).cachedFromUrl(
-              'https://beq.ebooksgratuits.com/vents/Hugo-miserables-1.pdf',
+              widget.bookContentURL,
               placeholder: (progress) => Center(
                 child: Lottie.asset(
                   AssetsConstants.bookLoadingLottieAnimation,

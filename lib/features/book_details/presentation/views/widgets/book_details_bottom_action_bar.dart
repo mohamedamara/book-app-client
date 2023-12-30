@@ -16,9 +16,11 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
   const BookDetailsBottomActionBar({
     super.key,
     required this.bookId,
+    required this.bookContentURL,
   });
 
   final String bookId;
+  final String bookContentURL;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -141,6 +143,7 @@ class BookDetailsBottomActionBar extends HookConsumerWidget {
                     Navigator.pushNamed(
                       context,
                       NavigationPaths.inAppReadingRoute,
+                      arguments: bookContentURL,
                     );
                   },
                 ),

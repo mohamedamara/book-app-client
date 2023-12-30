@@ -24,9 +24,12 @@ mixin _$Book {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
+  String get contentOverview => throw _privateConstructorUsedError;
   String get contentURL => throw _privateConstructorUsedError;
   String get coverImageURL => throw _privateConstructorUsedError;
   String get genre => throw _privateConstructorUsedError;
+  String get language => throw _privateConstructorUsedError;
+  int get numberOfPages => throw _privateConstructorUsedError;
   DateTime get publicationDate => throw _privateConstructorUsedError;
   num get rating => throw _privateConstructorUsedError;
 
@@ -44,9 +47,12 @@ abstract class $BookCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       String title,
       String author,
+      String contentOverview,
       String contentURL,
       String coverImageURL,
       String genre,
+      String language,
+      int numberOfPages,
       DateTime publicationDate,
       num rating});
 }
@@ -67,9 +73,12 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
     Object? id = null,
     Object? title = null,
     Object? author = null,
+    Object? contentOverview = null,
     Object? contentURL = null,
     Object? coverImageURL = null,
     Object? genre = null,
+    Object? language = null,
+    Object? numberOfPages = null,
     Object? publicationDate = null,
     Object? rating = null,
   }) {
@@ -86,6 +95,10 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as String,
+      contentOverview: null == contentOverview
+          ? _value.contentOverview
+          : contentOverview // ignore: cast_nullable_to_non_nullable
+              as String,
       contentURL: null == contentURL
           ? _value.contentURL
           : contentURL // ignore: cast_nullable_to_non_nullable
@@ -98,6 +111,14 @@ class _$BookCopyWithImpl<$Res, $Val extends Book>
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
               as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfPages: null == numberOfPages
+          ? _value.numberOfPages
+          : numberOfPages // ignore: cast_nullable_to_non_nullable
+              as int,
       publicationDate: null == publicationDate
           ? _value.publicationDate
           : publicationDate // ignore: cast_nullable_to_non_nullable
@@ -121,9 +142,12 @@ abstract class _$$BookImplCopyWith<$Res> implements $BookCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       String title,
       String author,
+      String contentOverview,
       String contentURL,
       String coverImageURL,
       String genre,
+      String language,
+      int numberOfPages,
       DateTime publicationDate,
       num rating});
 }
@@ -141,9 +165,12 @@ class __$$BookImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? author = null,
+    Object? contentOverview = null,
     Object? contentURL = null,
     Object? coverImageURL = null,
     Object? genre = null,
+    Object? language = null,
+    Object? numberOfPages = null,
     Object? publicationDate = null,
     Object? rating = null,
   }) {
@@ -160,6 +187,10 @@ class __$$BookImplCopyWithImpl<$Res>
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as String,
+      contentOverview: null == contentOverview
+          ? _value.contentOverview
+          : contentOverview // ignore: cast_nullable_to_non_nullable
+              as String,
       contentURL: null == contentURL
           ? _value.contentURL
           : contentURL // ignore: cast_nullable_to_non_nullable
@@ -172,6 +203,14 @@ class __$$BookImplCopyWithImpl<$Res>
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
               as String,
+      language: null == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfPages: null == numberOfPages
+          ? _value.numberOfPages
+          : numberOfPages // ignore: cast_nullable_to_non_nullable
+              as int,
       publicationDate: null == publicationDate
           ? _value.publicationDate
           : publicationDate // ignore: cast_nullable_to_non_nullable
@@ -191,9 +230,12 @@ class _$BookImpl implements _Book {
       {@JsonKey(name: '_id') required this.id,
       required this.title,
       required this.author,
+      required this.contentOverview,
       required this.contentURL,
       required this.coverImageURL,
       required this.genre,
+      required this.language,
+      required this.numberOfPages,
       required this.publicationDate,
       required this.rating});
 
@@ -208,11 +250,17 @@ class _$BookImpl implements _Book {
   @override
   final String author;
   @override
+  final String contentOverview;
+  @override
   final String contentURL;
   @override
   final String coverImageURL;
   @override
   final String genre;
+  @override
+  final String language;
+  @override
+  final int numberOfPages;
   @override
   final DateTime publicationDate;
   @override
@@ -220,7 +268,7 @@ class _$BookImpl implements _Book {
 
   @override
   String toString() {
-    return 'Book(id: $id, title: $title, author: $author, contentURL: $contentURL, coverImageURL: $coverImageURL, genre: $genre, publicationDate: $publicationDate, rating: $rating)';
+    return 'Book(id: $id, title: $title, author: $author, contentOverview: $contentOverview, contentURL: $contentURL, coverImageURL: $coverImageURL, genre: $genre, language: $language, numberOfPages: $numberOfPages, publicationDate: $publicationDate, rating: $rating)';
   }
 
   @override
@@ -231,11 +279,17 @@ class _$BookImpl implements _Book {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.author, author) || other.author == author) &&
+            (identical(other.contentOverview, contentOverview) ||
+                other.contentOverview == contentOverview) &&
             (identical(other.contentURL, contentURL) ||
                 other.contentURL == contentURL) &&
             (identical(other.coverImageURL, coverImageURL) ||
                 other.coverImageURL == coverImageURL) &&
             (identical(other.genre, genre) || other.genre == genre) &&
+            (identical(other.language, language) ||
+                other.language == language) &&
+            (identical(other.numberOfPages, numberOfPages) ||
+                other.numberOfPages == numberOfPages) &&
             (identical(other.publicationDate, publicationDate) ||
                 other.publicationDate == publicationDate) &&
             (identical(other.rating, rating) || other.rating == rating));
@@ -243,8 +297,19 @@ class _$BookImpl implements _Book {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, author, contentURL,
-      coverImageURL, genre, publicationDate, rating);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      author,
+      contentOverview,
+      contentURL,
+      coverImageURL,
+      genre,
+      language,
+      numberOfPages,
+      publicationDate,
+      rating);
 
   @JsonKey(ignore: true)
   @override
@@ -265,9 +330,12 @@ abstract class _Book implements Book {
       {@JsonKey(name: '_id') required final String id,
       required final String title,
       required final String author,
+      required final String contentOverview,
       required final String contentURL,
       required final String coverImageURL,
       required final String genre,
+      required final String language,
+      required final int numberOfPages,
       required final DateTime publicationDate,
       required final num rating}) = _$BookImpl;
 
@@ -281,11 +349,17 @@ abstract class _Book implements Book {
   @override
   String get author;
   @override
+  String get contentOverview;
+  @override
   String get contentURL;
   @override
   String get coverImageURL;
   @override
   String get genre;
+  @override
+  String get language;
+  @override
+  int get numberOfPages;
   @override
   DateTime get publicationDate;
   @override

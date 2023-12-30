@@ -11,9 +11,12 @@ class Book with _$Book {
     @JsonKey(name: '_id') required String id,
     required String title,
     required String author,
+    required String contentOverview,
     required String contentURL,
     required String coverImageURL,
     required String genre,
+    required String language,
+    required int numberOfPages,
     required DateTime publicationDate,
     required num rating,
   }) = _Book;

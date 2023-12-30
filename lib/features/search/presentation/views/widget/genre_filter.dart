@@ -30,16 +30,6 @@ class GenreFitler extends HookWidget {
               ),
         ),
         RadioListTile<Genre>(
-          title: const Text('Agriculture'),
-          value: Genre.agriculture,
-          groupValue: genreValue,
-          onChanged: (Genre? value) {
-            if (value != null) {
-              onGenreRadioChanged(value);
-            }
-          },
-        ),
-        RadioListTile<Genre>(
           title: const Text('Architecture'),
           value: Genre.architecture,
           groupValue: genreValue,
@@ -83,6 +73,16 @@ class GenreFitler extends HookWidget {
           RadioListTile<Genre>(
             title: const Text('Philosophy'),
             value: Genre.philosophy,
+            groupValue: genreValue,
+            onChanged: (Genre? value) {
+              if (value != null) {
+                onGenreRadioChanged(value);
+              }
+            },
+          ),
+          RadioListTile<Genre>(
+            title: const Text('Science'),
+            value: Genre.science,
             groupValue: genreValue,
             onChanged: (Genre? value) {
               if (value != null) {
