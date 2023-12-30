@@ -3,6 +3,7 @@ import 'package:books_app_client/features/favorites/presentation/controllers/fav
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/models/failure.dart';
+import '../../../home/presentation/controllers/home_controller.dart';
 import '../states/book_details_view_states.dart';
 
 final bookDetailsControllerProvider = StateNotifierProvider.autoDispose
@@ -10,11 +11,13 @@ final bookDetailsControllerProvider = StateNotifierProvider.autoDispose
   (ref, bookId) {
     final bookDetailsRepository = ref.watch(bookDetailsRepositoryProvider);
     final favoritesController = ref.watch(favoritesControllerProvider.notifier);
+    final homeController = ref.watch(homeControllerProvider.notifier);
     return BookDetailsController(
       initialState: BookDetailsViewStates.initial(),
       bookDetailsRepository: bookDetailsRepository,
       bookId: bookId,
       favoritesController: favoritesController,
+      homeController: homeController,
     );
   },
 );
@@ -25,6 +28,7 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
     required this.bookDetailsRepository,
     required this.bookId,
     required this.favoritesController,
+    required this.homeController,
   }) : super(initialState) {
     getBookDetailsData(bookId: bookId);
   }
@@ -33,6 +37,7 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
   final BookDetailsViewStates initialState;
   final String bookId;
   final FavoritesController favoritesController;
+  final HomeController homeController;
 
   Future<void> getBookDetailsData({required String bookId}) async {
     state = state.copyWith(bookReviews: const AsyncValue.loading());
@@ -136,6 +141,7 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
       state = state.copyWith(
         isBookInUserRecents: const AsyncData(true),
       );
+      homeController.getHomeData();
     } on Failure catch (_) {}
   }
 }
