@@ -49,6 +49,7 @@ app.*.map.json
 
 # Exclude all .env files from source control
 *.env
+env.g.dart
 
 # Test coverage files
 coverage/
