@@ -30,6 +30,7 @@ dependencies:
   wakelock_plus: ^1.1.4
   lottie: ^2.7.0
   flutter_cached_pdfview: ^0.4.2
+  envied: ^0.5.2
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +44,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   custom_lint: ^0.5.7
   riverpod_lint: ^2.3.7
+  envied_generator: ^0.5.2
 
 flutter:
   uses-material-design: true
