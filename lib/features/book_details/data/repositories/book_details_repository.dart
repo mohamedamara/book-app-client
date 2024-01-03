@@ -18,9 +18,9 @@ abstract class BookDetailsRepository {
   Future<bool> addBookToFavorites({required String bookId});
   Future<bool> removeBookFromFavorites({required String bookId});
   Future<Review> addReview({
+    required String bookId,
     required String reviewContent,
     required num reviewRating,
-    required String bookId,
   });
   Future<bool> addBookToRecents({required String bookId});
 }
@@ -43,12 +43,7 @@ class BookDetailsRepositoryImpl implements BookDetailsRepository {
   @override
   Future<bool> addBookToFavorites({required String bookId}) async {
     try {
-      await dio.post(
-        'favoritebooks',
-        data: {
-          'bookId': bookId,
-        },
-      );
+      await dio.post('favorite-books/$bookId');
       return true;
     } on DioException catch (error) {
       throw error.failure;
@@ -58,12 +53,7 @@ class BookDetailsRepositoryImpl implements BookDetailsRepository {
   @override
   Future<bool> removeBookFromFavorites({required String bookId}) async {
     try {
-      await dio.delete(
-        'favoritebooks',
-        data: {
-          'bookId': bookId,
-        },
-      );
+      await dio.delete('favorite-books/$bookId');
       return false;
     } on DioException catch (error) {
       throw error.failure;
@@ -72,17 +62,17 @@ class BookDetailsRepositoryImpl implements BookDetailsRepository {
 
   @override
   Future<Review> addReview({
+    required String bookId,
     required String reviewContent,
     required num reviewRating,
-    required String bookId,
   }) async {
     try {
       final response = await dio.post(
         'reviews',
         data: {
+          'bookId': bookId,
           'reviewContent': reviewContent,
           'reviewRating': reviewRating,
-          'bookId': bookId,
         },
       );
       final reviewData = Review.fromJson(response.data);
@@ -95,12 +85,7 @@ class BookDetailsRepositoryImpl implements BookDetailsRepository {
   @override
   Future<bool> addBookToRecents({required String bookId}) async {
     try {
-      await dio.post(
-        'recentlyviewedbooks',
-        data: {
-          'bookId': bookId,
-        },
-      );
+      await dio.post('recently-viewed-books/$bookId');
       return true;
     } on DioException catch (error) {
       throw error.failure;

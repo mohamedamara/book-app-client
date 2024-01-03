@@ -29,7 +29,7 @@ class SearchRepositoryImpl implements SearchRepository {
       final response = await dio.get(
         'books',
         queryParameters: {
-          'searchkeyword': searchkeyword,
+          'search-keyword': searchkeyword,
         },
       );
       List<Book> searchedBooks = List<Book>.from(
@@ -51,8 +51,8 @@ class SearchRepositoryImpl implements SearchRepository {
         queryParameters: {
           'rating': filterBooks.rating.value,
           'genre': filterBooks.genre.name,
-          'sortby': filterBooks.sort.value.sortBy,
-          'sortorder': filterBooks.sort.value.sortOrder,
+          'sort-by': filterBooks.sort.value.sortBy,
+          'sort-order': filterBooks.sort.value.sortOrder,
         },
       );
       List<Book> filteredBooks = List<Book>.from(

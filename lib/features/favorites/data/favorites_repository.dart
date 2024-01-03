@@ -23,7 +23,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   @override
   Future<List<Book>> getFavoriteBooks() async {
     try {
-      final response = await dio.get('favoritebooks');
+      final response = await dio.get('favorite-books');
       List<Book> favoriteBooks = List<Book>.from(
         response.data.map((book) => Book.fromJson(book)),
       );
@@ -36,12 +36,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   @override
   Future<bool> removeBookFromFavorites(String bookId) async {
     try {
-      await dio.delete(
-        'favoritebooks',
-        data: {
-          'bookId': bookId,
-        },
-      );
+      await dio.delete('favorite-books/$bookId');
       return true;
     } on DioException catch (error) {
       throw error.failure;

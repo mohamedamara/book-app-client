@@ -93,9 +93,9 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
   }
 
   Future<void> addReview({
+    required String bookId,
     required String reviewContent,
     required num reviewRating,
-    required String bookId,
   }) async {
     state = state.copyWith(
       userReviewForThisBook: const AsyncValue.loading(),
@@ -115,9 +115,9 @@ class BookDetailsController extends StateNotifier<BookDetailsViewStates> {
     }
     try {
       final review = await bookDetailsRepository.addReview(
+        bookId: bookId,
         reviewContent: reviewContent,
         reviewRating: reviewRating,
-        bookId: bookId,
       );
       state = state.copyWith(
         userReviewForThisBook: AsyncData(review),

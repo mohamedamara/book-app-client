@@ -207,9 +207,9 @@ showReviewModalBottomSheet({
                                         .notifier,
                                   )
                                   .addReview(
+                                    bookId: bookId,
                                     reviewContent: textEditingController.text,
                                     reviewRating: ratingValue,
-                                    bookId: bookId,
                                   );
                               var review = ref
                                   .read(
