@@ -8,8 +8,8 @@ final dioProvider = Provider<Dio>((ref) {
   final jwt = ref.watch(jwtStateProvider);
   final options = BaseOptions(
     baseUrl: Env.baseUrl,
-    connectTimeout: const Duration(seconds: 5),
-    receiveTimeout: const Duration(seconds: 3),
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 10),
     headers: {if (jwt.isNotEmpty) 'Authorization': 'Bearer $jwt'},
   );
   return Dio(options);
