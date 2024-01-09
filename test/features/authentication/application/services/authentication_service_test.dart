@@ -70,6 +70,16 @@ void main() {
         ),
         completes,
       );
+
+      verify(
+        () => mockedAuthenticationRepository.signIn(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).called(1);
+
+      verifyNoMoreInteractions(mockedAuthenticationRepository);
+      verifyNoMoreInteractions(mockedSecureStorageRepository);
     });
 
     test(
@@ -98,6 +108,8 @@ void main() {
 
       verify(() => mockedSecureStorageRepository.addData(any(), any()))
           .called(1);
+
+      verifyNoMoreInteractions(mockedSecureStorageRepository);
     });
 
     test(
