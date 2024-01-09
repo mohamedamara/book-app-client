@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/navigation/navigation_paths.dart';
-import '../../../authentication/enums/authentication_status.dart';
+import '../../../authentication/presentation/enums/authentication_status.dart';
 import '../controllers/startup_controller.dart';
 
 class StartUpView extends ConsumerWidget {

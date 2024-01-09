@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../authentication/enums/authentication_status.dart';
+import '../../../authentication/presentation/enums/authentication_status.dart';
 import '../../application/services/startup_service.dart';
 
 final startupControllerProvider = StateNotifierProvider.autoDispose<

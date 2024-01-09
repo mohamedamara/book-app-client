@@ -1,4 +1,4 @@
-import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
+import 'package:books_app_client/features/authentication/data/repositories/authentication_repository.dart';
 import 'package:books_app_client/features/home/presentation/views/home_view.dart';
 import 'package:books_app_client/features/startup/application/services/startup_service.dart';
 import 'package:books_app_client/main.dart';

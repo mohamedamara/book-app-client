@@ -1,5 +1,5 @@
 import 'package:books_app_client/core/widgets/custom_textfield.dart';
-import 'package:books_app_client/features/authentication/views/sign_in_view.dart';
+import 'package:books_app_client/features/authentication/presentation/views/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

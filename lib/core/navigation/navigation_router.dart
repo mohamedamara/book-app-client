@@ -3,8 +3,8 @@ import 'package:books_app_client/features/in_app_reading/presentation/views/in_a
 import 'package:books_app_client/features/search/presentation/views/widget/filter_books_view.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/authentication/views/sign_in_view.dart';
-import '../../features/authentication/views/sign_up_view.dart';
+import '../../features/authentication/presentation/views/sign_in_view.dart';
+import '../../features/authentication/presentation/views/sign_up_view.dart';
 import '../../features/onboarding/views/onboarding_view/onboarding_view.dart';
 import '../../features/profile/presentation/views/profile_view.dart';
 import '../../features/startup/presentation/views/startup_view.dart';

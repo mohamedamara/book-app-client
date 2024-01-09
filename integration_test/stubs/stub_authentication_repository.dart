@@ -1,4 +1,4 @@
-import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
+import 'package:books_app_client/features/authentication/data/repositories/authentication_repository.dart';
 
 class StubAuthenticationRepository implements AuthenticationRepository {
   final String _jwt = 'abcdefg';

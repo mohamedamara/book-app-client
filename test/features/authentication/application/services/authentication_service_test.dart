@@ -1,13 +1,13 @@
 import 'package:books_app_client/core/models/failure.dart';
 import 'package:books_app_client/core/providers/jwt_state_provider.dart';
-import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
-import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
-import 'package:books_app_client/features/authentication/services/authentication_service.dart';
+import 'package:books_app_client/features/authentication/data/repositories/authentication_repository.dart';
+import 'package:books_app_client/features/authentication/data/repositories/secure_storage_repository.dart';
+import 'package:books_app_client/features/authentication/application/services/authentication_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../core/utils/test_utils.dart';
+import '../../../../core/utils/test_utils.dart';
 
 class MockAuthenticationRepository extends Mock
     implements AuthenticationRepository {}

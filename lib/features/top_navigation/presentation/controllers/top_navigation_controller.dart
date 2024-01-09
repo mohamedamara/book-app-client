@@ -1,4 +1,4 @@
-import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
+import 'package:books_app_client/features/authentication/data/repositories/secure_storage_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final topNavigationControllerProvider = Provider<TopNavigationController>(

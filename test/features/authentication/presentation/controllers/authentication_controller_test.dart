@@ -1,12 +1,12 @@
 import 'package:books_app_client/core/models/failure.dart';
-import 'package:books_app_client/features/authentication/controllers/authentication_controller.dart';
-import 'package:books_app_client/features/authentication/enums/authentication_status.dart';
-import 'package:books_app_client/features/authentication/services/authentication_service.dart';
+import 'package:books_app_client/features/authentication/presentation/controllers/authentication_controller.dart';
+import 'package:books_app_client/features/authentication/presentation/enums/authentication_status.dart';
+import 'package:books_app_client/features/authentication/application/services/authentication_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../core/utils/test_utils.dart';
+import '../../../../core/utils/test_utils.dart';
 
 class MockAuthenticationService extends Mock implements AuthenticationService {}
 

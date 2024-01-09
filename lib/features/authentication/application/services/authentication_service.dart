@@ -1,10 +1,10 @@
 import 'package:books_app_client/core/constants/secure_storage_constants.dart';
 import 'package:books_app_client/core/models/failure.dart';
-import 'package:books_app_client/features/authentication/repositories/authentication_repository.dart';
-import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
+import 'package:books_app_client/features/authentication/data/repositories/authentication_repository.dart';
+import 'package:books_app_client/features/authentication/data/repositories/secure_storage_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/providers/jwt_state_provider.dart';
+import '../../../../core/providers/jwt_state_provider.dart';
 
 final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
   final authenticationRepository = ref.watch(authenticationRepositoryProvider);

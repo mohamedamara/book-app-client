@@ -1,5 +1,5 @@
 import 'package:books_app_client/core/constants/secure_storage_constants.dart';
-import 'package:books_app_client/features/authentication/repositories/secure_storage_repository.dart';
+import 'package:books_app_client/features/authentication/data/repositories/secure_storage_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/providers/jwt_state_provider.dart';
