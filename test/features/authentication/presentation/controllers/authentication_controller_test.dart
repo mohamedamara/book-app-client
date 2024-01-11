@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../core/utils/test_utils.dart';
+import '../../../../test_helpers/riverpod_test_helper.dart';
 
 class MockAuthenticationService extends Mock implements AuthenticationService {}
 
