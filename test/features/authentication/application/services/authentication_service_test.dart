@@ -44,8 +44,7 @@ void main() {
   });
 
   group('Authentication service tests -', () {
-    test(
-        'When signin API call is successful Then complete the function normally',
+    test('When signin call is successful Then complete the function normally',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -83,7 +82,7 @@ void main() {
     });
 
     test(
-        'When signin API call is successful and isStayLoggedInChecked is true Then call secure storage repository to store the jwt',
+        'When signin call is successful and isStayLoggedInChecked is true Then call secure storage repository to store the jwt',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -113,7 +112,7 @@ void main() {
     });
 
     test(
-        'When signin API call is successful and isStayLoggedInChecked is false Then no call to the secure storage repository should occur',
+        'When signin call is successful and isStayLoggedInChecked is false Then no call to the secure storage repository should occur',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -140,7 +139,7 @@ void main() {
     });
 
     test(
-        'When signin API call is successful Then update jwt state with value gotten from API',
+        'When signin call is successful Then update jwt state with value gotten from the repository',
         () async {
       when(
         () => mockedAuthenticationRepository.signIn(
@@ -180,7 +179,7 @@ void main() {
       verifyNoMoreInteractions(listener);
     });
 
-    test('When signin API call fails Then throw failure exception', () async {
+    test('When signin call fails Then throw failure exception', () async {
       when(
         () => mockedAuthenticationRepository.signIn(
           email: any(named: 'email'),
