@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/models/failure.dart';
+import 'package:books_app_client/core/exceptions/failure.dart';
 import 'package:books_app_client/features/authentication/application/services/authentication_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

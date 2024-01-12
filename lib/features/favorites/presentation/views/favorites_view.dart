@@ -5,7 +5,7 @@ import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/models/failure.dart';
+import '../../../../core/exceptions/failure.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../../core/widgets/error_view.dart';
 import '../controllers/favorites_controller.dart';

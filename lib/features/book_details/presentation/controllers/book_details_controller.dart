@@ -2,7 +2,7 @@ import 'package:books_app_client/features/book_details/data/repositories/book_de
 import 'package:books_app_client/features/favorites/presentation/controllers/favorites_controller.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/models/failure.dart';
+import '../../../../core/exceptions/failure.dart';
 import '../../../home/presentation/controllers/home_controller.dart';
 import '../states/book_details_view_states.dart';
 

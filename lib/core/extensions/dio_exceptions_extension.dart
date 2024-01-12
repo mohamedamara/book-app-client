@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:books_app_client/core/models/failure.dart';
+import 'package:books_app_client/core/exceptions/failure.dart';
 import 'package:dio/dio.dart';
 
 extension DioExceptionsExtension on DioException {

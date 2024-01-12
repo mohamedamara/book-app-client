@@ -1,6 +1,6 @@
 import 'package:books_app_client/core/extensions/context_extension.dart';
 import 'package:books_app_client/core/extensions/string_extension.dart';
-import 'package:books_app_client/core/models/failure.dart';
+import 'package:books_app_client/core/exceptions/failure.dart';
 import 'package:books_app_client/core/navigation/navigation_paths.dart';
 import 'package:books_app_client/core/widgets/custom_snack_bar.dart';
 import 'package:books_app_client/core/widgets/custom_textfield.dart';

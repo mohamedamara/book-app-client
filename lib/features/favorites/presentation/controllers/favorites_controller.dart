@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/models/failure.dart';
+import 'package:books_app_client/core/exceptions/failure.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/favorites_repository.dart';

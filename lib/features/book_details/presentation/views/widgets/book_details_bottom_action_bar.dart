@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/models/failure.dart';
+import '../../../../../core/exceptions/failure.dart';
 import '../../../../../core/navigation/navigation_paths.dart';
 import '../../../../../core/widgets/custom_snack_bar.dart';
 import 'review_modal_bottom_sheet.dart';

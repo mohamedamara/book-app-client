@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../core/models/failure.dart';
+import '../../../../../core/exceptions/failure.dart';
 import '../../../../../core/widgets/primary_button.dart';
 
 showReviewModalBottomSheet({

@@ -1,4 +1,4 @@
-import 'package:books_app_client/core/models/failure.dart';
+import 'package:books_app_client/core/exceptions/failure.dart';
 import 'package:books_app_client/features/authentication/presentation/controllers/authentication_controller.dart';
 import 'package:books_app_client/features/authentication/presentation/enums/authentication_status.dart';
 import 'package:books_app_client/features/authentication/application/services/authentication_service.dart';
