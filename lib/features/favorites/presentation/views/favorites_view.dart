@@ -9,7 +9,7 @@ import '../../../../core/exceptions/failure.dart';
 import '../../../../core/widgets/custom_snack_bar.dart';
 import '../../../../core/widgets/error_view.dart';
 import '../controllers/favorites_controller.dart';
-import '../../../../core/widgets/book_liste_tile.dart';
+import '../../../../core/widgets/book_list_tile.dart';
 
 class FavoritesView extends ConsumerWidget {
   const FavoritesView({super.key});

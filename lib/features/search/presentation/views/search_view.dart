@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../core/constants/assets_constants.dart';
 import '../../../../core/navigation/navigation_paths.dart';
 import '../../../../core/widgets/custom_textfield.dart';
-import '../../../../core/widgets/book_liste_tile.dart';
+import '../../../../core/widgets/book_list_tile.dart';
 import '../controllers/search_controller.dart';
 import 'widget/empty_filter_result.dart';
 import 'widget/filter_books_view.dart';
