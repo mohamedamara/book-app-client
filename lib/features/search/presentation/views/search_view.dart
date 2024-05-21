@@ -52,7 +52,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
   }
 
   Future<void> _searchBooks(String currentValue) async {
-    if (currentValue.isNotEqual(lastSearchValue)) {
+    if (!currentValue.isEqual(lastSearchValue)) {
       lastSearchValue = currentValue;
       await ref
           .read(searchControllerProvider.notifier)

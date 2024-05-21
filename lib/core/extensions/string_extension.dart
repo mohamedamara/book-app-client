@@ -6,19 +6,5 @@ extension StringExtension on String {
     return emailRegularExpression.hasMatch(this);
   }
 
-  bool isEqual(String value) {
-    if (this == value) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  bool isNotEqual(String value) {
-    if (this != value) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  bool isEqual(String value) => this == value ? true : false;
 }
